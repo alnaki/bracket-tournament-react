@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { number } from 'prop-types';
+import { Grid, Card } from '@material-ui/core';
+import { tournament } from '../../config/store';
+import ContentCard from '../card/card';
+import { ICard } from '../../shared/model/card.model';
 
-export default class BracketColumn extends Component {
-    constructor(props: Readonly<{}>) {
-        super(props);
-        this.state = {
-            round: 1,
-            cards: []
-        }
+type Props = { round: number }
+type State = { cards: ICard[] }
 
+export default class BracketColumn extends Component<Props, State> {
+    state = {
+        cards: [...tournament]
     }
 
     static propTypes = {
@@ -16,11 +18,16 @@ export default class BracketColumn extends Component {
     }
 
     render() {
+        const cards = this.state.cards.map( (card) => (
+            <ContentCard card={ card }></ContentCard>
+        ));
+
         return (
-            <div className="bracket-column">
+            <Grid className="bracket-column" xs>
                 <div>bracket round title</div>
                 <div>list</div>
-            </div>
+                { cards }
+            </Grid>
         );
     }
 }

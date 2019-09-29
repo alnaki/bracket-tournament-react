@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { makeStyles } from '@material-ui/styles';
+import { Grid } from '@material-ui/core';
+import BracketColumn from './column';
 
 export default class Bracket extends Component {
     render() {
         return (
-            <div className="bracket">
-
-
-            </div>
+            <Grid className="bracket" container>
+                <BracketColumn round={1}></BracketColumn>
+                <BracketColumn round={2}></BracketColumn>
+                <BracketColumn round={3}></BracketColumn>
+            </Grid>
         );
     }
 }
