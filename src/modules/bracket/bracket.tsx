@@ -1,20 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/styles';
 
-const useStyles = makeStyles ({
-    
+export default class Bracket extends Component {
+    render() {
+        return (
+            <div className="bracket">
 
 
-
-});
-
-export default function Bracket() {
-
-
-    return (
-        <div>
-
-
-        </div>
-    );
+            </div>
+        );
+    }
 }

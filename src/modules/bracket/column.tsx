@@ -1,28 +1,26 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core';
-import { ICard } from '../../shared/model/card.model';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-export interface IColumn {
-    cardList: ICard[];
-    columnPosition: number;
-    isRight:boolean;
+export default class BracketColumn extends Component {
+    constructor(props: Readonly<{}>) {
+        super(props);
+        this.state = {
+            round: 1,
+            cards: []
+        }
+
+    }
+
+    static propTypes = {
+        round: PropTypes.number.isRequired,
+    }
+
+    render() {
+        return (
+            <div className="bracket-column">
+                <div>bracket round title</div>
+                <div>list</div>
+            </div>
+        );
+    }
 }
-
-const useStyles = makeStyles ({
-
-});
-
-BracketColumn.propTypes = {
-
-
-}
-
-export default function BracketColumn() {
-    const classes = useStyles();
-    return (
-        <div>
-
-        </div>
-    );
-
-};
