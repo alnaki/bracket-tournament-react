@@ -4,6 +4,7 @@ import { Grid, Card } from '@material-ui/core';
 import { tournament } from '../../config/store';
 import ContentCard from '../card/card';
 import { ICard } from '../../shared/model/card.model';
+import OppositionCard from '../card/oppositionCard';
 
 type Props = { round: number }
 type State = { cards: ICard[] }
@@ -18,15 +19,15 @@ export default class BracketColumn extends Component<Props, State> {
     }
 
     render() {
-        const cards = this.state.cards.map( (card) => (
-            <ContentCard card={ card }></ContentCard>
+
+        const cards = this.state.cards.map((card) => (
+            <OppositionCard team1={card} team2={card}></OppositionCard>
         ));
 
         return (
             <Grid className="bracket-column" xs>
-                <div>bracket round title</div>
-                <div>list</div>
-                { cards }
+                <h1>bracket round title</h1>
+                {cards}
             </Grid>
         );
     }

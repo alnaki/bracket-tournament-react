@@ -43,10 +43,4 @@ export const tournament : ICard[] = [
         name: "player 7",
         type: cardType.user
     },
-    {
-        id: 8,
-        avatar: "https://loremflickr.com/640/360",
-        name: "player 8",
-        type: cardType.user
-    },
 ]

@@ -1,7 +1,7 @@
 export interface ICard {
     id?: number;
     avatar?: string;
-    name?: String;
+    name: String;
     type?: cardType;
 }
 
