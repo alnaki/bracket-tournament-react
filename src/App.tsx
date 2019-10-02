@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import ContentCard from './modules/card/card';
+import TeamCard from './modules/card/teamCard';
 import BracketColumn from './modules/bracket/column';
 import Bracket from './modules/bracket/bracket';
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes, { number } from 'prop-types';
 import { Grid, Card } from '@material-ui/core';
 import { tournament } from '../../config/store';
-import ContentCard from '../card/card';
+import TeamCard from '../card/teamCard';
 import { ICard } from '../../shared/model/card.model';
 import OppositionCard from '../card/oppositionCard';
 
@@ -21,7 +21,7 @@ export default class BracketColumn extends Component<Props, State> {
     render() {
 
         const cards = this.state.cards.map((card) => (
-            <OppositionCard team1={card} team2={card}></OppositionCard>
+            <OppositionCard></OppositionCard>
         ));
 
         return (

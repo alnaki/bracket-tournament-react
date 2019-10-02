@@ -1,6 +1,6 @@
 import { ICard, cardType } from "../shared/model/card.model";
 
-export const tournament : ICard[] = [
+export const tournament: ICard[] = [
     {
         id: 1,
         avatar: "https://loremflickr.com/640/360",

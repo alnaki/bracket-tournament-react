@@ -2,29 +2,29 @@ import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import PropTypes from 'prop-types';
 
-type Props = { };
-type State = { }
+type Props = {};
+type State = {}
 
 export default class SingleUserCard extends Component<Props, State> {
-  seStyles = makeStyles({
-    // write css here
-  });
+    seStyles = makeStyles({
+        // write css here
+    });
 
-  state = {
-    // init states here
-  }
+    state = {
+        // init states here
+    }
 
-  static propTypes = {
-    // parameters mandatories
-    example: PropTypes.object.isRequired
-  }
+    static propTypes = {
+        // parameters mandatories
+        example: PropTypes.object.isRequired
+    }
 
-  render() {
-    return (
-      // html and components here
-      <div>
-     
-      </div>
-    )
-  }
+    render() {
+        return (
+            // html and components here
+            <div>
+
+            </div>
+        )
+    }
 }
