@@ -17,7 +17,7 @@ const OppositionRoot = styled.div`
 
 export default class OppositionCard extends Component {
   state = {
-    listTeam: [
+    teamList: [
       {
         name: "player 1"
       },
@@ -31,19 +31,20 @@ export default class OppositionCard extends Component {
   deleteTeam() {}
 
   addTeam = (_event: any) => {
-    console.log("this vaut :", this.state.listTeam);
-    if (this.state.listTeam.length >= 8) return;
+    if (this.state.teamList.length >= 8) return;
     let elem = {
       name: "ajout"
     };
     this.setState({
-      listTeam: [...this.state.listTeam, elem]
+      listTeam: [...this.state.teamList, elem]
     });
   };
 
   render() {
-    const list = this.state.listTeam.map((s, i) => (
-      <TeamCard key={i} name={s.name} avatar={s.avatar} />
+    const list = this.state.teamList.map((s, i) => (
+      <div>
+        <TeamCard key={i} name={s.name} avatar={s.avatar} />
+      </div>
     ));
 
     return (

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Card from "@material-ui/core/Card";
 import { Avatar, CardHeader, IconButton } from "@material-ui/core";
 import { styled } from "@material-ui/core/styles";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 type Props = {
   name: string;
@@ -19,17 +19,19 @@ export default class TeamCard extends Component<Props, State> {
     const avatar = this.props.avatar ? (
       <Avatar src={this.props.avatar} />
     ) : (
-      <MyAvatar>{this.props.name.substr(0, 1)}</MyAvatar>
+      <MyAvatar>{this.props.name.substr(0, 2)}</MyAvatar>
     );
     return (
-      <Card>
-        <CardHeader
-          avatar={avatar}
-          action={<IconButton />}
-          title={this.props.name}
-          subheader=""
-        />
-      </Card>
+      <CardHeader
+        avatar={avatar}
+        action={
+          <IconButton aria-label="settings">
+            <MoreVertIcon />
+          </IconButton>
+        }
+        title={this.props.name}
+        subheader=""
+      />
     );
   }
 }
