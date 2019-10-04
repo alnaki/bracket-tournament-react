@@ -1,7 +1,15 @@
 import React, { Component } from "react";
-import { Avatar, CardHeader, IconButton } from "@material-ui/core";
+import {
+  Avatar,
+  CardHeader,
+  IconButton,
+  Dialog,
+  DialogActions,
+  Button
+} from "@material-ui/core";
 import { styled } from "@material-ui/core/styles";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import TeamProperties from "./teamProperties";
 
 type Props = {
   name: string;
@@ -15,6 +23,18 @@ const MyAvatar = styled(Avatar)({
 });
 
 export default class TeamCard extends Component<Props, State> {
+  state = {
+    open: false
+  };
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
   render() {
     const avatar = this.props.avatar ? (
       <Avatar src={this.props.avatar} />
@@ -26,13 +46,29 @@ export default class TeamCard extends Component<Props, State> {
         <CardHeader
           avatar={avatar}
           action={
-            <IconButton aria-label="settings">
+            <IconButton aria-label="settings" onClick={this.handleClickOpen}>
               <MoreVertIcon />
             </IconButton>
           }
           title={this.props.name}
           subheader=""
         />
+
+        <Dialog
+          open={this.state.open}
+          onClose={this.handleClose}
+          aria-labelledby="form-dialog-title"
+        >
+          <TeamProperties />
+          <DialogActions>
+            <Button onClick={this.handleClose} color="primary">
+              Cancel
+            </Button>
+            <Button onClick={this.handleClose} color="primary">
+              Subscribe
+            </Button>
+          </DialogActions>
+        </Dialog>
       </div>
     );
   }

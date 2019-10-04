@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { Card, CardActions, CardHeader, Fab } from "@material-ui/core";
+import { Card, CardActions, CardHeader, Button } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import styled from "styled-components";
 import TeamCard from "./teamCard";
 
 const OppositionRoot = styled.div`
   max-width: 275px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 `;
 
 export default class OppositionCard extends Component {
@@ -22,7 +22,6 @@ export default class OppositionCard extends Component {
   deleteTeam() {}
 
   addTeam = (_event: any) => {
-    console.log("hey");
     if (this.state.teamList.length >= 8) return;
     let elem = {
       name: "New Player"
@@ -43,14 +42,15 @@ export default class OppositionCard extends Component {
           <CardHeader title="Opposition 1" />
           {list}
           <CardActions>
-            <Fab
-              size="small"
+            <Button
+              variant="contained"
               color="secondary"
               aria-label="add"
               onClick={this.addTeam}
+              fullWidth
             >
               <AddIcon />
-            </Fab>
+            </Button>
           </CardActions>
         </Card>
       </OppositionRoot>
