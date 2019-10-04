@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import PlayerForm from "./playerForm";
 import TeamForm from "./teamForm";
+import { Button } from "@material-ui/core";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -75,6 +76,9 @@ export default function ScrollableTabsButtonAuto() {
       <TabPanel value={value} index={1}>
         <TeamForm />
       </TabPanel>
+      <Button variant="contained" color="primary">
+        Primary
+      </Button>
     </div>
   );
 }

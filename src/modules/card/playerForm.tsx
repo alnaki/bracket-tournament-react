@@ -88,7 +88,7 @@ export default class PlayerForm extends Component<Props, State> {
           title={
             <TextField
               id="standard-name"
-              label="Name"
+              label="Nom ou pseudo du joueur"
               value={this.state.name}
               onChange={this.handleChange("name")}
               margin="normal"

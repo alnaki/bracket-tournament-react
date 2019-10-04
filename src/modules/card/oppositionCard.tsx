@@ -1,11 +1,5 @@
 import React, { Component } from "react";
-import {
-  Card,
-  CardActions,
-  CardHeader,
-  Fab,
-  TextField
-} from "@material-ui/core";
+import { Card, CardActions, CardHeader, Fab } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import styled from "styled-components";
 import TeamCard from "./teamCard";
@@ -19,9 +13,6 @@ export default class OppositionCard extends Component {
   state = {
     teamList: [
       {
-        name: "player 1"
-      },
-      {
         avatar: "https://loremflickr.com/640/360",
         name: "player 2"
       }
@@ -31,19 +22,20 @@ export default class OppositionCard extends Component {
   deleteTeam() {}
 
   addTeam = (_event: any) => {
+    console.log("hey");
     if (this.state.teamList.length >= 8) return;
     let elem = {
-      name: "ajout"
+      name: "New Player"
     };
     this.setState({
-      listTeam: [...this.state.teamList, elem]
+      teamList: [...this.state.teamList, elem]
     });
   };
 
   render() {
     const list = this.state.teamList.map((s, i) => (
-      <div>
-        <TeamCard key={i} name={s.name} avatar={s.avatar} />
+      <div key={i}>
+        <TeamCard name={s.name} avatar={s.avatar} />
       </div>
     ));
 
@@ -53,10 +45,6 @@ export default class OppositionCard extends Component {
           <CardHeader title="Opposition 1" />
           {list}
           <CardActions>
-            <TextField
-              id="standard-name"
-              // onChange={handleChange("name")}
-            />
             <Fab
               size="small"
               color="secondary"
@@ -65,23 +53,6 @@ export default class OppositionCard extends Component {
             >
               <AddIcon />
             </Fab>
-
-            {/* <Button
-              aria-describedby={id}
-              variant="contained"
-              onClick={handleClick}
-            >
-              Toggle Popper
-            </Button>
-            <Popper id={id} open={open} anchorEl={anchorEl} transition>
-              {({ TransitionProps }) => (
-                <Fade {...TransitionProps} timeout={350}>
-                  <Paper>
-                    <Typography>The content of the Popper.</Typography>
-                  </Paper>
-                </Fade>
-              )}
-            </Popper> */}
           </CardActions>
         </Card>
       </OppositionRoot>
