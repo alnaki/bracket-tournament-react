@@ -1,6 +1,11 @@
 import React, { Component } from "react";
-import Paper from "@material-ui/core/Paper";
-import { Card, CardActions, CardHeader, Fab, TextField } from "@material-ui/core";
+import {
+  Card,
+  CardActions,
+  CardHeader,
+  Fab,
+  TextField
+} from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import styled from "styled-components";
 import TeamCard from "./teamCard";
@@ -10,32 +15,26 @@ const OppositionRoot = styled.div`
   margin-bottom: 12px;
 `;
 
-const Opp = styled.div`
-  padding: 10px;
-`;
-
 export default class OppositionCard extends Component {
   state = {
-    listTeam: [{
-      id: 1,
-      avatar: "https://loremflickr.com/640/360",
-      name: "player 1",
-    },
-    {
-      id: 2,
-      avatar: "https://loremflickr.com/640/360",
-      name: "player 2",
-    }],
+    listTeam: [
+      {
+        name: "player 1"
+      },
+      {
+        avatar: "https://loremflickr.com/640/360",
+        name: "player 2"
+      }
+    ]
   };
 
-  deleteTeam() { }
+  deleteTeam() {}
 
   addTeam = (_event: any) => {
     console.log("this vaut :", this.state.listTeam);
     if (this.state.listTeam.length >= 8) return;
     let elem = {
-      title: "Element ajouté",
-      content: "Hey"
+      name: "ajout"
     };
     this.setState({
       listTeam: [...this.state.listTeam, elem]
@@ -43,9 +42,10 @@ export default class OppositionCard extends Component {
   };
 
   render() {
-    const list = this.state.listTeam.map(s => (
-      <TeamCard name={s.name} ></TeamCard>
+    const list = this.state.listTeam.map((s, i) => (
+      <TeamCard key={i} name={s.name} avatar={s.avatar} />
     ));
+
     return (
       <OppositionRoot>
         <Card>
@@ -54,7 +54,7 @@ export default class OppositionCard extends Component {
           <CardActions>
             <TextField
               id="standard-name"
-            // onChange={handleChange("name")}
+              // onChange={handleChange("name")}
             />
             <Fab
               size="small"
@@ -64,6 +64,23 @@ export default class OppositionCard extends Component {
             >
               <AddIcon />
             </Fab>
+
+            {/* <Button
+              aria-describedby={id}
+              variant="contained"
+              onClick={handleClick}
+            >
+              Toggle Popper
+            </Button>
+            <Popper id={id} open={open} anchorEl={anchorEl} transition>
+              {({ TransitionProps }) => (
+                <Fade {...TransitionProps} timeout={350}>
+                  <Paper>
+                    <Typography>The content of the Popper.</Typography>
+                  </Paper>
+                </Fade>
+              )}
+            </Popper> */}
           </CardActions>
         </Card>
       </OppositionRoot>

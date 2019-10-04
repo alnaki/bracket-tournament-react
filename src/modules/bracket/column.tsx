@@ -1,34 +1,42 @@
-import React, { Component } from 'react';
-import PropTypes, { number } from 'prop-types';
-import { Grid, Card } from '@material-ui/core';
-import { tournament } from '../../config/store';
-import TeamCard from '../card/teamCard';
-import { ICard } from '../../shared/model/card.model';
-import OppositionCard from '../card/oppositionCard';
+import React, { Component } from "react";
+import { Grid, Button } from "@material-ui/core";
+import OppositionCard from "../card/oppositionCard";
+import AddIcon from "@material-ui/icons/Add";
 
-type Props = { round: number }
-type State = { cards: ICard[] }
+export default class BracketColumn extends Component {
+  state = {
+    oppositionList: [
+      {
+        name: "Example"
+      }
+    ]
+  };
 
-export default class BracketColumn extends Component<Props, State> {
-    state = {
-        cards: [...tournament]
-    }
+  addOpposition = (_event: any) => {
+    console.log("Ajout d'une opposition", this.state.oppositionList);
+    let elem = { name: "ajout" };
+    this.setState({
+      oppositionList: [...this.state.oppositionList, elem]
+    });
+  };
 
-    static propTypes = {
-        round: PropTypes.number.isRequired,
-    }
-
-    render() {
-
-        const cards = this.state.cards.map((card) => (
-            <OppositionCard></OppositionCard>
-        ));
-
-        return (
-            <Grid className="bracket-column" xs>
-                <h1>bracket round title</h1>
-                {cards}
-            </Grid>
-        );
-    }
+  render() {
+    const list = this.state.oppositionList.map((s, i) => (
+      <OppositionCard key={i} />
+    ));
+    return (
+      <Grid className="bracket-column">
+        <h1>bracket round title</h1>
+        {list}
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={this.addOpposition}
+          fullWidth
+        >
+          <AddIcon />
+        </Button>
+      </Grid>
+    );
+  }
 }

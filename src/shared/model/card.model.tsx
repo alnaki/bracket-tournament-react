@@ -1,10 +1,11 @@
 export interface ICard {
-    id?: number;
-    avatar?: string;
-    name: String;
-    type?: cardType;
+  id?: number;
+  avatar?: string;
+  name: String;
+  type?: cardType;
 }
 
 export enum cardType {
-    user, group,
+  user,
+  group
 }

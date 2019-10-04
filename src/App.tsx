@@ -1,16 +1,18 @@
-import React from 'react';
-import './App.css';
-import TeamCard from './modules/card/teamCard';
-import BracketColumn from './modules/bracket/column';
-import Bracket from './modules/bracket/bracket';
+import React from "react";
+import "./App.css";
+import Bracket from "./modules/bracket/bracket";
+// import { Provider } from "react-redux";
+// import store from "./shared/store";
 
 const App: React.FC = () => {
   return (
+    // <Provider store={store} className="App">
+    //   <Bracket />
+    // </Provider>
     <div className="App">
-      <Bracket></Bracket>
-
+      <Bracket />
     </div>
   );
-}
+};
 
 export default App;
