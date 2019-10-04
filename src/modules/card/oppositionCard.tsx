@@ -34,9 +34,7 @@ export default class OppositionCard extends Component {
 
   render() {
     const list = this.state.teamList.map((s, i) => (
-      <div key={i}>
-        <TeamCard name={s.name} avatar={s.avatar} />
-      </div>
+      <TeamCard key={i} name={s.name} avatar={s.avatar} />
     ));
 
     return (

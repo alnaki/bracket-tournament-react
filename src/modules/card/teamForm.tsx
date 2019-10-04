@@ -41,22 +41,20 @@ export default class TeamForm extends Component<Props, State> {
 
   render() {
     const list = this.state.playerList.map((s, i) => (
-      <div>
-        <PlayerForm key={i} />
+      <div key={i}>
+        <PlayerForm />
       </div>
     ));
 
     return (
       <div>
-        <h2>
-          <TextField
-            id="standard-name"
-            label="Nom de la team"
-            value={this.state.titleTeam}
-            onChange={this.handleChange("titleTeam")}
-            margin="normal"
-          />
-        </h2>
+        <TextField
+          id="standard-name"
+          label="Nom de la team"
+          value={this.state.titleTeam}
+          onChange={this.handleChange("titleTeam")}
+          margin="normal"
+        />
         {list}
         <Fab
           size="small"
