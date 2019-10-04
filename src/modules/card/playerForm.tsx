@@ -5,7 +5,7 @@ import TeamCard from "./teamCard";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 
 type Props = {
-  /*props*/
+  name?: string;
 };
 type State = {
   avatar?: string;
@@ -21,7 +21,7 @@ const MyAvatar = styled(Avatar)({
 
 export default class PlayerForm extends Component<Props, State> {
   state = {
-    name: "Player name",
+    name: this.props.name ? this.props.name : "Player name",
     avatar: undefined,
     edition: false
   };

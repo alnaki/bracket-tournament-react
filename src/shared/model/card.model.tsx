@@ -1,11 +1,5 @@
-export interface ICard {
+export interface IPlayer {
   id?: number;
-  avatar?: string;
   name: String;
-  type?: cardType;
-}
-
-export enum cardType {
-  user,
-  group
+  avatar?: string;
 }

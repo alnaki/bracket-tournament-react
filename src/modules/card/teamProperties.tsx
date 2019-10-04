@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-export default function ScrollableTabsButtonAuto() {
+export default function ScrollableTabsButtonAuto(props: any) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -71,7 +71,7 @@ export default function ScrollableTabsButtonAuto() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <PlayerForm />
+        <PlayerForm name={props.name} />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <TeamForm />

@@ -10,10 +10,12 @@ import {
 import { styled } from "@material-ui/core/styles";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import TeamProperties from "./teamProperties";
+import { IPlayer } from "../../shared/model/card.model";
 
 type Props = {
   name: string;
   avatar?: string;
+  playerList?: IPlayer[];
 };
 type State = {};
 
@@ -59,7 +61,7 @@ export default class TeamCard extends Component<Props, State> {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <TeamProperties />
+          <TeamProperties name={this.props.name} />
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">
               Cancel
