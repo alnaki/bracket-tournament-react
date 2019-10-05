@@ -12,7 +12,7 @@ export function bracketReducer(
       console.log(state.mode)
       return {
         ...state,
-        mode: state.mode
+        mode: true
       };
     default:
       return state;

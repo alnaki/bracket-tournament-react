@@ -3,23 +3,35 @@ import { connect } from "react-redux";
 import { Grid, FormControlLabel, Switch } from "@material-ui/core";
 import BracketColumn from "./column";
 import { changeMode } from "../../shared/store/bracket/actions";
+import { AppState } from "../../shared/store";
+import { modes } from "react-transition-group/SwitchTransition";
 
-type Props = {};
-type State = { mode: boolean };
-class Bracket extends Component<Props, State> {
+type Props = {
+    mode: boolean;
+};
+class Bracket extends Component<Props> {
     state = {
-        mode: true
+        mode: this.props.mode? this.props.mode : false,
     };
+
+     handleChange = (name: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({ ...this.state, [name]: event.target.checked });
+      };
 
     render() {
         return (
             <div>
                 <FormControlLabel
                     value="top"
-                    control={<Switch color="primary" />}
+                    control={      <Switch
+                        checked={this.state.mode}
+                        onChange={this.handleChange("mode")}
+                        value="checkedB"
+                        color="primary"
+                        inputProps={{ 'aria-label': 'primary checkbox' }}
+                      />}
                     label="Mode modification"
                     labelPlacement="top"
-                    onChange={() => changeMode(this.state.mode)}
                 />
                 {this.state.mode}
                 <Grid className="bracket" container>
@@ -30,8 +42,8 @@ class Bracket extends Component<Props, State> {
     }
 }
 
-const mapStateToProps = (state: { mode: any; }) => ({
-    mode: state.mode
+const mapStateToProps = (state: AppState) => ({
+    mode: state.bracket.mode,
 });
 
 const mapDispatchToProps = (dispatch: (arg0: { type: string; mode: any; }) => void) => ({

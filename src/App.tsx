@@ -2,11 +2,9 @@ import React from "react";
 import "./App.css";
 import Bracket from "./modules/bracket/bracket";
 import { Provider } from "react-redux";
-import { createStore } from 'redux'
-import rootReducer from "./shared/store";
+import configureStore from "./shared/store";
 
-const store = createStore(rootReducer);
-
+const store = configureStore();
 
 const App: React.FC = () => {
   return (
