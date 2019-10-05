@@ -2,8 +2,14 @@ import React, { Component } from "react";
 import { Grid, Button } from "@material-ui/core";
 import OppositionCard from "../card/oppositionCard";
 import AddIcon from "@material-ui/icons/Add";
+import { connect } from "react-redux";
+import { AppState } from "../../shared/store";
 
-export default class BracketColumn extends Component {
+
+type Props = {
+  mode?: boolean;
+};
+class BracketColumn extends Component<Props> {
   state = {
     oppositionList: [
       {
@@ -27,6 +33,7 @@ export default class BracketColumn extends Component {
       <Grid className="bracket-column">
         <h1>bracket round title</h1>
         {list}
+        { this.props.mode && (
         <Button
           variant="contained"
           color="primary"
@@ -35,7 +42,14 @@ export default class BracketColumn extends Component {
         >
           <AddIcon />
         </Button>
+        )}
       </Grid>
     );
   }
 }
+
+const mapStateToProps = (state: AppState) => ({
+  mode: state.bracket.mode,
+});
+
+export default connect(mapStateToProps)(BracketColumn);

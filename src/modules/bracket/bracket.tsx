@@ -26,7 +26,7 @@ class Bracket extends Component<Props> {
         return (
             <div>
                 <FormControlLabel
-                    value="top"
+                    value="start"
                     control={<Switch
                         checked={this.state.mode}
                         onChange={(e) => this.handleChangeMode(e)}
@@ -34,8 +34,8 @@ class Bracket extends Component<Props> {
                         color="primary"
                         inputProps={{ 'aria-label': 'primary checkbox' }}
                     />}
-                    label="Mode modification"
-                    labelPlacement="top"
+                    label="Mode modification : "
+                    labelPlacement="start"
                 />
                 {this.state.mode}
                 <Grid className="bracket" container>

@@ -45,7 +45,6 @@ class OppositionCard extends Component<Props> {
     return (
       <OppositionRoot>
         <Card>
-          <CardHeader title={'hello ' + this.props.mode} />
           {list}
           {this.props.mode && (
             <CardActions>
