@@ -1,17 +1,20 @@
 import React from "react";
 import "./App.css";
 import Bracket from "./modules/bracket/bracket";
-// import { Provider } from "react-redux";
-// import store from "./shared/store";
+import { Provider } from "react-redux";
+import { createStore } from 'redux'
+import rootReducer from "./shared/store";
+
+const store = createStore(rootReducer);
+
 
 const App: React.FC = () => {
   return (
-    // <Provider store={store} className="App">
-    //   <Bracket />
-    // </Provider>
     <div className="App">
-      <Bracket />
-    </div>
+      <Provider store={store}>
+        <Bracket />
+      </Provider>
+     </div>
   );
 };
 
