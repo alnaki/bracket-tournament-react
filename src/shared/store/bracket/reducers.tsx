@@ -1,7 +1,7 @@
 import { BracketActionTypes, BracketState, BRACKET_MODE } from "./types";
 
-const initialState = {
-  mode: true
+const initialState: BracketState = {
+  mode: false
 };
 
 export function bracketReducer(
@@ -9,10 +9,9 @@ export function bracketReducer(
   action: BracketActionTypes): BracketState {
   switch (action.type) {
     case BRACKET_MODE:
-      console.log(state.mode)
       return {
         ...state,
-        mode: true
+        mode: action.mode
       };
     default:
       return state;

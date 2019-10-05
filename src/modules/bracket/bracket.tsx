@@ -6,15 +6,16 @@ import { changeMode } from "../../shared/store/bracket/actions";
 import { AppState } from "../../shared/store";
 
 type Props = {
-    mode: boolean;
+    mode?: boolean;
+    changeMode: (arg0: boolean) => void,
 };
 class Bracket extends Component<Props> {
     state = {
         mode: this.props.mode ? this.props.mode : false,
     };
 
-    changeMode(event: React.ChangeEvent<HTMLInputElement>) {
-        console.log("mode: ", event.target.checked)
+    handleChangeMode(event: React.ChangeEvent<HTMLInputElement>) {
+        this.props.changeMode(event.target.checked);
         this.setState({
             ...this.state,
             mode: event.target.checked,
@@ -28,7 +29,7 @@ class Bracket extends Component<Props> {
                     value="top"
                     control={<Switch
                         checked={this.state.mode}
-                        onChange={(e) => this.changeMode(e)}
+                        onChange={(e) => this.handleChangeMode(e)}
                         value="mode"
                         color="primary"
                         inputProps={{ 'aria-label': 'primary checkbox' }}

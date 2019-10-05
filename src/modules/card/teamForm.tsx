@@ -39,6 +39,13 @@ export default class TeamForm extends Component<Props, State> {
     });
   };
 
+
+  keyPress(e: React.KeyboardEvent<any>) {
+    if (e.key === "Enter") {
+      // send();
+    }
+  }
+
   render() {
     const list = this.state.playerList.map((s, i) => (
       <div key={i}>
