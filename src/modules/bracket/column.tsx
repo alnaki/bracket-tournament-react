@@ -13,7 +13,6 @@ export default class BracketColumn extends Component {
   };
 
   addOpposition = (_event: any) => {
-    console.log("Ajout d'une opposition", this.state.oppositionList);
     let elem = { name: "ajout" };
     this.setState({
       oppositionList: [...this.state.oppositionList, elem]
