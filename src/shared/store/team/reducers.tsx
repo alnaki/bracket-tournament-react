@@ -1,5 +1,4 @@
-import { TeamActionTypes, TeamState, GET_TEAM, CREATE_TEAM, MODIFY_TEAM, DELETE_TEAM, ADD_PLAYER_IN_TEAM, REMOVE_PLAYER_IN_TEAM, ITeam } from "./types";
-import { number } from "prop-types";
+import { TeamActionTypes, TeamState, ADD_TEAM, EDIT_TEAM, DELETE_TEAM, ADD_PLAYER_IN_TEAM, DELETE_PLAYER_IN_TEAM } from "./types";
 
 const initialState: TeamState = {
   teamList: [],
@@ -10,15 +9,24 @@ export function bracketReducer(
   state = initialState,
   action: TeamActionTypes): TeamState {
   switch (action.type) {
-    case GET_TEAM:
-      return { 
-      };
-    case CREATE_TEAM:
+    case ADD_TEAM:
+        action.player.bracketId = state.nbPlayer;
+
       return {
         ...state,
         mode: action.mode
       };
-    case MODIFY_TEAM:
+
+
+      case ADD_PLAYER:
+          action.player.bracketId = state.nbPlayer;
+          return {
+            nbPlayer: state.nbPlayer++,
+            playerList: [...state.playerList, action.player]
+          };
+
+
+    case EDIT_TEAM:
       return {
         ...state,
         mode: action.mode
@@ -33,7 +41,7 @@ export function bracketReducer(
         ...state,
         mode: action.mode
       };
-    case REMOVE_PLAYER_IN_TEAM:
+    case DELETE_PLAYER_IN_TEAM:
       return {
         ...state,
         mode: action.mode

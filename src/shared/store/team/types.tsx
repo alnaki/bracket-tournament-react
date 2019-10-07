@@ -15,24 +15,19 @@ export interface TeamState {
 }
 
 // Describing the different ACTION NAMES available
-export const GET_TEAM = "GET_TEAM"
-export const CREATE_TEAM = "CREATE_TEAM"
-export const MODIFY_TEAM = "MODIFY_TEAM"
+export const ADD_TEAM = "ADD_TEAM"
+export const EDIT_TEAM = "EDIT_TEAM"
 export const DELETE_TEAM = "DELETE_TEAM"
 export const ADD_PLAYER_IN_TEAM = "ADD_PLAYER_IN_TEAM"
-export const REMOVE_PLAYER_IN_TEAM = "REMOVE_PLAYER_IN_TEAM"
+export const DELETE_PLAYER_IN_TEAM = "DELETE_PLAYER_IN_TEAM"
 
-interface GetTeam {
-    type: typeof GET_TEAM;
-    bracketId: number;
+interface AddTeam {
+    type: typeof ADD_TEAM;
+    player: ITeam;
 }
-interface CreateTeam {
-    type: typeof CREATE_TEAM;
-    player: IPlayer;
-}
-interface ModifyTeam {
-    type: typeof MODIFY_TEAM;
-    player: IPlayer;
+interface EditTeam {
+    type: typeof EDIT_TEAM;
+    player: ITeam;
 }
 interface DeleteTeam {
     type: typeof DELETE_TEAM;
@@ -43,11 +38,11 @@ interface AddPlayerInTeam {
     playerId: number;
     bracketId: number;
 }
-interface RemovePlayerInTeam {
-    type: typeof REMOVE_PLAYER_IN_TEAM;
+interface DeletePlayerInTeam {
+    type: typeof DELETE_PLAYER_IN_TEAM;
     playerId: number;
     bracketId: number;
 }
 
-export type TeamActionTypes = GetTeam | CreateTeam | ModifyTeam | DeleteTeam | AddPlayerInTeam | RemovePlayerInTeam;
+export type TeamActionTypes = AddTeam | EditTeam | DeleteTeam | AddPlayerInTeam | DeletePlayerInTeam;
 

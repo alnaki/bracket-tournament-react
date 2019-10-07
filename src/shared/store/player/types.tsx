@@ -12,21 +12,16 @@ export interface PlayerState {
 }
 
 // Describing the different ACTION NAMES available
-export const GET_PLAYER = "GET_PLAYER"
-export const CREATE_PLAYER = "CREATE_PLAYER"
-export const MODIFY_PLAYER = "MODIFY_PLAYER"
+export const ADD_PLAYER = "ADD_PLAYER"
+export const EDIT_PLAYER = "EDIT_PLAYER"
 export const DELETE_PLAYER = "DELETE_PLAYER"
 
-interface GetPlayer {
-    type: typeof GET_PLAYER;
-    bracketId: number;
-}
-interface CreatePlayer {
-    type: typeof CREATE_PLAYER;
+interface AddPlayer {
+    type: typeof ADD_PLAYER;
     player: IPlayer;
 }
-interface ModifyPlayer {
-    type: typeof MODIFY_PLAYER;
+interface EditPlayer {
+    type: typeof EDIT_PLAYER;
     player: IPlayer;
 }
 interface DeletePlayer {
@@ -34,5 +29,5 @@ interface DeletePlayer {
     bracketId: number;
 }
 
-export type PlayerActionTypes = GetPlayer | CreatePlayer | ModifyPlayer | DeletePlayer;
+export type PlayerActionTypes =  AddPlayer | EditPlayer | DeletePlayer;
 
