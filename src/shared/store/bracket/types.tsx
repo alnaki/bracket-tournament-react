@@ -1,5 +1,5 @@
 // Describing the shape of the chat's slice of state
-export interface BracketState {
+export interface IBracket {
     mode: boolean;
 }
 

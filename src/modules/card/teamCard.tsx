@@ -10,7 +10,7 @@ import {
 import { styled } from "@material-ui/core/styles";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import TeamProperties from "./teamProperties";
-import { IPlayer } from "../../shared/model/cardModel";
+import { IPlayer } from "../../shared/store/player/types";
 
 type Props = {
   name: string;
