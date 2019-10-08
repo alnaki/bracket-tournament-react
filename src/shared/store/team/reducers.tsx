@@ -1,52 +1,76 @@
-import { TeamActionTypes, TeamState, ADD_TEAM, EDIT_TEAM, DELETE_TEAM, ADD_PLAYER_IN_TEAM, DELETE_PLAYER_IN_TEAM } from "./types";
+import {
+  TeamActionTypes,
+  TeamState,
+  ADD_TEAM,
+  EDIT_TEAM,
+  DELETE_TEAM,
+  ADD_PLAYER_IN_TEAM,
+  DELETE_PLAYER_IN_TEAM
+} from "./types";
 
 const initialState: TeamState = {
   teamList: [],
-  nbTeam: 0,
+  nbTeam: 0
 };
 
-export function bracketReducer(
+export function teamReducer(
   state = initialState,
-  action: TeamActionTypes): TeamState {
+  action: TeamActionTypes
+): TeamState {
   switch (action.type) {
     case ADD_TEAM:
-        action.player.bracketId = state.nbPlayer;
-
+      action.team.id = state.nbTeam;
       return {
-        ...state,
-        mode: action.mode
+        nbTeam: state.nbTeam++,
+        teamList: [...state.teamList, action.team]
       };
-
-
-      case ADD_PLAYER:
-          action.player.bracketId = state.nbPlayer;
-          return {
-            nbPlayer: state.nbPlayer++,
-            playerList: [...state.playerList, action.player]
-          };
-
-
     case EDIT_TEAM:
       return {
         ...state,
-        mode: action.mode
+        teamList: [
+          ...state.teamList.map(team =>
+            team.id === action.team.id ? action.team : team
+          )
+        ]
       };
     case DELETE_TEAM:
       return {
         ...state,
-        mode: action.mode
+        teamList: [
+          ...state.teamList.filter(team => team.id !== action.bracketId)
+        ]
       };
     case ADD_PLAYER_IN_TEAM:
-      return {
-        ...state,
-        mode: action.mode
-      };
+      const upTeam1 = state.teamList.find(team => team.id === action.teamId);
+      if (upTeam1 !== undefined) {
+        upTeam1.playerList.push(action.playerId);
+        return {
+          ...state,
+          teamList: [
+            ...state.teamList.map(team =>
+              team.id === action.teamId ? upTeam1 : team
+            )
+          ]
+        };
+      } else return state;
+
     case DELETE_PLAYER_IN_TEAM:
-      return {
-        ...state,
-        mode: action.mode
-      };
+      const upTeam2 = state.teamList.find(team => team.id === action.teamId);
+      if (upTeam2 !== undefined) {
+        upTeam2.playerList = upTeam2.playerList.filter(
+          player => player === action.playerId
+        );
+        return {
+          ...state,
+          teamList: [
+            ...state.teamList.map(team =>
+              team.id === action.teamId ? upTeam2 : team
+            )
+          ]
+        };
+      } else return state;
+
     default:
       return state;
   }
-};
+}

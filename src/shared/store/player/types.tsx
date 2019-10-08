@@ -1,33 +1,32 @@
 // Describing the shape of the chat's slice of state
 export interface IPlayer {
-    id?: number;
-    bracketId: number;
-    name: String;
-    avatar?: string;
+  id: number;
+  bddId?: number;
+  name: String;
+  avatar?: string;
 }
 
 export interface PlayerState {
-    playerList: IPlayer[];
-    nbPlayer: number;
+  playerList: IPlayer[];
+  nbPlayer: number;
 }
 
 // Describing the different ACTION NAMES available
-export const ADD_PLAYER = "ADD_PLAYER"
-export const EDIT_PLAYER = "EDIT_PLAYER"
-export const DELETE_PLAYER = "DELETE_PLAYER"
+export const ADD_PLAYER = "ADD_PLAYER";
+export const EDIT_PLAYER = "EDIT_PLAYER";
+export const DELETE_PLAYER = "DELETE_PLAYER";
 
 interface AddPlayer {
-    type: typeof ADD_PLAYER;
-    player: IPlayer;
+  type: typeof ADD_PLAYER;
+  player: IPlayer;
 }
 interface EditPlayer {
-    type: typeof EDIT_PLAYER;
-    player: IPlayer;
+  type: typeof EDIT_PLAYER;
+  player: IPlayer;
 }
 interface DeletePlayer {
-    type: typeof DELETE_PLAYER;
-    bracketId: number;
+  type: typeof DELETE_PLAYER;
+  bracketId: number;
 }
 
-export type PlayerActionTypes =  AddPlayer | EditPlayer | DeletePlayer;
-
+export type PlayerActionTypes = AddPlayer | EditPlayer | DeletePlayer;
