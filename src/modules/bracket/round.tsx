@@ -9,7 +9,7 @@ import { BracketState } from "../../shared/store/bracket/types";
 type Props = {
   params: BracketState;
 };
-class BracketColumn extends Component<Props> {
+class Round extends Component<Props> {
   state = {
     oppositionList: [{}]
   };
@@ -48,4 +48,4 @@ const mapStateToProps = (state: AppState) => ({
   params: state.bracket
 });
 
-export default connect(mapStateToProps)(BracketColumn);
+export default connect(mapStateToProps)(Round);

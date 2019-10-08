@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Grid, FormControlLabel, Switch } from "@material-ui/core";
-import BracketColumn from "./column";
+import Round from "./round";
 import { changeMode } from "../../shared/store/bracket/actions";
 import { AppState } from "../../shared/store";
 import { BracketState } from "../../shared/store/bracket/types";
@@ -38,7 +38,7 @@ class Bracket extends Component<Props> {
         />
         {this.props.params.mode}
         <Grid className="bracket" container>
-          <BracketColumn />
+          <Round />
         </Grid>
       </div>
     );
