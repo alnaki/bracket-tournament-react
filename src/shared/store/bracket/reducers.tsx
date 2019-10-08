@@ -1,19 +1,24 @@
-import { BracketActionTypes, BracketState, BRACKET_MODE } from "./types";
+import { BracketActionTypes, BracketState, CHANGE_MODE } from "./types";
 
 const initialState: BracketState = {
-  mode: false
+  name: "Tournament",
+  mode: false,
+  nbPlayerMaxByTeam: 4,
+  nbTeamWinner: 1,
+  fontColor: "grey"
 };
 
 export function bracketReducer(
   state = initialState,
-  action: BracketActionTypes): BracketState {
+  action: BracketActionTypes
+): BracketState {
   switch (action.type) {
-    case BRACKET_MODE:
+    case CHANGE_MODE:
       return {
         ...state,
-        mode: action.mode
+        mode: action.value
       };
     default:
       return state;
   }
-};
+}

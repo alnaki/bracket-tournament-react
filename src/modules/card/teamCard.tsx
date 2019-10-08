@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import { styled } from "@material-ui/core/styles";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import TeamProperties from "./teamProperties";
+import TeamProperties from "./teamComposition";
 import { IPlayer } from "../../shared/store/player/types";
 
 type Props = {

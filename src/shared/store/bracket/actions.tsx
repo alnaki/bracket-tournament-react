@@ -1,8 +1,43 @@
-import { BRACKET_MODE } from "./types";
+import * as types from "./types";
 
-export function changeMode(newMode: boolean) {
-    return {
-        type: BRACKET_MODE,
-        mode: newMode
-    }
-};
+export function changeName(value: string) {
+  return {
+    type: types.CHANGE_MODE,
+    value: value
+  };
+}
+
+export function changeMode(value: boolean) {
+  return {
+    type: types.CHANGE_MODE,
+    value: value
+  };
+}
+
+export function changeNbPlayerMaxByTeam(value: number) {
+  return {
+    type: types.CHANGE_MODE,
+    value: value
+  };
+}
+
+export function changeNbTeamWinner(value: number) {
+  return {
+    type: types.CHANGE_MODE,
+    value: value
+  };
+}
+
+export function changeFontColor(value: string) {
+  return {
+    type: types.CHANGE_MODE,
+    value: value
+  };
+}
+
+export function changeParams(value: types.BracketState) {
+  return {
+    type: types.CHANGE_PARAMS,
+    value: value
+  };
+}

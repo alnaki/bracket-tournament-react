@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, CardActions, CardHeader, Button } from "@material-ui/core";
+import { Card, CardActions, Button } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import styled from "styled-components";
 import TeamCard from "./teamCard";
@@ -13,25 +13,29 @@ const OppositionRoot = styled.div`
 
 type Props = {
   mode?: boolean;
+  nbPlayerMaxByTeam?: number;
 };
 class OppositionCard extends Component<Props> {
   state = {
+    nbPlayerMaxByTeam: this.props.nbPlayerMaxByTeam
+      ? this.props.nbPlayerMaxByTeam
+      : 2,
     teamList: [
       {
         avatar: "https://loremflickr.com/640/360",
         name: "player 2"
       }
-    ],
+    ]
   };
 
-  deleteTeam() { }
+  deleteTeam() {}
 
   addTeam = (_event: any) => {
-    if (this.state.teamList.length >= 8) return;
+    if (this.state.teamList.length >= this.state.nbPlayerMaxByTeam) return;
     let elem = {
       name: "New Player"
     };
-    
+
     this.setState({
       teamList: [...this.state.teamList, elem]
     });
@@ -46,19 +50,20 @@ class OppositionCard extends Component<Props> {
       <OppositionRoot>
         <Card>
           {list}
-          {this.props.mode && (
-            <CardActions>
-              <Button
-                variant="contained"
-                color="secondary"
-                aria-label="add"
-                onClick={this.addTeam}
-                fullWidth
-              >
-                <AddIcon />
-              </Button>
-            </CardActions>
-          )}
+          {this.state.teamList.length < this.state.nbPlayerMaxByTeam &&
+            this.props.mode && (
+              <CardActions>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  aria-label="add"
+                  onClick={this.addTeam}
+                  fullWidth
+                >
+                  <AddIcon />
+                </Button>
+              </CardActions>
+            )}
         </Card>
       </OppositionRoot>
     );
@@ -67,6 +72,7 @@ class OppositionCard extends Component<Props> {
 
 const mapStateToProps = (state: AppState) => ({
   mode: state.bracket.mode,
+  nbPlayerMaxByTeam: state.bracket.nbPlayerMaxByTeam
 });
 
 export default connect(mapStateToProps)(OppositionCard);

@@ -4,22 +4,18 @@ import OppositionCard from "../card/oppositionCard";
 import AddIcon from "@material-ui/icons/Add";
 import { connect } from "react-redux";
 import { AppState } from "../../shared/store";
-
+import { BracketState } from "../../shared/store/bracket/types";
 
 type Props = {
-  mode?: boolean;
+  params: BracketState;
 };
 class BracketColumn extends Component<Props> {
   state = {
-    oppositionList: [
-      {
-        name: "Example"
-      }
-    ]
+    oppositionList: [{}]
   };
 
   addOpposition = (_event: any) => {
-    let elem = { name: "ajout" };
+    let elem = {};
     this.setState({
       oppositionList: [...this.state.oppositionList, elem]
     });
@@ -33,15 +29,15 @@ class BracketColumn extends Component<Props> {
       <Grid className="bracket-column">
         <h1>bracket round title</h1>
         {list}
-        { this.props.mode && (
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={this.addOpposition}
-          fullWidth
-        >
-          <AddIcon />
-        </Button>
+        {this.props.params.mode && (
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={this.addOpposition}
+            fullWidth
+          >
+            <AddIcon />
+          </Button>
         )}
       </Grid>
     );
@@ -49,7 +45,7 @@ class BracketColumn extends Component<Props> {
 }
 
 const mapStateToProps = (state: AppState) => ({
-  mode: state.bracket.mode,
+  params: state.bracket
 });
 
 export default connect(mapStateToProps)(BracketColumn);

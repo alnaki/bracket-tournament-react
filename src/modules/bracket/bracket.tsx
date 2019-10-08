@@ -4,57 +4,56 @@ import { Grid, FormControlLabel, Switch } from "@material-ui/core";
 import BracketColumn from "./column";
 import { changeMode } from "../../shared/store/bracket/actions";
 import { AppState } from "../../shared/store";
+import { BracketState } from "../../shared/store/bracket/types";
 
 type Props = {
-    mode?: boolean;
-    changeMode: (arg0: boolean) => void,
+  params: BracketState;
+  changeMode: (arg0: boolean) => void;
 };
 class Bracket extends Component<Props> {
-    state = {
-        mode: this.props.mode ? this.props.mode : false,
-    };
+  handleChangeMode(event: React.ChangeEvent<HTMLInputElement>) {
+    this.props.changeMode(event.target.checked);
+    this.setState({
+      ...this.state,
+      mode: event.target.checked
+    });
+  }
 
-    handleChangeMode(event: React.ChangeEvent<HTMLInputElement>) {
-        this.props.changeMode(event.target.checked);
-        this.setState({
-            ...this.state,
-            mode: event.target.checked,
-        });
-    };
-
-    render() {
-        return (
-            <div>
-                <FormControlLabel
-                    value="start"
-                    control={<Switch
-                        checked={this.state.mode}
-                        onChange={(e) => this.handleChangeMode(e)}
-                        value="mode"
-                        color="primary"
-                        inputProps={{ 'aria-label': 'primary checkbox' }}
-                    />}
-                    label="Mode modification : "
-                    labelPlacement="start"
-                />
-                {this.state.mode}
-                <Grid className="bracket" container>
-                    <BracketColumn />
-                </Grid>
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div>
+        <FormControlLabel
+          value="start"
+          control={
+            <Switch
+              checked={this.props.params.mode}
+              onChange={e => this.handleChangeMode(e)}
+              value="mode"
+              color="primary"
+              inputProps={{ "aria-label": "primary checkbox" }}
+            />
+          }
+          label="Mode modification : "
+          labelPlacement="start"
+        />
+        {this.props.params.mode}
+        <Grid className="bracket" container>
+          <BracketColumn />
+        </Grid>
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = (state: AppState) => ({
-    mode: state.bracket.mode,
+  params: state.bracket
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-    changeMode: (mode: boolean) => dispatch(changeMode(mode), dispatch),
+  changeMode: (mode: boolean) => dispatch(changeMode(mode), dispatch)
 });
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Bracket);
