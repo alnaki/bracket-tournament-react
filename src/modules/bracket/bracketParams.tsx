@@ -19,7 +19,12 @@ import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 
-const drawerWidth = 240;
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import Switch from "@material-ui/core/Switch";
+import EditIcon from "@material-ui/icons/Edit";
+import TextField from "@material-ui/core/TextField";
+
+const drawerWidth = 300;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -74,6 +79,10 @@ const useStyles = makeStyles((theme: Theme) =>
         duration: theme.transitions.duration.enteringScreen
       }),
       marginRight: 0
+    },
+    textField: {
+      width: "70px",
+      height: "30px"
     }
   })
 );
@@ -132,25 +141,54 @@ export default function PersistentDrawerRight(props: {
         </div>
         <Divider />
         <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+          <ListItem>
+            <ListItemIcon>
+              <EditIcon />
+            </ListItemIcon>
+            <ListItemText id="switch-list-label-edit" primary="Mode edition" />
+            <ListItemSecondaryAction>
+              <Switch
+                edge="end"
+                inputProps={{ "aria-labelledby": "switch-list-label-edit" }}
+              />
+            </ListItemSecondaryAction>
+          </ListItem>
+
+          <ListItem>
+            <ListItemIcon>
+              <EditIcon />
+            </ListItemIcon>
+            <ListItemText id="switch-list-label-edit" primary="Mode edition" />
+            <ListItemSecondaryAction>
+              <TextField
+                id="outlined-number"
+                type="number"
+                InputLabelProps={{
+                  shrink: true
+                }}
+                variant="standard"
+                className={classes.textField}
+              />
+            </ListItemSecondaryAction>
+          </ListItem>
+
+          <ListItem>
+            <ListItemIcon>
+              <EditIcon />
+            </ListItemIcon>
+            <ListItemText id="switch-list-label-edit" primary="Mode edition" />
+            <ListItemSecondaryAction>
+              <TextField
+                id="outlined-number"
+                type="number"
+                InputLabelProps={{
+                  shrink: true
+                }}
+                variant="standard"
+                className={classes.textField}
+              />
+            </ListItemSecondaryAction>
+          </ListItem>
         </List>
       </Drawer>
     </div>
