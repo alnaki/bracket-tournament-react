@@ -128,6 +128,7 @@ export default function PersistentDrawerRight(props: {
               <ChevronRightIcon />
             )}
           </IconButton>
+          <h3>Params</h3>
         </div>
         <Divider />
         <List>
