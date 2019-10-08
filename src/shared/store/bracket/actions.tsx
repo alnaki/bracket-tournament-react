@@ -34,10 +34,3 @@ export function changeFontColor(value: string) {
     value: value
   };
 }
-
-export function changeParams(value: types.BracketState) {
-  return {
-    type: types.CHANGE_PARAMS,
-    value: value
-  };
-}

@@ -1,5 +1,3 @@
-import { Color } from "csstype";
-
 // Describing the shape of the chat's slice of state
 export interface BracketState {
   id?: number;
@@ -7,7 +5,8 @@ export interface BracketState {
   mode: boolean;
   nbPlayerMaxByTeam: number;
   nbTeamWinner: number;
-  fontColor: Color;
+  fontColor: string;
+  tournament: [];
 }
 
 // Describing the different ACTION NAMES available
@@ -43,9 +42,9 @@ interface ChangeFontColor {
   value: string;
 }
 
-interface ChangeParams {
-  type: typeof CHANGE_PARAMS;
-  value: BracketState;
-}
-
-export type BracketActionTypes = ChangeMode;
+export type BracketActionTypes =
+  | ChangeName
+  | ChangeMode
+  | ChangeNbPlayerMaxByTeam
+  | ChangeNbTeamWinner
+  | ChangeFontColor;

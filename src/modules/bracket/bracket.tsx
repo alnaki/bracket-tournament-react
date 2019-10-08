@@ -22,28 +22,26 @@ class Bracket extends Component<Props> {
 
   render() {
     return (
-      <div>
-        <PersistanceDrawerLeft>
-          <FormControlLabel
-            value="start"
-            control={
-              <Switch
-                checked={this.props.params.mode}
-                onChange={e => this.handleChangeMode(e)}
-                value="mode"
-                color="primary"
-                inputProps={{ "aria-label": "primary checkbox" }}
-              />
-            }
-            label="Mode modification : "
-            labelPlacement="start"
-          />
-          {this.props.params.mode}
-          <Grid className="bracket" container>
-            <Round />
-          </Grid>
-        </PersistanceDrawerLeft>
-      </div>
+      <PersistanceDrawerLeft>
+        <FormControlLabel
+          value="start"
+          control={
+            <Switch
+              checked={this.props.params.mode}
+              onChange={e => this.handleChangeMode(e)}
+              value="mode"
+              color="primary"
+              inputProps={{ "aria-label": "primary checkbox" }}
+            />
+          }
+          label="Mode modification : "
+          labelPlacement="start"
+        />
+        {this.props.params.mode}
+        <Grid className="bracket" container>
+          <Round />
+        </Grid>
+      </PersistanceDrawerLeft>
     );
   }
 }
