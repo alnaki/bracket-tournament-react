@@ -10,12 +10,12 @@ import {
 import { styled } from "@material-ui/core/styles";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import TeamProperties from "./teamComposition";
-import { IPlayer } from "../../shared/store/player/types";
+import { ITeam } from "../../shared/store/team/types";
 
 type Props = {
-  name: string;
-  avatar?: string;
-  playerList?: IPlayer[];
+  team: ITeam;
+  variant?: "small" | "medium" | "large";
+  edition?: boolean;
 };
 type State = {};
 
@@ -25,6 +25,10 @@ const MyAvatar = styled(Avatar)({
 });
 
 export default class TeamCard extends Component<Props, State> {
+  static defaultProps = {
+    variant: "medium",
+    edition: false
+  };
   state = {
     open: false
   };
@@ -38,10 +42,10 @@ export default class TeamCard extends Component<Props, State> {
   };
 
   render() {
-    const avatar = this.props.avatar ? (
-      <Avatar src={this.props.avatar} />
+    const avatar = this.props.team.avatar ? (
+      <Avatar src={this.props.team.avatar} />
     ) : (
-      <MyAvatar>{this.props.name.substr(0, 2)}</MyAvatar>
+      <MyAvatar>{this.props.team.name.substr(0, 2)}</MyAvatar>
     );
     return (
       <div>
@@ -52,7 +56,7 @@ export default class TeamCard extends Component<Props, State> {
               <MoreVertIcon />
             </IconButton>
           }
-          title={this.props.name}
+          title={this.props.team.name}
           subheader=""
         />
 
@@ -61,7 +65,7 @@ export default class TeamCard extends Component<Props, State> {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <TeamProperties name={this.props.name} />
+          <TeamProperties name={this.props.team.name} />
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">
               Cancel

@@ -14,15 +14,9 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
-
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import Switch from "@material-ui/core/Switch";
-import EditIcon from "@material-ui/icons/Edit";
-import TextField from "@material-ui/core/TextField";
+import { ITeam } from "../../shared/store/team/types";
+import TeamCard from "./teamCard";
+import Card from "@material-ui/core/Card";
 
 const drawerWidth = 300;
 
@@ -87,9 +81,12 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function PersistentDrawerRight(props: {
+type Props = {
   children: React.ReactNode;
-}) {
+  teams: ITeam[];
+};
+
+export default function BracketParamsDrawer(props: Props) {
   const theme = useTheme();
   const classes = useStyles(theme);
   const [open, setOpen] = React.useState(false);
@@ -123,7 +120,7 @@ export default function PersistentDrawerRight(props: {
       <Drawer
         className={classes.drawer}
         variant="persistent"
-        anchor="right"
+        anchor="left"
         open={open}
         classes={{
           paper: classes.drawerPaper
@@ -141,54 +138,13 @@ export default function PersistentDrawerRight(props: {
         </div>
         <Divider />
         <List>
-          <ListItem>
-            <ListItemIcon>
-              <EditIcon />
-            </ListItemIcon>
-            <ListItemText id="switch-list-label-edit" primary="Mode edition" />
-            <ListItemSecondaryAction>
-              <Switch
-                edge="end"
-                inputProps={{ "aria-labelledby": "switch-list-label-edit" }}
-              />
-            </ListItemSecondaryAction>
-          </ListItem>
-
-          <ListItem>
-            <ListItemIcon>
-              <EditIcon />
-            </ListItemIcon>
-            <ListItemText id="switch-list-label-edit" primary="Mode edition" />
-            <ListItemSecondaryAction>
-              <TextField
-                id="outlined-number"
-                type="number"
-                InputLabelProps={{
-                  shrink: true
-                }}
-                variant="standard"
-                className={classes.textField}
-              />
-            </ListItemSecondaryAction>
-          </ListItem>
-
-          <ListItem>
-            <ListItemIcon>
-              <EditIcon />
-            </ListItemIcon>
-            <ListItemText id="switch-list-label-edit" primary="Mode edition" />
-            <ListItemSecondaryAction>
-              <TextField
-                id="outlined-number"
-                type="number"
-                InputLabelProps={{
-                  shrink: true
-                }}
-                variant="standard"
-                className={classes.textField}
-              />
-            </ListItemSecondaryAction>
-          </ListItem>
+          {props.teams.map(t => (
+            <ListItem>
+              <Card>
+                <TeamCard team={t} />
+              </Card>
+            </ListItem>
+          ))}
         </List>
       </Drawer>
     </div>

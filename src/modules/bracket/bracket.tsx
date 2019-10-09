@@ -5,10 +5,13 @@ import Round from "./round";
 import { changeMode } from "../../shared/store/bracket/actions";
 import { AppState } from "../../shared/store";
 import { BracketState } from "../../shared/store/bracket/types";
-import PersistanceDrawerLeft from "./bracketParams";
+import BracketParamsDrawer from "./bracketParamsDrawer";
+import TeamDrawer from "../team/teamDrawer";
+import { ITeam } from "../../shared/store/team/types";
 
 type Props = {
   params: BracketState;
+  teams: ITeam[];
   changeMode: (arg0: boolean) => void;
 };
 class Bracket extends Component<Props> {
@@ -16,42 +19,45 @@ class Bracket extends Component<Props> {
     this.props.changeMode(event.target.checked);
     this.setState({
       ...this.state,
-      mode: event.target.checked
+      edition: event.target.checked
     });
   }
 
   render() {
     return (
-      <PersistanceDrawerLeft>
-        <FormControlLabel
-          value="start"
-          control={
-            <Switch
-              checked={this.props.params.mode}
-              onChange={e => this.handleChangeMode(e)}
-              value="mode"
-              color="primary"
-              inputProps={{ "aria-label": "primary checkbox" }}
-            />
-          }
-          label="Mode modification : "
-          labelPlacement="start"
-        />
-        {this.props.params.mode}
-        <Grid className="bracket" container>
-          <Round />
-        </Grid>
-      </PersistanceDrawerLeft>
+      <TeamDrawer teams={this.props.teams}>
+        <BracketParamsDrawer>
+          <FormControlLabel
+            value="start"
+            control={
+              <Switch
+                checked={this.props.params.edition}
+                onChange={e => this.handleChangeMode(e)}
+                value="mode"
+                color="primary"
+                inputProps={{ "aria-label": "primary checkbox" }}
+              />
+            }
+            label="Mode modification : "
+            labelPlacement="start"
+          />
+          {this.props.params.edition}
+          <Grid className="bracket" container>
+            <Round />
+          </Grid>
+        </BracketParamsDrawer>
+      </TeamDrawer>
     );
   }
 }
 
 const mapStateToProps = (state: AppState) => ({
-  params: state.bracket
+  params: state.bracket,
+  teams: state.teams.teamList
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-  changeMode: (mode: boolean) => dispatch(changeMode(mode), dispatch)
+  changeMode: (edition: boolean) => dispatch(changeMode(edition), dispatch)
 });
 
 export default connect(

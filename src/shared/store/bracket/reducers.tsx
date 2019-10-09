@@ -2,7 +2,7 @@ import { BracketActionTypes, BracketState } from "./types";
 import * as types from "./types";
 const initialState: BracketState = {
   name: "Tournament",
-  mode: false,
+  edition: false,
   nbPlayerMaxByTeam: 4,
   nbTeamWinner: 1,
   fontColor: "#eceff1",
@@ -22,7 +22,7 @@ export function bracketReducer(
     case types.CHANGE_MODE:
       return {
         ...state,
-        mode: action.value
+        edition: action.value
       };
     case types.CHANGE_NB_PLAYER_MAX_BY_TEAM:
       return {

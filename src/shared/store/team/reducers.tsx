@@ -9,7 +9,7 @@ import {
 } from "./types";
 
 const initialState: TeamState = {
-  teamList: [],
+  teamList: [{ id: 1, name: "team 1" }, { id: 2, name: "group 2" }],
   nbTeam: 0
 };
 

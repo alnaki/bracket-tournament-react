@@ -12,16 +12,17 @@ const OppositionRoot = styled.div`
 `;
 
 type Props = {
-  mode?: boolean;
+  edition?: boolean;
   nbPlayerMaxByTeam?: number;
 };
-class OppositionCard extends Component<Props> {
+class TeamDuel extends Component<Props> {
   state = {
     nbPlayerMaxByTeam: this.props.nbPlayerMaxByTeam
       ? this.props.nbPlayerMaxByTeam
       : 2,
     teamList: [
       {
+        id: 1,
         avatar: "https://loremflickr.com/640/360",
         name: "player 2"
       }
@@ -43,7 +44,7 @@ class OppositionCard extends Component<Props> {
 
   render() {
     const list = this.state.teamList.map((s, i) => (
-      <TeamCard key={i} name={s.name} avatar={s.avatar} />
+      <TeamCard key={i} team={s} />
     ));
 
     return (
@@ -51,7 +52,7 @@ class OppositionCard extends Component<Props> {
         <Card>
           {list}
           {this.state.teamList.length < this.state.nbPlayerMaxByTeam &&
-            this.props.mode && (
+            this.props.edition && (
               <CardActions>
                 <Button
                   variant="contained"
@@ -71,8 +72,8 @@ class OppositionCard extends Component<Props> {
 }
 
 const mapStateToProps = (state: AppState) => ({
-  mode: state.bracket.mode,
+  edition: state.bracket.edition,
   nbPlayerMaxByTeam: state.bracket.nbPlayerMaxByTeam
 });
 
-export default connect(mapStateToProps)(OppositionCard);
+export default connect(mapStateToProps)(TeamDuel);

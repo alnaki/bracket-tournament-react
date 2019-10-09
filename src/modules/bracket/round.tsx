@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Grid, Button } from "@material-ui/core";
-import OppositionCard from "../card/oppositionCard";
+import TeamDuel from "../team/teamDuel";
 import AddIcon from "@material-ui/icons/Add";
 import { connect } from "react-redux";
 import { AppState } from "../../shared/store";
@@ -22,14 +22,12 @@ class Round extends Component<Props> {
   };
 
   render() {
-    const list = this.state.oppositionList.map((s, i) => (
-      <OppositionCard key={i} />
-    ));
+    const list = this.state.oppositionList.map((s, i) => <TeamDuel key={i} />);
     return (
       <Grid className="bracket-column">
         <h1>bracket round title</h1>
         {list}
-        {this.props.params.mode && (
+        {this.props.params.edition && (
           <Button
             variant="contained"
             color="primary"

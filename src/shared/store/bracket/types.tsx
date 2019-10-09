@@ -2,7 +2,7 @@
 export interface BracketState {
   id?: number;
   name: string;
-  mode: boolean;
+  edition: boolean;
   nbPlayerMaxByTeam: number;
   nbTeamWinner: number;
   fontColor: string;

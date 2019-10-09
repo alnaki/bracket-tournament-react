@@ -4,7 +4,7 @@ export interface ITeam {
   bddId?: number;
   name: String;
   avatar?: string;
-  playerList: number[];
+  playerList?: number[];
 }
 
 export interface TeamState {
