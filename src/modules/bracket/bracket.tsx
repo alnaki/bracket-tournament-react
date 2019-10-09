@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Grid, FormControlLabel, Switch } from "@material-ui/core";
 import Round from "./round";
-import { changeMode } from "../../shared/store/bracket/actions";
-import { AppState } from "../../shared/store";
-import { BracketState } from "../../shared/store/bracket/types";
+import { changeMode } from "../../store/bracket/actions";
+import { AppState } from "../../store";
+import { BracketState } from "../../store/bracket/types";
 import BracketParamsDrawer from "./bracketParamsDrawer";
 import TeamDrawer from "../team/teamDrawer";
-import { ITeam } from "../../shared/store/team/types";
+import { ITeam } from "../../store/team/types";
 
 type Props = {
   params: BracketState;
@@ -25,7 +25,7 @@ class Bracket extends Component<Props> {
 
   render() {
     return (
-      <TeamDrawer teams={this.props.teams}>
+      <TeamDrawer teams={this.props.teams} edition={this.props.params.edition}>
         <BracketParamsDrawer>
           <FormControlLabel
             value="start"

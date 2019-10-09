@@ -7,16 +7,14 @@ import {
   createStyles
 } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
-import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import ListItem from "@material-ui/core/ListItem";
-import { ITeam } from "../../shared/store/team/types";
-import TeamCard from "./teamCard";
-import Card from "@material-ui/core/Card";
+import { ITeam } from "../../store/team/types";
+import TeamList from "./teamList";
+import TeamListRanking from "./teamListRanking";
 
 const drawerWidth = 300;
 
@@ -84,6 +82,7 @@ const useStyles = makeStyles((theme: Theme) =>
 type Props = {
   children: React.ReactNode;
   teams: ITeam[];
+  edition: boolean;
 };
 
 export default function BracketParamsDrawer(props: Props) {
@@ -134,18 +133,14 @@ export default function BracketParamsDrawer(props: Props) {
               <ChevronRightIcon />
             )}
           </IconButton>
-          <h3>Params</h3>
+          <h3>Teams</h3>
         </div>
         <Divider />
-        <List>
-          {props.teams.map(t => (
-            <ListItem>
-              <Card>
-                <TeamCard team={t} />
-              </Card>
-            </ListItem>
-          ))}
-        </List>
+        {props.edition ? (
+          <TeamList teams={props.teams} />
+        ) : (
+          <TeamListRanking teams={props.teams} />
+        )}
       </Drawer>
     </div>
   );

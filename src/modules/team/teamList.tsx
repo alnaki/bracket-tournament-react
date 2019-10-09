@@ -1,19 +1,23 @@
 import React, { Component } from "react";
-import { ITeam } from "../../shared/store/team/types";
+import { ITeam } from "../../store/team/types";
+import TeamCard from "./teamCard";
+import { List, ListItem, Card } from "@material-ui/core";
 
 type Props = {
   teams: ITeam[];
 };
-type State = {
-  /*states*/
-};
-
-export default class NameComponent extends Component<Props, State> {
-  state = {
-    // init states here
-  };
-
+export default class TeamList extends Component<Props> {
   render() {
-    return <div />;
+    return (
+      <List>
+        {this.props.teams.map(t => (
+          <ListItem>
+            <Card>
+              <TeamCard team={t} />
+            </Card>
+          </ListItem>
+        ))}
+      </List>
+    );
   }
 }

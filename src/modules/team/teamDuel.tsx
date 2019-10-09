@@ -4,7 +4,7 @@ import AddIcon from "@material-ui/icons/Add";
 import styled from "styled-components";
 import TeamCard from "./teamCard";
 import { connect } from "react-redux";
-import { AppState } from "../../shared/store";
+import { AppState } from "../../store";
 
 const OppositionRoot = styled.div`
   max-width: 275px;

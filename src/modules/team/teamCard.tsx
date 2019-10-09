@@ -10,7 +10,7 @@ import {
 import { styled } from "@material-ui/core/styles";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import TeamProperties from "./teamComposition";
-import { ITeam } from "../../shared/store/team/types";
+import { ITeam } from "../../store/team/types";
 
 type Props = {
   team: ITeam;

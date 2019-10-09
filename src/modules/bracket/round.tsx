@@ -3,8 +3,8 @@ import { Grid, Button } from "@material-ui/core";
 import TeamDuel from "../team/teamDuel";
 import AddIcon from "@material-ui/icons/Add";
 import { connect } from "react-redux";
-import { AppState } from "../../shared/store";
-import { BracketState } from "../../shared/store/bracket/types";
+import { AppState } from "../../store";
+import { BracketState } from "../../store/bracket/types";
 
 type Props = {
   params: BracketState;

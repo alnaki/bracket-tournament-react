@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import Bracket from "./modules/bracket/bracket";
 import { Provider } from "react-redux";
-import configureStore from "./shared/store";
+import configureStore from "./store";
 
 const store = configureStore();
 
