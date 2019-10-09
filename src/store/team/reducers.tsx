@@ -19,12 +19,11 @@ export function teamReducer(
 ): TeamState {
   switch (action.type) {
     case ADD_TEAM:
-      if (!action.team) {
-        action.team = { id: state.nbTeam, name: "Team " + state.nbTeam };
-      }
-      action.team.id = state.nbTeam;
+      !action.team
+        ? (action.team = { id: state.nbTeam, name: "Team " + state.nbTeam })
+        : (action.team.id = state.nbTeam);
       return {
-        nbTeam: state.nbTeam++,
+        nbTeam: state.nbTeam + 1,
         teamList: [...state.teamList, action.team]
       };
     case EDIT_TEAM:
