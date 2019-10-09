@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Avatar, CardHeader, IconButton, TextField } from "@material-ui/core";
 import { styled } from "@material-ui/styles";
-import TeamCard from "./teamCard";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 
 type Props = {
@@ -66,11 +65,7 @@ export default class PlayerForm extends Component<Props, State> {
   }
 
   consultRender() {
-    return (
-      <div onClick={() => this.handleEditMode()}>
-        <TeamCard name={this.state.name} />
-      </div>
-    );
+    return <div onClick={() => this.handleEditMode()}>{this.state.name}</div>;
   }
 
   editRender(avatar: JSX.Element) {

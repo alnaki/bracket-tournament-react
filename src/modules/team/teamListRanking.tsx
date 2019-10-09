@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { ITeam } from "../../store/team/types";
 import TeamCard from "./teamCard";
-import { List, ListItem, Card } from "@material-ui/core";
+import { List, ListItem } from "@material-ui/core";
 
 type Props = {
   teams: ITeam[];

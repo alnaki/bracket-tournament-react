@@ -17,10 +17,6 @@ type Props = {
 class Bracket extends Component<Props> {
   handleChangeMode(event: React.ChangeEvent<HTMLInputElement>) {
     this.props.changeMode(event.target.checked);
-    this.setState({
-      ...this.state,
-      edition: event.target.checked
-    });
   }
 
   render() {

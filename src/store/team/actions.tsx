@@ -7,7 +7,7 @@ import {
 } from "./types";
 import { ITeam } from "./types";
 
-export function addTeam(team: ITeam) {
+export function addTeam(team: ITeam | undefined) {
   return {
     type: ADD_TEAM,
     team: team

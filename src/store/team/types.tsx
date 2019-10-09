@@ -21,7 +21,7 @@ export const DELETE_PLAYER_IN_TEAM = "DELETE_PLAYER_IN_TEAM";
 
 interface AddTeam {
   type: typeof ADD_TEAM;
-  team: ITeam;
+  team?: ITeam;
 }
 interface EditTeam {
   type: typeof EDIT_TEAM;
