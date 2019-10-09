@@ -21,13 +21,13 @@ const useStyles = makeStyles({
   },
 });
 
-export interface SimpleDialogProps {
+export interface Props {
   open: boolean;
   selectedValue: string;
   onClose: (value: string) => void;
 }
 
-function SimpleDialog(props: SimpleDialogProps) {
+function TeamDialogForm(props: Props) {
   const classes = useStyles();
   const { onClose, selectedValue, open } = props;
 
