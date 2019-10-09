@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import PlayerForm from "./playerForm";
 import { Fab, TextField } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 
 type Props = {
-  /*props*/
+  name?: string;
 };
 type State = {
   playerList: any;
@@ -39,7 +38,6 @@ export default class TeamForm extends Component<Props, State> {
     });
   };
 
-
   keyPress(e: React.KeyboardEvent<any>) {
     if (e.key === "Enter") {
       // send();
@@ -47,12 +45,6 @@ export default class TeamForm extends Component<Props, State> {
   }
 
   render() {
-    const list = this.state.playerList.map((s, i) => (
-      <div key={i}>
-        <PlayerForm />
-      </div>
-    ));
-
     return (
       <div>
         <TextField
@@ -62,7 +54,9 @@ export default class TeamForm extends Component<Props, State> {
           onChange={this.handleChange("titleTeam")}
           margin="normal"
         />
-        {list}
+        {this.state.playerList.map((s, i) => (
+          <div key={i}>{s.name}</div>
+        ))}
         <Fab
           size="small"
           color="secondary"

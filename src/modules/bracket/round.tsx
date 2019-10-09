@@ -25,7 +25,7 @@ class Round extends Component<Props> {
     const list = this.state.oppositionList.map((s, i) => <TeamDuel key={i} />);
     return (
       <Grid className="bracket-column">
-        <h1>bracket round title</h1>
+        <h1>Round 1</h1>
         {list}
         {this.props.params.edition && (
           <Button

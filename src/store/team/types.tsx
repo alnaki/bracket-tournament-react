@@ -2,7 +2,7 @@
 export interface ITeam {
   id: number;
   bddId?: number;
-  name: String;
+  name: string;
   avatar?: string;
   playerList: number[];
 }

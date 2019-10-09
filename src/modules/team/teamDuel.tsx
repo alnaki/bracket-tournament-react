@@ -20,11 +20,12 @@ class TeamDuel extends Component<Props> {
     nbPlayerMaxByTeam: this.props.nbPlayerMaxByTeam
       ? this.props.nbPlayerMaxByTeam
       : 2,
-    teamList: [
+    teams: [
       {
         id: 1,
         avatar: "https://loremflickr.com/640/360",
-        name: "player 2"
+        name: "player 2",
+        playerList: []
       }
     ]
   };
@@ -32,26 +33,26 @@ class TeamDuel extends Component<Props> {
   deleteTeam() {}
 
   addTeam = (_event: any) => {
-    if (this.state.teamList.length >= this.state.nbPlayerMaxByTeam) return;
+    if (this.state.teams.length >= this.state.nbPlayerMaxByTeam) return;
     let elem = {
       name: "New Player"
     };
 
     this.setState({
-      teamList: [...this.state.teamList, elem]
+      teamList: [...this.state.teams, elem]
     });
   };
 
   render() {
-    const list = this.state.teamList.map((s, i) => (
-      <TeamCard key={i} team={s} />
+    const list = this.state.teams.map((s, i) => (
+      <TeamCard key={i} team={s} variant={"medium"} />
     ));
 
     return (
       <OppositionRoot>
         <Card>
           {list}
-          {this.state.teamList.length < this.state.nbPlayerMaxByTeam &&
+          {this.state.teams.length < this.state.nbPlayerMaxByTeam &&
             this.props.edition && (
               <CardActions>
                 <Button

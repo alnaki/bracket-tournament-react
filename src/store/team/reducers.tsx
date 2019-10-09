@@ -9,7 +9,10 @@ import {
 } from "./types";
 
 const initialState: TeamState = {
-  teamList: [{ id: 1, name: "team 1" }, { id: 2, name: "group 2" }],
+  teamList: [
+    { id: 1, name: "team 1", playerList: [] },
+    { id: 2, name: "group 2", playerList: [] }
+  ],
   nbTeam: 0
 };
 
@@ -20,7 +23,11 @@ export function teamReducer(
   switch (action.type) {
     case ADD_TEAM:
       !action.team
-        ? (action.team = { id: state.nbTeam, name: "Team " + state.nbTeam })
+        ? (action.team = {
+            id: state.nbTeam,
+            name: "Team " + state.nbTeam,
+            playerList: []
+          })
         : (action.team.id = state.nbTeam);
       return {
         nbTeam: state.nbTeam + 1,
