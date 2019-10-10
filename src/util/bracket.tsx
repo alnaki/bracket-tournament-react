@@ -1,3 +1,10 @@
+export function initBracket() {
+  // Get all teams
+  // Mixed teams
+  // Split by duels
+  // Move duels in rounds
+}
+
 export function initRandomOppositions(
   teams: number[],
   nbTeamMaxByDuel: number
