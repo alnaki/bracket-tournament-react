@@ -1,36 +1,30 @@
-import {
-  ADD_TEAM,
-  EDIT_TEAM,
-  DELETE_TEAM,
-  ADD_PLAYER_IN_TEAM,
-  DELETE_PLAYER_IN_TEAM
-} from "./types";
+import * as types from "./types";
 import { ITeam } from "./types";
 
 export function addTeam(team: ITeam | undefined) {
   return {
-    type: ADD_TEAM,
+    type: types.ADD_TEAM,
     team: team
   };
 }
 
 export function editTeam(team: ITeam) {
   return {
-    type: EDIT_TEAM,
+    type: types.EDIT_TEAM,
     team: team
   };
 }
 
 export function deleteTeam(id: number) {
   return {
-    type: DELETE_TEAM,
+    type: types.DELETE_TEAM,
     id: id
   };
 }
 
 export function addPlayerInTeam(idTeam: number, idPlayer: number) {
   return {
-    type: ADD_PLAYER_IN_TEAM,
+    type: types.ADD_PLAYER_IN_TEAM,
     idTeam: idTeam,
     idPlayer: idPlayer
   };
@@ -38,7 +32,7 @@ export function addPlayerInTeam(idTeam: number, idPlayer: number) {
 
 export function deletePlayerInTeam(idTeam: number, idPlayer: number) {
   return {
-    type: DELETE_PLAYER_IN_TEAM,
+    type: types.DELETE_PLAYER_IN_TEAM,
     idTeam: idTeam,
     idPlayer: idPlayer
   };

@@ -1,20 +1,29 @@
+import { ITeam } from "../team/types";
+
 // Describing the shape of the chat's slice of state
 export interface BracketState {
   id?: number;
   name: string;
   edition: boolean;
-  nbPlayerMaxByTeam: number;
+  nbTeamMaxByDuel: number;
   nbTeamWinner: number;
-  fontColor: string;
-  tournament: [];
+  tournament: IRound[];
+}
+
+export interface IRound {
+  name: string;
+  duels: IDuel[];
+}
+
+export interface IDuel {
+  teams: number[];
 }
 
 // Describing the different ACTION NAMES available
 export const CHANGE_NAME = "CHANGE_NAME";
 export const CHANGE_MODE = "CHANGE_MODE";
-export const CHANGE_NB_PLAYER_MAX_BY_TEAM = "CHANGE_NB_PLAYER_MAX_BY_TEAM";
+export const CHANGE_NB_TEAM_MAX_BY_DUEL = "CHANGE_NB_TEAM_MAX_BY_DUEL";
 export const CHANGE_NB_TEAM_WINNER = "CHANGE_NB_TEAM_WINNER";
-export const CHANGE_FONT_COLOR = "CHANGE_FONT_COLOR";
 export const CHANGE_PARAMS = "CHANGE_PARAMS";
 
 interface ChangeName {
@@ -27,8 +36,8 @@ interface ChangeMode {
   value: boolean;
 }
 
-interface ChangeNbPlayerMaxByTeam {
-  type: typeof CHANGE_NB_PLAYER_MAX_BY_TEAM;
+interface ChangeNbTeamMaxByDuel {
+  type: typeof CHANGE_NB_TEAM_MAX_BY_DUEL;
   value: number;
 }
 
@@ -37,14 +46,8 @@ interface ChangeNbTeamWinner {
   value: number;
 }
 
-interface ChangeFontColor {
-  type: typeof CHANGE_FONT_COLOR;
-  value: string;
-}
-
 export type BracketActionTypes =
   | ChangeName
   | ChangeMode
-  | ChangeNbPlayerMaxByTeam
-  | ChangeNbTeamWinner
-  | ChangeFontColor;
+  | ChangeNbTeamMaxByDuel
+  | ChangeNbTeamWinner;

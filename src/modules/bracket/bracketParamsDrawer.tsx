@@ -101,6 +101,12 @@ export default function BracketParamsDrawer(props: Props) {
     setOpen(false);
   };
 
+  const styleIcon = {
+    position: "absolute",
+    top: "10px",
+    right: "10px"
+  };
+
   return (
     <div className={classes.root}>
       <main
@@ -114,6 +120,11 @@ export default function BracketParamsDrawer(props: Props) {
           edge="end"
           onClick={handleDrawerOpen}
           className={clsx(open && classes.hide)}
+          style={{
+            position: "absolute",
+            top: "10px",
+            right: "10px"
+          }}
         >
           <MenuIcon />
         </IconButton>

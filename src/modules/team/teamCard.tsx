@@ -1,14 +1,6 @@
 import React, { Component } from "react";
-import {
-  Avatar,
-  CardHeader,
-  IconButton,
-  Grid,
-  Divider,
-  Typography,
-} from "@material-ui/core";
+import { Avatar, Grid, Divider, Typography } from "@material-ui/core";
 import { styled } from "@material-ui/core/styles";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { ITeam } from "../../store/team/types";
 
 type Props = {
@@ -49,13 +41,9 @@ export default class TeamCard extends Component<Props, State> {
               <Divider orientation="vertical" />
             </Grid>
             <Grid item zeroMinWidth>
-              <Typography noWrap>{this.props.team.name} d,kadjfdkflzeoo z lfz lq</Typography>
-            </Grid>
-            <Grid item>
-              <Divider orientation="vertical" />
-            </Grid>
-            <Grid item>
-              <Typography>1 </Typography>
+              <Typography noWrap>
+                {this.props.team.name} d,kadjfdkflzeoo z lfz lq
+              </Typography>
             </Grid>
           </Grid>
         );
@@ -64,26 +52,22 @@ export default class TeamCard extends Component<Props, State> {
           <div>
             <Grid container wrap="nowrap" spacing={1}>
               <Grid item>
-
-                {
-                  this.props.team.avatar ? (
-                    <Avatar src={this.props.team.avatar} />
-                  ) : (
-                      <MyAvatar>{this.props.team.name.substr(0, 2)}</MyAvatar>
-                    )
-                }
+                {this.props.team.avatar ? (
+                  <Avatar src={this.props.team.avatar} />
+                ) : (
+                  <MyAvatar>{this.props.team.name.substr(0, 2)}</MyAvatar>
+                )}
               </Grid>
               <Grid item>
                 <Divider orientation="vertical" />
               </Grid>
               <Grid item zeroMinWidth>
-                <Typography noWrap>{this.props.team.name} d,kadjfdkflzeoo z lfz lq</Typography>
-              </Grid>
-              <Grid item>
-                <Divider orientation="vertical" />
+                <Typography noWrap>
+                  {this.props.team.name} d,kadjfdkflzeoo z lfz lq
+                </Typography>
               </Grid>
             </Grid>
-          </div >
+          </div>
         );
     }
   }

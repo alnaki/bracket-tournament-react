@@ -1,10 +1,5 @@
-import {
-  PlayerActionTypes,
-  PlayerState,
-  ADD_PLAYER,
-  EDIT_PLAYER,
-  DELETE_PLAYER
-} from "./types";
+import { PlayerActionTypes, PlayerState } from "./types";
+import * as types from "./types";
 
 const initialState: PlayerState = {
   playerList: [],
@@ -16,13 +11,13 @@ export function playerReducer(
   action: PlayerActionTypes
 ): PlayerState {
   switch (action.type) {
-    case ADD_PLAYER:
+    case types.ADD_PLAYER:
       action.player.id = state.nbPlayer;
       return {
         nbPlayer: state.nbPlayer++,
         playerList: [...state.playerList, action.player]
       };
-    case EDIT_PLAYER:
+    case types.EDIT_PLAYER:
       return {
         ...state,
         playerList: [
@@ -31,7 +26,7 @@ export function playerReducer(
           )
         ]
       };
-    case DELETE_PLAYER:
+    case types.DELETE_PLAYER:
       return {
         ...state,
         playerList: [

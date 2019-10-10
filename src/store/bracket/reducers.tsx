@@ -3,9 +3,8 @@ import * as types from "./types";
 const initialState: BracketState = {
   name: "Tournament",
   edition: false,
-  nbPlayerMaxByTeam: 4,
+  nbTeamMaxByDuel: 4,
   nbTeamWinner: 1,
-  fontColor: "#eceff1",
   tournament: []
 };
 
@@ -24,21 +23,20 @@ export function bracketReducer(
         ...state,
         edition: action.value
       };
-    case types.CHANGE_NB_PLAYER_MAX_BY_TEAM:
+    case types.CHANGE_NB_TEAM_MAX_BY_DUEL:
       return {
         ...state,
-        nbPlayerMaxByTeam: action.value
+        nbTeamMaxByDuel: action.value
       };
     case types.CHANGE_NB_TEAM_WINNER:
-      return {
-        ...state,
-        nbTeamWinner: action.value
-      };
-    case types.CHANGE_FONT_COLOR:
-      return {
-        ...state,
-        fontColor: action.value
-      };
+      if (initialState.nbTeamWinner / 2 < initialState.nbTeamMaxByDuel) {
+        return {
+          ...state,
+          nbTeamWinner: action.value
+        };
+      } else {
+        return state;
+      }
     default:
       return state;
   }

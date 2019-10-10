@@ -10,8 +10,8 @@ export default class TeamListRanking extends Component<Props> {
   render() {
     return (
       <List>
-        {this.props.teams.map(t => (
-          <ListItem>
+        {this.props.teams.map((t, i) => (
+          <ListItem key={i}>
             <TeamCard team={t} />
           </ListItem>
         ))}

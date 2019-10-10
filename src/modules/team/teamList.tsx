@@ -19,8 +19,8 @@ class TeamList extends Component<Props> {
     return (
       <div>
         <List>
-          {this.props.teams.map(t => (
-            <ListItem>
+          {this.props.teams.map((t, i) => (
+            <ListItem key={i}>
               <Card>
                 <TeamCard team={t} />
               </Card>
@@ -34,6 +34,14 @@ class TeamList extends Component<Props> {
           fullWidth
         >
           <AddIcon />
+        </Button>
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={this.handleAddTeam}
+          fullWidth
+        >
+          Générer tournois aléatoire
         </Button>
       </div>
     );

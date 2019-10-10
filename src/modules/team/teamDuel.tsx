@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Card, CardActions, Button } from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
+import { Card } from "@material-ui/core";
 import styled from "styled-components";
 import TeamCard from "./teamCard";
 import { connect } from "react-redux";
@@ -12,14 +11,11 @@ const OppositionRoot = styled.div`
 `;
 
 type Props = {
-  edition?: boolean;
-  nbPlayerMaxByTeam?: number;
+  edition: boolean;
+  nbTeamMaxByDuel: number;
 };
 class TeamDuel extends Component<Props> {
   state = {
-    nbPlayerMaxByTeam: this.props.nbPlayerMaxByTeam
-      ? this.props.nbPlayerMaxByTeam
-      : 2,
     teams: [
       {
         id: 1,
@@ -33,9 +29,10 @@ class TeamDuel extends Component<Props> {
   deleteTeam() {}
 
   addTeam = (_event: any) => {
-    if (this.state.teams.length >= this.state.nbPlayerMaxByTeam) return;
+    if (this.state.teams.length >= this.props.nbTeamMaxByDuel) return;
     let elem = {
-      name: "New Player"
+      name: "New Player",
+      playerList: []
     };
 
     this.setState({
@@ -44,28 +41,12 @@ class TeamDuel extends Component<Props> {
   };
 
   render() {
-    const list = this.state.teams.map((s, i) => (
-      <TeamCard key={i} team={s} variant={"medium"} />
-    ));
-
     return (
       <OppositionRoot>
         <Card>
-          {list}
-          {this.state.teams.length < this.state.nbPlayerMaxByTeam &&
-            this.props.edition && (
-              <CardActions>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  aria-label="add"
-                  onClick={this.addTeam}
-                  fullWidth
-                >
-                  <AddIcon />
-                </Button>
-              </CardActions>
-            )}
+          {this.state.teams.map((s, i) => (
+            <TeamCard key={i} team={s} variant={"medium"} />
+          ))}
         </Card>
       </OppositionRoot>
     );
@@ -74,7 +55,7 @@ class TeamDuel extends Component<Props> {
 
 const mapStateToProps = (state: AppState) => ({
   edition: state.bracket.edition,
-  nbPlayerMaxByTeam: state.bracket.nbPlayerMaxByTeam
+  nbTeamMaxByDuel: state.bracket.nbTeamMaxByDuel
 });
 
 export default connect(mapStateToProps)(TeamDuel);
