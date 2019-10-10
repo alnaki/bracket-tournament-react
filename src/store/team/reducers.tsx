@@ -9,7 +9,7 @@ import {
 } from "./types";
 
 const initialState: TeamState = {
-  teamList: [
+  teams: [
     { id: 1, name: "team 1", playerList: [] },
     { id: 2, name: "group 2", playerList: [] }
   ],
@@ -31,13 +31,13 @@ export function teamReducer(
         : (action.team.id = state.nbTeam);
       return {
         nbTeam: state.nbTeam + 1,
-        teamList: [...state.teamList, action.team]
+        teams: [...state.teams, action.team]
       };
     case EDIT_TEAM:
       return {
         ...state,
-        teamList: [
-          ...state.teamList.map(team =>
+        teams: [
+          ...state.teams.map(team =>
             team.id === action.team.id ? action.team : team
           )
         ]
@@ -45,18 +45,16 @@ export function teamReducer(
     case DELETE_TEAM:
       return {
         ...state,
-        teamList: [
-          ...state.teamList.filter(team => team.id !== action.bracketId)
-        ]
+        teams: [...state.teams.filter(team => team.id !== action.bracketId)]
       };
     case ADD_PLAYER_IN_TEAM:
-      const upTeam1 = state.teamList.find(team => team.id === action.teamId);
+      const upTeam1 = state.teams.find(team => team.id === action.teamId);
       if (upTeam1 !== undefined) {
         upTeam1.playerList.push(action.playerId);
         return {
           ...state,
-          teamList: [
-            ...state.teamList.map(team =>
+          teams: [
+            ...state.teams.map(team =>
               team.id === action.teamId ? upTeam1 : team
             )
           ]
@@ -64,15 +62,15 @@ export function teamReducer(
       } else return state;
 
     case DELETE_PLAYER_IN_TEAM:
-      const upTeam2 = state.teamList.find(team => team.id === action.teamId);
+      const upTeam2 = state.teams.find(team => team.id === action.teamId);
       if (upTeam2 !== undefined) {
         upTeam2.playerList = upTeam2.playerList.filter(
           player => player === action.playerId
         );
         return {
           ...state,
-          teamList: [
-            ...state.teamList.map(team =>
+          teams: [
+            ...state.teams.map(team =>
               team.id === action.teamId ? upTeam2 : team
             )
           ]

@@ -1,14 +1,14 @@
 // Describing the shape of the chat's slice of state
-export interface IPlayer {
-  id: number;
-  bddId?: number;
-  name: String;
-  avatar?: string;
-}
-
 export interface PlayerState {
   playerList: IPlayer[];
   nbPlayer: number;
+}
+
+export interface IPlayer {
+  id: number;
+  idBDD?: number;
+  name: String;
+  avatar?: string;
 }
 
 // Describing the different ACTION NAMES available

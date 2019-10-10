@@ -1,5 +1,3 @@
-import { ITeam } from "../team/types";
-
 // Describing the shape of the chat's slice of state
 export interface BracketState {
   id?: number;
@@ -7,16 +5,12 @@ export interface BracketState {
   edition: boolean;
   nbTeamMaxByDuel: number;
   nbTeamWinner: number;
-  tournament: IRound[];
 }
 
-export interface IRound {
+export interface IBracket {
   name: string;
-  duels: IDuel[];
-}
-
-export interface IDuel {
-  teams: number[];
+  nbTeamMaxByDuel: number;
+  nbTeamWinner: number;
 }
 
 // Describing the different ACTION NAMES available

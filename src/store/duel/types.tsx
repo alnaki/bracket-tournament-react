@@ -1,20 +1,26 @@
 // Describing the shape of the chat's slice of state
-export interface IDuel {
-  id: number;
-  bddId?: number;
-  name: String;
-  avatar?: string;
+export interface DuelState {
+  duels: IDuel[];
+  nbDuel: number;
 }
 
-export interface DuelState {
-  duelList: IDuel[];
-  nbDuel: number;
+export interface IDuel {
+  id: number;
+  idBDD?: number;
+  teams: ITeamScoring[];
+}
+
+export interface ITeamScoring {
+  idTeam: number;
+  winner: "noplay" | "true" | "false";
+  score?: number;
 }
 
 // Describing the different ACTION NAMES available
 export const ADD_DUEL = "ADD_DUEL";
 export const EDIT_DUEL = "EDIT_DUEL";
 export const DELETE_DUEL = "DELETE_DUEL";
+export const EDIT_DUEL_TEAMS = "EDIT_DUEL_TEAMS";
 
 interface AddDuel {
   type: typeof ADD_DUEL;
@@ -26,7 +32,12 @@ interface EditDuel {
 }
 interface DeleteDuel {
   type: typeof DELETE_DUEL;
-  bracketId: number;
+  id: number;
+}
+interface EditDuelTeams {
+  type: typeof EDIT_DUEL_TEAMS;
+  id: number;
+  teams: ITeamScoring[];
 }
 
-export type DuelActionTypes = AddDuel | EditDuel | DeleteDuel;
+export type DuelActionTypes = AddDuel | EditDuel | DeleteDuel | EditDuelTeams;

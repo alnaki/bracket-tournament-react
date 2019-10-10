@@ -49,7 +49,7 @@ class Bracket extends Component<Props> {
 
 const mapStateToProps = (state: AppState) => ({
   params: state.bracket,
-  teams: state.teams.teamList
+  teams: state.teams.teams
 });
 
 const mapDispatchToProps = (dispatch: any) => ({

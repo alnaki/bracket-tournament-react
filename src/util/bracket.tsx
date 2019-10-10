@@ -1,15 +1,13 @@
-import { ITeam } from "../store/team/types";
-
 export function initRandomOppositions(
-  teams: ITeam[],
+  teams: number[],
   nbTeamMaxByDuel: number
-): ITeam[][] {
+): number[][] {
   let nbDuel = Math.ceil(teams.length / nbTeamMaxByDuel);
-  let randomTeams = shuffleArray(teams);
-  let duels: ITeam[][];
+  let randomTeams = shuffle(teams);
+  let duels: number[][] = [];
 
   for (var i = 0; i < nbDuel; i++) {
-    duels[i] = [];
+    duels.push([]);
   }
 
   randomTeams.map((t, i) => duels[i % nbDuel].push(t));
@@ -17,7 +15,7 @@ export function initRandomOppositions(
   return duels;
 }
 
-export function initRandomTournament(teams: ITeam[], nbTeamMaxByDuel: number) {
+export function initRandomTournament(teams: number[], nbTeamMaxByDuel: number) {
   let duels = initRandomOppositions(teams, nbTeamMaxByDuel);
 
   let rounds;
@@ -25,11 +23,7 @@ export function initRandomTournament(teams: ITeam[], nbTeamMaxByDuel: number) {
   return duels;
 }
 
-function shuffleArray(array: ITeam[]): ITeam[] {
-  let rand;
-  for (let i = array.length - 1; i > 0; i--) {
-    rand = Math.floor(Math.random() * (i + 1));
-    [array[i], array[rand]] = [array[rand], array[i]];
-  }
-  return rand;
+function shuffle(array: number[]): number[] {
+  let copy = array;
+  return copy.sort(() => Math.random() - 0.5);
 }

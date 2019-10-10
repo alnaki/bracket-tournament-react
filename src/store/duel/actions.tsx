@@ -1,5 +1,5 @@
 import * as types from "./types";
-import { IDuel } from "./types";
+import { IDuel, ITeamScoring } from "./types";
 
 export function addDuel(duel: IDuel | undefined) {
   return {
@@ -19,5 +19,13 @@ export function deleteDuel(id: number) {
   return {
     type: types.DELETE_DUEL,
     id: id
+  };
+}
+
+export function editDuelTeams(id: number, teams: ITeamScoring[]) {
+  return {
+    type: types.EDIT_DUEL_TEAMS,
+    id: id,
+    teams: teams
   };
 }

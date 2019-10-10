@@ -1,15 +1,15 @@
 // Describing the shape of the chat's slice of state
+export interface TeamState {
+  teams: ITeam[];
+  nbTeam: number;
+}
+
 export interface ITeam {
   id: number;
-  bddId?: number;
+  idBDD?: number;
   name: string;
   avatar?: string;
   playerList: number[];
-}
-
-export interface TeamState {
-  teamList: ITeam[];
-  nbTeam: number;
 }
 
 // Describing the different ACTION NAMES available

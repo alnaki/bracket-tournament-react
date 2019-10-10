@@ -4,8 +4,7 @@ const initialState: BracketState = {
   name: "Tournament",
   edition: false,
   nbTeamMaxByDuel: 4,
-  nbTeamWinner: 1,
-  tournament: []
+  nbTeamWinner: 1
 };
 
 export function bracketReducer(
