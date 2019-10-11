@@ -17,10 +17,12 @@ class Round extends Component<Props> {
   addDuel = (_event: any) => {};
 
   render() {
-    console.log(this.props.round);
+    console.log(this.props.round.duels);
+    console.log(this.props.duels);
     const duels = this.props.round.duels
       .map(s => this.props.duels.find(d => s === d.id))
-      .filter(s => s === undefined);
+      .filter(s => s !== undefined);
+    console.log(duels);
     return (
       <Grid className="bracket-column">
         <h1>Round 1</h1>

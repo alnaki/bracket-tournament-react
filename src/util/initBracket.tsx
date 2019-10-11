@@ -1,16 +1,16 @@
 import { AppState } from "../store";
 import { ITeam } from "../store/team/types";
-import { editDuelsInRound } from "../store/round/actions";
+import { IRound } from "../store/round/types";
 
 export function initBracket(state: AppState): number[][] {
   // Get all teams & mixed
   let teams = shuffle(state.teams.teams);
   let maxByDuel = state.bracket.nbTeamMaxByDuel;
   let nbDuel = Math.ceil(teams.length / maxByDuel);
-  let rounds: number[][] = [];
+  let rounds: IRound[] = [];
   // Split by duels
   for (var i = 0; i < nbDuel; i++) {
-    rounds.push([]);
+    rounds.push({});
   }
   teams.map((t, i) => rounds[i % nbDuel].push(t.id));
   // Move duels in rounds states

@@ -13,7 +13,8 @@ type Props = {
   states: AppState;
   teams: ITeam[];
   addTeam: (arg0: undefined) => void;
-  editDuelsInRound: any;
+  addDuel;
+  editDuelsInRound: (arg0: number, arg1: number[]) => void;
 };
 class TeamList extends Component<Props> {
   handleAddTeam = (_event: any) => {
@@ -22,7 +23,7 @@ class TeamList extends Component<Props> {
 
   handleInitBracket = () => {
     let rounds = initBracket(this.props.states);
-    rounds.map((duels, i) => editDuelsInRound(i, duels));
+    rounds.map((duels, i) => this.props.editDuelsInRound(i, duels));
   };
 
   render() {

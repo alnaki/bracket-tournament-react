@@ -7,7 +7,19 @@ export interface RoundState {
 export interface IRound {
   id: number;
   idBDD?: number;
-  duels: number[];
+  duels: IDuel[];
+}
+
+export interface IDuel {
+  idBDD?: number;
+  pos: number;
+  teams: ITeamScoring[];
+}
+
+export interface ITeamScoring {
+  idTeam: number;
+  winner: "noplay" | "true" | "false";
+  score?: number;
 }
 
 // Describing the different ACTION NAMES available

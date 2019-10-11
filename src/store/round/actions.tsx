@@ -31,7 +31,6 @@ export function addDuelInRound(idRound: number, idDuel: number) {
 }
 
 export function editDuelsInRound(idRound: number, duels: number[]) {
-  //console.log("tableau", idRound, duels);
   return {
     type: types.EDIT_DUELS_IN_ROUND,
     idRound: idRound,
