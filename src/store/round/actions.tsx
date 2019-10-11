@@ -21,3 +21,28 @@ export function deleteRound(id: number) {
     id: id
   };
 }
+
+export function addDuelInRound(idRound: number, idDuel: number) {
+  return {
+    type: types.ADD_DUEL_IN_ROUND,
+    idRound: idRound,
+    idDuel: idDuel
+  };
+}
+
+export function editDuelsInRound(idRound: number, duels: number[]) {
+  //console.log("tableau", idRound, duels);
+  return {
+    type: types.EDIT_DUELS_IN_ROUND,
+    idRound: idRound,
+    duels: duels
+  };
+}
+
+export function deleteDuelInRound(idRound: number, idDuel: number) {
+  return {
+    type: types.DELETE_DUEL_IN_ROUND,
+    idRound: idRound,
+    idDuel: idDuel
+  };
+}

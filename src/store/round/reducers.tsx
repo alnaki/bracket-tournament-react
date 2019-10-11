@@ -1,8 +1,8 @@
-import { RoundActionTypes, RoundState } from "./types";
+import { RoundActionTypes, RoundState, IRound } from "./types";
 import * as types from "./types";
 
 const initialState: RoundState = {
-  rounds: [],
+  rounds: [{ id: 0, duels: [] }],
   nbRound: 0
 };
 
@@ -36,7 +36,22 @@ export function roundReducer(
         ...state,
         rounds: [...state.rounds.filter(round => round.id !== action.id)]
       };
+    case types.EDIT_DUELS_IN_ROUND:
+      console.log("hey");
+      return {
+        ...state,
+        rounds: [
+          ...state.rounds.map(round =>
+            round.id === action.idRound ? _edit(round, action.duels) : round
+          )
+        ]
+      };
     default:
       return state;
   }
+}
+
+function _edit(round: IRound, duels: number[]): IRound {
+  round.duels = duels;
+  return round;
 }

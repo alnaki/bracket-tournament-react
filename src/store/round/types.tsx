@@ -15,6 +15,7 @@ export const ADD_ROUND = "ADD_ROUND";
 export const EDIT_ROUND = "EDIT_ROUND";
 export const DELETE_ROUND = "DELETE_ROUND";
 export const ADD_DUEL_IN_ROUND = "ADD_DUEL_IN_ROUND";
+export const EDIT_DUELS_IN_ROUND = "EDIT_DUELS_IN_ROUND";
 export const DELETE_DUEL_IN_ROUND = "DELETE_DUEL_IN_ROUND";
 
 interface AddRound {
@@ -34,6 +35,11 @@ interface AddDuelInRound {
   idRound: number;
   idDuel: number;
 }
+interface EditDuelsInRound {
+  type: typeof EDIT_DUELS_IN_ROUND;
+  idRound: number;
+  duels: number[];
+}
 interface DeleteDuelInRound {
   type: typeof DELETE_DUEL_IN_ROUND;
   idRound: number;
@@ -45,4 +51,5 @@ export type RoundActionTypes =
   | EditRound
   | DeleteRound
   | AddDuelInRound
+  | EditDuelsInRound
   | DeleteDuelInRound;

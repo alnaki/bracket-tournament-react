@@ -10,10 +10,10 @@ import {
 
 const initialState: TeamState = {
   teams: [
-    { id: 1, name: "team 1", playerList: [] },
-    { id: 2, name: "group 2", playerList: [] }
+    { id: 0, name: "team 1", playerList: [] },
+    { id: 1, name: "group 2", playerList: [] }
   ],
-  nbTeam: 0
+  nbTeam: 2
 };
 
 export function teamReducer(

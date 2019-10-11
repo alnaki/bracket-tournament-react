@@ -1,16 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Grid, FormControlLabel, Switch } from "@material-ui/core";
-import Round from "./round";
+import Round from "../round/round";
 import { changeMode } from "../../store/bracket/actions";
 import { AppState } from "../../store";
 import { BracketState } from "../../store/bracket/types";
 import BracketParamsDrawer from "./bracketParamsDrawer";
 import TeamDrawer from "../team/teamDrawer";
 import { ITeam } from "../../store/team/types";
+import { RoundState } from "../../store/round/types";
 
 type Props = {
   params: BracketState;
+  round: RoundState;
   teams: ITeam[];
   changeMode: (arg0: boolean) => void;
 };
@@ -39,7 +41,9 @@ class Bracket extends Component<Props> {
           />
           {this.props.params.edition}
           <Grid className="bracket" container>
-            <Round />
+            {this.props.round.rounds.map((r, i) => (
+              <Round key={i} round={r} />
+            ))}
           </Grid>
         </BracketParamsDrawer>
       </TeamDrawer>
@@ -49,6 +53,7 @@ class Bracket extends Component<Props> {
 
 const mapStateToProps = (state: AppState) => ({
   params: state.bracket,
+  round: state.round,
   teams: state.teams.teams
 });
 

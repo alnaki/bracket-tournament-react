@@ -5,33 +5,33 @@ import AddIcon from "@material-ui/icons/Add";
 import { connect } from "react-redux";
 import { AppState } from "../../store";
 import { BracketState } from "../../store/bracket/types";
+import { IRound } from "../../store/round/types";
+import { IDuel } from "../../store/duel/types";
 
 type Props = {
   params: BracketState;
+  duels: IDuel[];
+  round: IRound;
 };
 class Round extends Component<Props> {
-  state = {
-    oppositionList: [{}]
-  };
-
-  addOpposition = (_event: any) => {
-    let elem = {};
-    this.setState({
-      oppositionList: [...this.state.oppositionList, elem]
-    });
-  };
+  addDuel = (_event: any) => {};
 
   render() {
-    const list = this.state.oppositionList.map((s, i) => <TeamDuel key={i} />);
+    console.log(this.props.round);
+    const duels = this.props.round.duels
+      .map(s => this.props.duels.find(d => s === d.id))
+      .filter(s => s === undefined);
     return (
       <Grid className="bracket-column">
         <h1>Round 1</h1>
-        {list}
+        {duels.map((s, i) => (
+          <TeamDuel duel={s!} key={i} />
+        ))}
         {this.props.params.edition && (
           <Button
             variant="contained"
             color="primary"
-            onClick={this.addOpposition}
+            onClick={this.addDuel}
             fullWidth
           >
             <AddIcon />
@@ -43,6 +43,7 @@ class Round extends Component<Props> {
 }
 
 const mapStateToProps = (state: AppState) => ({
+  duels: state.duel.duels,
   params: state.bracket
 });
 
