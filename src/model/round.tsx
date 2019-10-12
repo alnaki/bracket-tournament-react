@@ -1,7 +1,12 @@
-import { IDuel } from "./duel";
+import { IDuel, DuelScoring, Duel } from "./duel";
 
 export interface IRound {
-    id: number;
-    idBDD?: number;
     duels: IDuel[];
+}
+
+export class Round implements IRound {
+    duels: IDuel[];
+    constructor(){
+        this.duels = [];
+    }
 }

@@ -1,6 +1,6 @@
 import { AppState } from "../store";
 import { ITeam } from "../store/team/types";
-import { IRound } from "../model/round";
+import { IRound, Round } from "../model/round";
 import { Duel } from "../model/duel";
 
 export function initBracket(state: AppState): IRound[] {
@@ -8,7 +8,11 @@ export function initBracket(state: AppState): IRound[] {
   let teams = shuffle(state.teams.teams);
   let maxByDuel = state.bracket.nbTeamMaxByDuel;
   let nbDuel = Math.ceil(teams.length / maxByDuel);
-  let rounds: IRound[] = [];
+  var rounds: IRound[] = [];
+
+  for (let i = 0; i < nbDuel; i++) {
+    rounds.push(new Round())
+  }
 
   // Split by duels
   teams.forEach((t, i) => (rounds[i % nbDuel].duels.push(new Duel(t))));
