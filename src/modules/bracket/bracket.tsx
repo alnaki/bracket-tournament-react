@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Grid, FormControlLabel, Switch } from "@material-ui/core";
-import Round from "../round/round";
 import { changeMode } from "../../store/bracket/actions";
 import { AppState } from "../../store";
 import { BracketState } from "../../store/bracket/types";
 import BracketRightDrawer from "./bracketRightDrawer";
 import BracketLeftDrawer from "./bracketLeftDrawer";
-import { ITeam } from "../../store/team/types";
 import RoundList from "../round/roundList";
 import { IRound } from "../../model/round";
 
@@ -29,7 +27,7 @@ class Bracket extends Component<Props, State> {
   render() {
     return (
       <div>
-        <BracketLeftDrawer />
+        <BracketLeftDrawer edition={this.props.bracket.edition} />
         <BracketRightDrawer />
         <FormControlLabel
           value="start"

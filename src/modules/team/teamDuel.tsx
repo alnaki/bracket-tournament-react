@@ -5,7 +5,7 @@ import TeamCard from "./teamCard";
 import { connect } from "react-redux";
 import { AppState } from "../../store";
 import { ITeam } from "../../store/team/types";
-import { IDuel } from "../../store/duel/types";
+import { IDuel } from "../../model/duel";
 
 const DuelRoot = styled.div`
   max-width: 275px;
@@ -34,10 +34,9 @@ class TeamDuel extends Component<Props> {
     return (
       <DuelRoot>
         <Card>
-          {this.props.duel.teams
-            .map(s => this.props.teams.find(t => s.idTeam === t.id))
-            .map(s => (
-              <TeamCard team={s!} variant={"medium"} />
+          {this.props.duel.scoring
+             .map(s => (
+              <TeamCard team={s.team} variant={"medium"} />
             ))}
         </Card>
       </DuelRoot>

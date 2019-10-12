@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { Grid, Button } from "@material-ui/core";
 import TeamDuel from "../team/teamDuel";
 import AddIcon from "@material-ui/icons/Add";
-import { connect } from "react-redux";
-import { AppState } from "../../store";
 import { IDuel } from "../../model/duel";
 
 type Props = {

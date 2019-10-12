@@ -14,8 +14,6 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import TeamList from "../team/teamList";
 import TeamListRanking from "../team/teamListRanking";
-import { connect } from "react-redux";
-import { AppState } from "../../store";
 
 const drawerWidth = 300;
 
@@ -80,73 +78,63 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
-const theme = useTheme();
-const classes = useStyles();
-const [open, setOpen] = React.useState(false);
 type Props = {
     edition: boolean;
 };
-class BracketLeftDrawer extends Component<Props> {
-    handleDrawerOpen() {
+export default function BracketLeftDrawer(props: Props) {
+    const theme = useTheme();
+    const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
+    const handleDrawerOpen = () => {
         setOpen(true);
     };
-    handleDrawerClose() {
+    const handleDrawerClose = () => {
         setOpen(false);
     };
 
-    render() {
-        return (
-            <div className={classes.root}>
-                <main
-                    className={clsx(classes.content, {
-                        [classes.contentShift]: open
-                    })}
+    return (
+        <div className={classes.root}>
+            <main
+                className={clsx(classes.content, {
+                    [classes.contentShift]: open
+                })}
+            >
+                <IconButton
+                    color="inherit"
+                    aria-label="open drawer"
+                    edge="end"
+                    onClick={handleDrawerOpen}
+                    className={clsx(open && classes.hide)}
                 >
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        edge="end"
-                        onClick={this.handleDrawerOpen}
-                        className={clsx(open && classes.hide)}
-                    >
-                        <MenuIcon />
+                    <MenuIcon />
+                </IconButton>
+            </main>
+            <Drawer
+                className={classes.drawer}
+                variant="persistent"
+                anchor="left"
+                open={open}
+                classes={{
+                    paper: classes.drawerPaper
+                }}
+            >
+                <div className={classes.drawerHeader}>
+                    <IconButton onClick={handleDrawerClose}>
+                        {theme.direction === "ltr" ? (
+                            <ChevronLeftIcon />
+                        ) : (
+                                <ChevronRightIcon />
+                            )}
                     </IconButton>
-                </main>
-                <Drawer
-                    className={classes.drawer}
-                    variant="persistent"
-                    anchor="left"
-                    open={open}
-                    classes={{
-                        paper: classes.drawerPaper
-                    }}
-                >
-                    <div className={classes.drawerHeader}>
-                        <IconButton onClick={this.handleDrawerClose}>
-                            {theme.direction === "ltr" ? (
-                                <ChevronLeftIcon />
-                            ) : (
-                                    <ChevronRightIcon />
-                                )}
-                        </IconButton>
-                        <h3>Teams</h3>
-                    </div>
-                    <Divider />
-                    {this.props.edition ? (
-                        <TeamList />
-                    ) : (
-                            <TeamListRanking />
-                        )}
-                </Drawer>
-            </div>
-        );
-    }
+                    <h3>Teams</h3>
+                </div>
+                <Divider />
+                {props.edition ? (
+                    <TeamList />
+                ) : (
+                        <TeamListRanking />
+                    )}
+            </Drawer>
+        </div>
+    );
 }
-
-const mapStateToProps = (state: AppState) => ({
-    edition: state.bracket.edition
-});
-
-export default connect(
-    mapStateToProps
-)(BracketLeftDrawer);

@@ -90,118 +90,111 @@ const styleIcon = {
   right: "10px"
 };
 
-const theme = useTheme();
-const classes = useStyles(theme);
-const [open, setOpen] = React.useState(false);
 
-export default class BracketRightDrawer extends Component {
-
-
-  handleDrawerOpen = () => {
+export default function BracketRightDrawer() {
+  const theme = useTheme();
+  const classes = useStyles(theme);
+  const [open, setOpen] = React.useState(false);
+  const handleDrawerOpen = () => {
     setOpen(true);
   };
-
-  handleDrawerClose = () => {
+  const handleDrawerClose = () => {
     setOpen(false);
   };
 
-
-  render() {
-    return (
-      <div className={classes.root}>
-        <main
-          className={clsx(classes.content, {
-            [classes.contentShift]: open
-          })}
-        >
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="end"
-            onClick={this.handleDrawerOpen}
-            className={clsx(open && classes.hide)}
-            style={{
-              position: "absolute",
-              top: "10px",
-              right: "10px"
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-          {this.props.children}
-        </main>
-        <Drawer
-          className={classes.drawer}
-          variant="persistent"
-          anchor="right"
-          open={open}
-          classes={{
-            paper: classes.drawerPaper
+  return (
+    <div className={classes.root}>
+      <main
+        className={clsx(classes.content, {
+          [classes.contentShift]: open
+        })}
+      >
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          edge="end"
+          onClick={handleDrawerOpen}
+          className={clsx(open && classes.hide)}
+          style={{
+            position: "absolute",
+            top: "10px",
+            right: "10px"
           }}
         >
-          <div className={classes.drawerHeader}>
-            <IconButton onClick={this.handleDrawerClose}>
-              {theme.direction === "ltr" ? (
-                <ChevronLeftIcon />
-              ) : (
-                  <ChevronRightIcon />
-                )}
-            </IconButton>
-            <h3>Params</h3>
-          </div>
-          <Divider />
-          <List>
-            <ListItem>
-              <ListItemIcon>
-                <EditIcon />
-              </ListItemIcon>
-              <ListItemText id="switch-list-label-edit" primary="Mode edition" />
-              <ListItemSecondaryAction>
-                <Switch
-                  edge="end"
-                  inputProps={{ "aria-labelledby": "switch-list-label-edit" }}
-                />
-              </ListItemSecondaryAction>
-            </ListItem>
+          <MenuIcon />
+        </IconButton>
+      </main>
+      <Drawer
+        className={classes.drawer}
+        variant="persistent"
+        anchor="right"
+        open={open}
+        classes={{
+          paper: classes.drawerPaper
+        }}
+      >
+        <div className={classes.drawerHeader}>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === "ltr" ? (
+              <ChevronLeftIcon />
+            ) : (
+                <ChevronRightIcon />
+              )}
+          </IconButton>
+          <h3>Params</h3>
+        </div>
+        <Divider />
+        <List>
+          <ListItem>
+            <ListItemIcon>
+              <EditIcon />
+            </ListItemIcon>
+            <ListItemText id="switch-list-label-edit" primary="Mode edition" />
+            <ListItemSecondaryAction>
+              <Switch
+                edge="end"
+                inputProps={{ "aria-labelledby": "switch-list-label-edit" }}
+              />
+            </ListItemSecondaryAction>
+          </ListItem>
 
-            <ListItem>
-              <ListItemIcon>
-                <EditIcon />
-              </ListItemIcon>
-              <ListItemText id="switch-list-label-edit" primary="Mode edition" />
-              <ListItemSecondaryAction>
-                <TextField
-                  id="outlined-number"
-                  type="number"
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                  variant="standard"
-                  className={classes.textField}
-                />
-              </ListItemSecondaryAction>
-            </ListItem>
+          <ListItem>
+            <ListItemIcon>
+              <EditIcon />
+            </ListItemIcon>
+            <ListItemText id="switch-list-label-edit" primary="Mode edition" />
+            <ListItemSecondaryAction>
+              <TextField
+                id="outlined-number"
+                type="number"
+                InputLabelProps={{
+                  shrink: true
+                }}
+                variant="standard"
+                className={classes.textField}
+              />
+            </ListItemSecondaryAction>
+          </ListItem>
 
-            <ListItem>
-              <ListItemIcon>
-                <EditIcon />
-              </ListItemIcon>
-              <ListItemText id="switch-list-label-edit" primary="Mode edition" />
-              <ListItemSecondaryAction>
-                <TextField
-                  id="outlined-number"
-                  type="number"
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                  variant="standard"
-                  className={classes.textField}
-                />
-              </ListItemSecondaryAction>
-            </ListItem>
-          </List>
-        </Drawer>
-      </div>
-    );
-  }
+          <ListItem>
+            <ListItemIcon>
+              <EditIcon />
+            </ListItemIcon>
+            <ListItemText id="switch-list-label-edit" primary="Mode edition" />
+            <ListItemSecondaryAction>
+              <TextField
+                id="outlined-number"
+                type="number"
+                InputLabelProps={{
+                  shrink: true
+                }}
+                variant="standard"
+                className={classes.textField}
+              />
+            </ListItemSecondaryAction>
+          </ListItem>
+        </List>
+      </Drawer>
+    </div>
+  );
 }
