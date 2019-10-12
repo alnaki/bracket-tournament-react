@@ -5,56 +5,56 @@ import Round from "../round/round";
 import { changeMode } from "../../store/bracket/actions";
 import { AppState } from "../../store";
 import { BracketState } from "../../store/bracket/types";
-import BracketParamsDrawer from "./bracketParamsDrawer";
-import TeamDrawer from "../team/teamDrawer";
+import BracketRightDrawer from "./bracketRightDrawer";
+import BracketLeftDrawer from "./bracketLeftDrawer";
 import { ITeam } from "../../store/team/types";
-import { RoundState } from "../../store/round/types";
+import RoundList from "../round/roundList";
+import { IRound } from "../../model/round";
 
 type Props = {
-  params: BracketState;
-  round: RoundState;
-  teams: ITeam[];
+  bracket: BracketState;
   changeMode: (arg0: boolean) => void;
 };
-class Bracket extends Component<Props> {
+type State = {
+  rounds: IRound[];
+};
+
+class Bracket extends Component<Props, State> {
+  state = {
+    rounds: []
+  }
   handleChangeMode(event: React.ChangeEvent<HTMLInputElement>) {
     this.props.changeMode(event.target.checked);
   }
-
   render() {
     return (
-      <TeamDrawer teams={this.props.teams} edition={this.props.params.edition}>
-        <BracketParamsDrawer>
-          <FormControlLabel
-            value="start"
-            control={
-              <Switch
-                checked={this.props.params.edition}
-                onChange={e => this.handleChangeMode(e)}
-                value="mode"
-                color="primary"
-                inputProps={{ "aria-label": "primary checkbox" }}
-              />
-            }
-            label="Mode modification : "
-            labelPlacement="start"
-          />
-          {this.props.params.edition}
-          <Grid className="bracket" container>
-            {this.props.round.rounds.map((r, i) => (
-              <Round key={i} round={r} />
-            ))}
-          </Grid>
-        </BracketParamsDrawer>
-      </TeamDrawer>
+      <div>
+        <BracketLeftDrawer />
+        <BracketRightDrawer />
+        <FormControlLabel
+          value="start"
+          control={
+            <Switch
+              checked={this.props.bracket.edition}
+              onChange={e => this.handleChangeMode(e)}
+              value="mode"
+              color="primary"
+              inputProps={{ "aria-label": "primary checkbox" }}
+            />
+          }
+          label="Mode modification : "
+          labelPlacement="start"
+        />
+        <Grid className="bracket" container>
+          <RoundList rounds={this.state.rounds} />
+        </Grid>
+      </div>
     );
   }
 }
 
 const mapStateToProps = (state: AppState) => ({
-  params: state.bracket,
-  round: state.round,
-  teams: state.teams.teams
+  bracket: state.bracket,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({

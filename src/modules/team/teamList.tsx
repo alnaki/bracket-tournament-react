@@ -7,14 +7,11 @@ import { connect } from "react-redux";
 import { addTeam } from "../../store/team/actions";
 import { initBracket } from "../../util/initBracket";
 import { AppState } from "../../store";
-import { editDuelsInRound } from "../../store/round/actions";
 
 type Props = {
   states: AppState;
   teams: ITeam[];
   addTeam: (arg0: undefined) => void;
-  addDuel;
-  editDuelsInRound: (arg0: number, arg1: number[]) => void;
 };
 class TeamList extends Component<Props> {
   handleAddTeam = (_event: any) => {
@@ -23,7 +20,6 @@ class TeamList extends Component<Props> {
 
   handleInitBracket = () => {
     let rounds = initBracket(this.props.states);
-    rounds.map((duels, i) => this.props.editDuelsInRound(i, duels));
   };
 
   render() {
@@ -60,13 +56,12 @@ class TeamList extends Component<Props> {
 }
 
 const mapStateToProps = (state: AppState) => ({
-  states: state
+  states: state,
+  teams: state.teams.teams
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-  addTeam: (team: ITeam | undefined) => dispatch(addTeam(team), dispatch),
-  editDuelsInRound: (idRound: number, duels: number[]) =>
-    dispatch(editDuelsInRound(idRound, duels), dispatch)
+  addTeam: (team: ITeam | undefined) => dispatch(addTeam(team), dispatch)
 });
 
 export default connect(

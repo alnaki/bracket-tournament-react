@@ -7,12 +7,6 @@ export interface BracketState {
   nbTeamWinner: number;
 }
 
-export interface IBracket {
-  name: string;
-  nbTeamMaxByDuel: number;
-  nbTeamWinner: number;
-}
-
 // Describing the different ACTION NAMES available
 export const CHANGE_NAME = "CHANGE_NAME";
 export const CHANGE_MODE = "CHANGE_MODE";
