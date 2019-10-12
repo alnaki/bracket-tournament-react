@@ -13,11 +13,9 @@ class RoundList extends Component<Props> {
   render() {
     return (
       <Grid>
+        <h1>Round 1</h1>
         {this.props.rounds.map(round =>
-          <div>
-            <h1>Round 1</h1>
-            <Round duels={round.duels} edition={this.props.edition} />
-          </div>
+          <Round duels={round.duels} edition={this.props.edition} />
         )}
       </Grid>
     );

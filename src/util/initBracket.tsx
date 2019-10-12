@@ -24,6 +24,6 @@ export function initBracket(state: AppState): IRound[] {
 }
 
 export function shuffle(array: ITeam[]): ITeam[] {
-  let copy = array;
+  let copy = array.slice();
   return copy.sort(() => Math.random() - 0.5);
 }
