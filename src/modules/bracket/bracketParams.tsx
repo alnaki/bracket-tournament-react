@@ -10,13 +10,22 @@ import TextField from "@material-ui/core/TextField";
 import { BracketState } from "../../store/bracket/types";
 import { connect } from "react-redux";
 import { AppState } from "../../store";
+import { changeMode } from "../../store/bracket/actions";
 
-const textfield = { width: "70px", height: "30px" }
+const textfield = { width: "40px", height: "30px" }
 
 type Props = {
   bracket: BracketState;
+  changeMode: (arg0: boolean) => void;
 }
 class BracketParams extends Component<Props> {
+  handleChangeMode(event: React.ChangeEvent<HTMLInputElement>) {
+    this.props.changeMode(event.target.checked);
+  }
+
+  handleChangeNbMaxPlayer(event: React.ChangeEvent<HTMLInputElement>) {
+  }
+
   render() {
     return (
       <List>
@@ -28,7 +37,9 @@ class BracketParams extends Component<Props> {
           <ListItemSecondaryAction>
             <Switch
               edge="end"
-              inputProps={{ "aria-labelledby": "switch-list-label-edit" }}
+              checked={this.props.bracket.edition}
+              onChange={e => this.handleChangeMode(e)}
+              inputProps={{ "aria-label": "primary checkbox" }}
             />
           </ListItemSecondaryAction>
         </ListItem>
@@ -37,7 +48,7 @@ class BracketParams extends Component<Props> {
           <ListItemIcon>
             <EditIcon />
           </ListItemIcon>
-          <ListItemText id="switch-list-label-edit" primary="Mode edition" />
+          <ListItemText id="switch-list-label-edit" primary="Nombre de team max par duels" />
           <ListItemSecondaryAction>
             <TextField
               id="outlined-number"
@@ -55,7 +66,7 @@ class BracketParams extends Component<Props> {
           <ListItemIcon>
             <EditIcon />
           </ListItemIcon>
-          <ListItemText id="switch-list-label-edit" primary="Mode edition" />
+          <ListItemText id="switch-list-label-edit" primary="Nombre de gagnants par duels" />
           <ListItemSecondaryAction>
             <TextField
               id="outlined-number"
@@ -78,4 +89,12 @@ const mapStateToProps = (state: AppState) => ({
   bracket: state.bracket,
 });
 
-export default connect(mapStateToProps)(BracketParams);
+const mapDispatchToProps = (dispatch: any) => ({
+  changeMode: (edition: boolean) => dispatch(changeMode(edition), dispatch)
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BracketParams);
+
