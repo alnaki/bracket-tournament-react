@@ -7,11 +7,13 @@ import { connect } from "react-redux";
 import { addTeam } from "../../store/team/actions";
 import { initBracket } from "../../util/initBracket";
 import { AppState } from "../../store";
+import { IRound } from "../../model/round";
 
 type Props = {
   states: AppState;
   teams: ITeam[];
   addTeam: (arg0: undefined) => void;
+  initRounds: (rounds: IRound[]) => void;
 };
 class TeamList extends Component<Props> {
   handleAddTeam = (_event: any) => {
@@ -20,6 +22,8 @@ class TeamList extends Component<Props> {
 
   handleInitBracket = () => {
     let rounds = initBracket(this.props.states);
+    this.props.initRounds(rounds);
+
   };
 
   render() {

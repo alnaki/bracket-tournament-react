@@ -21,13 +21,18 @@ class Bracket extends Component<Props, State> {
   state = {
     rounds: []
   }
+
+  initRounds(rounds: IRound[]) {
+    this.setState({ rounds: rounds });
+  }
+
   handleChangeMode(event: React.ChangeEvent<HTMLInputElement>) {
     this.props.changeMode(event.target.checked);
   }
   render() {
     return (
       <div>
-        <BracketLeftDrawer edition={this.props.bracket.edition} />
+        <BracketLeftDrawer initRounds={this.initRounds.bind(this)} edition={this.props.bracket.edition} />
         <BracketRightDrawer />
         <FormControlLabel
           value="start"
@@ -43,7 +48,7 @@ class Bracket extends Component<Props, State> {
           label="Mode modification : "
           labelPlacement="start"
         />
-        <Grid className="bracket" container>
+        <Grid container>
           <RoundList rounds={this.state.rounds} />
         </Grid>
       </div>

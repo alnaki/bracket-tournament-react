@@ -42,7 +42,7 @@ export default class TeamCard extends Component<Props, State> {
             </Grid>
             <Grid item zeroMinWidth>
               <Typography noWrap>
-                {this.props.team.name} d,kadjfdkflzeoo z lfz lq
+                {this.props.team.name}
               </Typography>
             </Grid>
           </Grid>
@@ -63,7 +63,7 @@ export default class TeamCard extends Component<Props, State> {
               </Grid>
               <Grid item zeroMinWidth>
                 <Typography noWrap>
-                  {this.props.team.name} d,kadjfdkflzeoo z lfz lq
+                  {this.props.team.name}
                 </Typography>
               </Grid>
             </Grid>

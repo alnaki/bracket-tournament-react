@@ -1,4 +1,4 @@
-import { IDuel, DuelScoring, Duel } from "./duel";
+import { IDuel } from "./duel";
 
 export interface IRound {
     duels: IDuel[];
@@ -6,7 +6,7 @@ export interface IRound {
 
 export class Round implements IRound {
     duels: IDuel[];
-    constructor(){
+    constructor() {
         this.duels = [];
     }
 }

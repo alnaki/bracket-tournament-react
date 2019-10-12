@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import clsx from "clsx";
 import {
     makeStyles,
@@ -14,6 +14,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import TeamList from "../team/teamList";
 import TeamListRanking from "../team/teamListRanking";
+import { IRound } from "../../model/round";
 
 const drawerWidth = 300;
 
@@ -80,6 +81,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 type Props = {
     edition: boolean;
+    initRounds: (rounds: IRound[]) => void;
 };
 export default function BracketLeftDrawer(props: Props) {
     const theme = useTheme();
@@ -130,7 +132,7 @@ export default function BracketLeftDrawer(props: Props) {
                 </div>
                 <Divider />
                 {props.edition ? (
-                    <TeamList />
+                    <TeamList initRounds={props.initRounds} />
                 ) : (
                         <TeamListRanking />
                     )}

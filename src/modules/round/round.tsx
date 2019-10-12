@@ -14,7 +14,7 @@ export default class Round extends Component<Props> {
   render() {
     return (
       <Grid className="bracket-column">
-        <h1>Round 1</h1>
+        <h4>Match 1</h4>
         {this.props.duels.map((s, i) => (
           <TeamDuel duel={s} key={i} />
         ))}
