@@ -10,20 +10,29 @@ import TextField from "@material-ui/core/TextField";
 import { BracketState } from "../../store/bracket/types";
 import { connect } from "react-redux";
 import { AppState } from "../../store";
-import { changeMode } from "../../store/bracket/actions";
+import { changeName, changeMode, changeNbTeamMaxByDuel, changeNbTeamWinner } from "../../store/bracket/actions";
 
 const textfield = { width: "40px", height: "30px" }
 
 type Props = {
   bracket: BracketState;
+  changeName: (arg0: string) => void;
   changeMode: (arg0: boolean) => void;
+  changeNbTeamMaxByDuel: (arg0: number) => void;
+  changeNbTeamWinner: (arg0: number) => void;
 }
 class BracketParams extends Component<Props> {
+  handleChangeName(input: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    this.props.changeName(input.target.value);
+  }
   handleChangeMode(event: React.ChangeEvent<HTMLInputElement>) {
     this.props.changeMode(event.target.checked);
   }
-
-  handleChangeNbMaxPlayer(event: React.ChangeEvent<HTMLInputElement>) {
+  handleChangeNbMaxPlayerByDuel(input: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    this.props.changeNbTeamMaxByDuel(Number(input.target.value));
+  }
+  handleChangeNbWinner(input: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    this.props.changeNbTeamWinner(Number(input.target.value));
   }
 
   render() {
@@ -53,6 +62,8 @@ class BracketParams extends Component<Props> {
             <TextField
               id="outlined-number"
               type="number"
+              value={this.props.bracket.nbTeamMaxByDuel}
+              onChange={e => this.handleChangeNbMaxPlayerByDuel(e)}
               InputLabelProps={{
                 shrink: true
               }}
@@ -71,6 +82,8 @@ class BracketParams extends Component<Props> {
             <TextField
               id="outlined-number"
               type="number"
+              value={this.props.bracket.nbTeamWinner}
+              onChange={e => this.handleChangeNbWinner(e)}
               InputLabelProps={{
                 shrink: true
               }}
@@ -90,7 +103,10 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-  changeMode: (edition: boolean) => dispatch(changeMode(edition), dispatch)
+  changeName: (name: string) => dispatch(changeName(name), dispatch),
+  changeMode: (edition: boolean) => dispatch(changeMode(edition), dispatch),
+  changeNbTeamMaxByDuel: (nb: number) => dispatch(changeNbTeamMaxByDuel(nb), dispatch),
+  changeNbTeamWinner: (nb: number) => dispatch(changeNbTeamWinner(nb), dispatch)
 });
 
 export default connect(

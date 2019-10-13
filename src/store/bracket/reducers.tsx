@@ -23,20 +23,43 @@ export function bracketReducer(
         edition: action.value
       };
     case types.CHANGE_NB_TEAM_MAX_BY_DUEL:
-      return {
-        ...state,
-        nbTeamMaxByDuel: action.value
-      };
+      return upNbTeamByDuel(state, action.value);
     case types.CHANGE_NB_TEAM_WINNER:
-      if (initialState.nbTeamWinner / 2 < initialState.nbTeamMaxByDuel) {
-        return {
-          ...state,
-          nbTeamWinner: action.value
-        };
-      } else {
-        return state;
-      }
+      return upNbWinner(state, action.value);
     default:
       return state;
   }
+}
+
+// pas plus de la moitié peuvent gagner
+function upNbTeamByDuel(state: BracketState, nb: number) {
+  if (nb >= 2) {
+    if (nb >= (state.nbTeamWinner * 2)) {
+      return {
+        ...state,
+        nbTeamMaxByDuel: nb
+      }
+
+    } else {
+      return {
+        ...state,
+        nbTeamMaxByDuel: nb,
+        nbTeamWinner: Math.trunc(nb / 2)
+      };
+    }
+  } else {
+    return state;
+  };
+}
+
+// pas plus de la moitié peuvent gagner
+function upNbWinner(state: BracketState, nb: number) {
+  if (nb >= 1 && state.nbTeamMaxByDuel >= (nb * 2)) {
+    return {
+      ...state,
+      nbTeamWinner: nb
+    };
+  } else {
+    return state;
+  };
 }
