@@ -24,13 +24,14 @@ class Bracket extends Component<Props, State> {
 
   render() {
     return (
-      <div>
-        <BracketLeftDrawer initRounds={this.initRounds.bind(this)} edition={this.props.bracket.edition} />
-        <BracketRightDrawer />
-        <Grid container>
-          <RoundList rounds={this.state.rounds} />
-        </Grid>
-      </div>
+      <BracketRightDrawer >
+        <BracketLeftDrawer initRounds={this.initRounds.bind(this)} edition={this.props.bracket.edition} >
+          <Grid container>
+            <RoundList rounds={this.state.rounds} />
+          </Grid>
+        </BracketLeftDrawer>
+      </BracketRightDrawer>
+
     );
   }
 }

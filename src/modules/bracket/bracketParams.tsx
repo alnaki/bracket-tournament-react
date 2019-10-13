@@ -5,12 +5,15 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Switch from "@material-ui/core/Switch";
-import EditIcon from "@material-ui/icons/Edit";
 import TextField from "@material-ui/core/TextField";
 import { BracketState } from "../../store/bracket/types";
 import { connect } from "react-redux";
 import { AppState } from "../../store";
 import { changeName, changeMode, changeNbTeamMaxByDuel, changeNbTeamWinner } from "../../store/bracket/actions";
+import EditIcon from "@material-ui/icons/Edit";
+import GroupIcon from '@material-ui/icons/Group';
+import TitleIcon from '@material-ui/icons/Title';
+
 
 const textfield = { width: "40px", height: "30px" }
 
@@ -40,6 +43,20 @@ class BracketParams extends Component<Props> {
       <List>
         <ListItem>
           <ListItemIcon>
+            <TitleIcon />
+          </ListItemIcon>
+          <ListItemText>
+            <TextField
+              label="Name"
+              value={this.props.bracket.name}
+              onChange={e => this.handleChangeName(e)}
+              variant="standard"
+              margin="normal"
+            />
+          </ListItemText>
+        </ListItem>
+        <ListItem>
+          <ListItemIcon>
             <EditIcon />
           </ListItemIcon>
           <ListItemText id="switch-list-label-edit" primary="Mode edition" />
@@ -52,15 +69,13 @@ class BracketParams extends Component<Props> {
             />
           </ListItemSecondaryAction>
         </ListItem>
-
         <ListItem>
           <ListItemIcon>
-            <EditIcon />
+            <GroupIcon />
           </ListItemIcon>
           <ListItemText id="switch-list-label-edit" primary="Nombre de team max par duels" />
           <ListItemSecondaryAction>
             <TextField
-              id="outlined-number"
               type="number"
               value={this.props.bracket.nbTeamMaxByDuel}
               onChange={e => this.handleChangeNbMaxPlayerByDuel(e)}
@@ -72,15 +87,13 @@ class BracketParams extends Component<Props> {
             />
           </ListItemSecondaryAction>
         </ListItem>
-
         <ListItem>
           <ListItemIcon>
-            <EditIcon />
+            <GroupIcon />
           </ListItemIcon>
           <ListItemText id="switch-list-label-edit" primary="Nombre de gagnants par duels" />
           <ListItemSecondaryAction>
             <TextField
-              id="outlined-number"
               type="number"
               value={this.props.bracket.nbTeamWinner}
               onChange={e => this.handleChangeNbWinner(e)}

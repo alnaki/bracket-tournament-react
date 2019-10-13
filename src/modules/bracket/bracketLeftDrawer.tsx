@@ -21,67 +21,65 @@ const drawerWidth = 300;
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
-            display: "flex"
+            display: 'flex',
         },
         appBar: {
-            transition: theme.transitions.create(["margin", "width"], {
+            transition: theme.transitions.create(['margin', 'width'], {
                 easing: theme.transitions.easing.sharp,
-                duration: theme.transitions.duration.leavingScreen
-            })
+                duration: theme.transitions.duration.leavingScreen,
+            }),
         },
         appBarShift: {
             width: `calc(100% - ${drawerWidth}px)`,
-            transition: theme.transitions.create(["margin", "width"], {
+            marginLeft: drawerWidth,
+            transition: theme.transitions.create(['margin', 'width'], {
                 easing: theme.transitions.easing.easeOut,
-                duration: theme.transitions.duration.enteringScreen
+                duration: theme.transitions.duration.enteringScreen,
             }),
-            marginRight: drawerWidth
         },
-        title: {
-            flexGrow: 1
+        menuButton: {
+            marginRight: theme.spacing(2),
         },
         hide: {
-            display: "none"
+            display: 'none',
         },
         drawer: {
             width: drawerWidth,
-            flexShrink: 0
+            flexShrink: 0,
         },
         drawerPaper: {
-            width: drawerWidth
+            width: drawerWidth,
         },
         drawerHeader: {
-            display: "flex",
-            alignItems: "center",
+            display: 'flex',
+            alignItems: 'center',
             padding: theme.spacing(0, 1),
             ...theme.mixins.toolbar,
-            justifyContent: "flex-start"
+            justifyContent: 'flex-end',
         },
         content: {
             flexGrow: 1,
-            transition: theme.transitions.create("margin", {
+            padding: theme.spacing(3),
+            transition: theme.transitions.create('margin', {
                 easing: theme.transitions.easing.sharp,
-                duration: theme.transitions.duration.leavingScreen
+                duration: theme.transitions.duration.leavingScreen,
             }),
-            marginRight: -drawerWidth
+            marginLeft: -drawerWidth,
         },
         contentShift: {
-            transition: theme.transitions.create("margin", {
+            transition: theme.transitions.create('margin', {
                 easing: theme.transitions.easing.easeOut,
-                duration: theme.transitions.duration.enteringScreen
+                duration: theme.transitions.duration.enteringScreen,
             }),
-            marginRight: 0
+            marginLeft: 0,
         },
-        textField: {
-            width: "70px",
-            height: "30px"
-        }
-    })
+    }),
 );
 
 type Props = {
     edition: boolean;
     initRounds: (rounds: IRound[]) => void;
+    children: React.ReactNode;
 };
 export default function BracketLeftDrawer(props: Props) {
     const theme = useTheme();
@@ -96,21 +94,6 @@ export default function BracketLeftDrawer(props: Props) {
 
     return (
         <div className={classes.root}>
-            <main
-                className={clsx(classes.content, {
-                    [classes.contentShift]: open
-                })}
-            >
-                <IconButton
-                    color="inherit"
-                    aria-label="open drawer"
-                    edge="end"
-                    onClick={handleDrawerOpen}
-                    className={clsx(open && classes.hide)}
-                >
-                    <MenuIcon />
-                </IconButton>
-            </main>
             <Drawer
                 className={classes.drawer}
                 variant="persistent"
@@ -122,13 +105,8 @@ export default function BracketLeftDrawer(props: Props) {
             >
                 <div className={classes.drawerHeader}>
                     <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === "ltr" ? (
-                            <ChevronLeftIcon />
-                        ) : (
-                                <ChevronRightIcon />
-                            )}
+                        {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
                     </IconButton>
-                    <h3>Teams</h3>
                 </div>
                 <Divider />
                 {props.edition ? (
@@ -137,6 +115,22 @@ export default function BracketLeftDrawer(props: Props) {
                         <TeamListRanking />
                     )}
             </Drawer>
+            <main
+                className={clsx(classes.content, {
+                    [classes.contentShift]: open
+                })}
+            >
+                <IconButton
+                    color="inherit"
+                    aria-label="open drawer"
+                    onClick={handleDrawerOpen}
+                    edge="start"
+                    className={clsx(classes.menuButton, open && classes.hide)}
+                >
+                    <MenuIcon />
+                </IconButton>
+                {props.children}
+            </main>
         </div>
     );
 }
