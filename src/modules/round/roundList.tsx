@@ -10,12 +10,16 @@ type Props = {
   rounds: IRound[];
 };
 class RoundList extends Component<Props> {
+  addDuel() {}
+
   render() {
     return (
-      <Grid item xs>
-        <h2>Round 1</h2>
+      <Grid container>
         {this.props.rounds.map(round => (
-          <Round duels={round.duels} edition={this.props.edition} />
+          <Grid item xs>
+            <h2>Round 1</h2>
+            <Round duels={round.duels} edition={this.props.edition} />
+          </Grid>
         ))}
       </Grid>
     );

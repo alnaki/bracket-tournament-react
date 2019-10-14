@@ -1,29 +1,47 @@
 import { AppState } from "../store";
 import { ITeam } from "../store/team/types";
 import { IRound, Round } from "../model/round";
-import { Duel } from "../model/duel";
+import { Duel, IDuel, DuelScoring } from "../model/duel";
+import { shuffle } from "./shuffle";
 
 export function initBracket(state: AppState): IRound[] {
   // Get all teams & mixed
-  let teams = shuffle(state.teams.teams);
+  let teams = shuffle<ITeam>(state.teams.teams);
   let maxByDuel = state.bracket.nbTeamMaxByDuel;
   let nbDuel = Math.ceil(teams.length / maxByDuel);
-  var rounds: IRound[] = [];
+  var bracket: IRound[] = [];
+  var firstDuels: IDuel[] = [];
 
   for (let i = 0; i < nbDuel; i++) {
-    rounds.push(new Round())
+    firstDuels.push(new Duel());
   }
 
-  // Split by duels
-  teams.forEach((t, i) => (rounds[i % nbDuel].duels.push(new Duel(t))));
-  // Move duels in rounds states
+  teams.forEach((t, i) =>
+    firstDuels[i % nbDuel].scoring.push(new DuelScoring(t))
+  );
+  console.log(firstDuels);
+  bracket = initEmptyBracket(firstDuels.length);
+  console.log(bracket);
 
-  return rounds;
-
-  // console.log(state.round);
+  return makeDuelInTournament(bracket, firstDuels);
 }
 
-export function shuffle(array: ITeam[]): ITeam[] {
-  let copy = array.slice();
-  return copy.sort(() => Math.random() - 0.5);
+function initEmptyBracket(nbFirstDuel: number): IRound[] {
+  let rounds: IRound[] = [];
+  for (let i = 1; i ** 2 <= nbFirstDuel; i++) {
+    let round: IRound = new Round();
+    for (let j = 0; j < i ** 2; j++) {
+      round.duels.push(new Duel());
+    }
+    rounds.push(round);
+  }
+
+  return rounds;
+}
+
+function makeDuelInTournament(bracket: IRound[], duels: IDuel[]): IRound[] {
+  let lastRound = bracket[bracket.length].duels.length;
+
+  for (let i = 0; i < lastRound; i++) {}
+  return bracket;
 }
