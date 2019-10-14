@@ -23,7 +23,6 @@ class TeamList extends Component<Props> {
   handleInitBracket = () => {
     let rounds = initBracket(this.props.states);
     this.props.initRounds(rounds);
-
   };
 
   render() {
@@ -32,7 +31,7 @@ class TeamList extends Component<Props> {
         <List>
           {this.props.teams.map((t, i) => (
             <ListItem key={i}>
-              <Card>
+              <Card style={{ width: "inherit" }}>
                 <TeamCard team={t} />
               </Card>
             </ListItem>

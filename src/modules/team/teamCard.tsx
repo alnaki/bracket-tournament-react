@@ -41,33 +41,27 @@ export default class TeamCard extends Component<Props, State> {
               <Divider orientation="vertical" />
             </Grid>
             <Grid item zeroMinWidth>
-              <Typography noWrap>
-                {this.props.team.name}
-              </Typography>
+              <Typography noWrap>{this.props.team.name}</Typography>
             </Grid>
           </Grid>
         );
       case "medium":
         return (
-          <div>
-            <Grid container wrap="nowrap" spacing={1}>
-              <Grid item>
-                {this.props.team.avatar ? (
-                  <Avatar src={this.props.team.avatar} />
-                ) : (
-                  <MyAvatar>{this.props.team.name.substr(0, 2)}</MyAvatar>
-                )}
-              </Grid>
-              <Grid item>
-                <Divider orientation="vertical" />
-              </Grid>
-              <Grid item zeroMinWidth>
-                <Typography noWrap>
-                  {this.props.team.name}
-                </Typography>
-              </Grid>
+          <Grid container wrap="nowrap" spacing={1}>
+            <Grid item>
+              {this.props.team.avatar ? (
+                <Avatar src={this.props.team.avatar} />
+              ) : (
+                <MyAvatar>{this.props.team.name.substr(0, 2)}</MyAvatar>
+              )}
             </Grid>
-          </div>
+            <Grid item>
+              <Divider orientation="vertical" />
+            </Grid>
+            <Grid item zeroMinWidth>
+              <Typography noWrap>{this.props.team.name}</Typography>
+            </Grid>
+          </Grid>
         );
     }
   }
