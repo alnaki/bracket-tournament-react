@@ -5,18 +5,33 @@ import AddIcon from "@material-ui/icons/Add";
 
 type Props = {
   edition: boolean;
-  duels: Duel[];
+  nbDuel: number;
+};
+type State = {
+  duels: any;
 };
 export default class Round extends Component<Props> {
+  static DefaultProps = {
+    nbDuel: 1
+  };
+  state = { duels: this.initDuels() };
+
+  private initDuels(): Duel[] {
+    let duels: Duel[] = [];
+    for (let i = 0; i < this.props.nbDuel; i++) {
+      duels.push(new Duel({ edition: this.props.edition, nbTeamMaxByDuel: 2 }));
+    }
+    return duels;
+  }
+
   addDuel = (_event: any) => {};
 
   render() {
     return (
       <Grid className="bracket-column">
-        <h4>Match 1</h4>
-        {this.props.duels.map((s, i) => (
-          <Duel duel={s} key={i} />
-        ))}
+        <h4>Round 1</h4>
+        <Duel edition={this.props.edition} nbTeamMaxByDuel={2} />
+        {this.state.duels.map(duel => duel)}
         {this.props.edition && (
           <Button
             variant="contained"

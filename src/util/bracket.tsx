@@ -1,7 +1,5 @@
 import { AppState } from "../store";
 import { ITeam } from "../store/team/types";
-import { IRound, Round } from "../model/round";
-import { Duel, IDuel, DuelScoring } from "../model/duel";
 import { shuffle } from "./shuffle";
 
 export function initBracket(state: AppState): IRound[] {

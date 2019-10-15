@@ -7,13 +7,12 @@ import { connect } from "react-redux";
 import { addTeam } from "../../store/team/actions";
 import { initBracket } from "../../util/bracket";
 import { AppState } from "../../store";
-import { IRound } from "../../model/round";
 
 type Props = {
   states: AppState;
   teams: ITeam[];
   addTeam: (arg0: undefined) => void;
-  initRounds: (rounds: IRound[]) => void;
+  initRounds: (rounds: Round[]) => void;
 };
 class TeamList extends Component<Props> {
   handleAddTeam = (_event: any) => {
