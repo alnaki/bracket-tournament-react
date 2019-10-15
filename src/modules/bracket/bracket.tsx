@@ -6,6 +6,8 @@ import BracketRightDrawer from "./bracketRightDrawer";
 import BracketLeftDrawer from "./bracketLeftDrawer";
 import Round from "../round/round";
 import Grid from "@material-ui/core/Grid";
+import { shuffle } from "../../util/shuffle";
+import Duel from "../duel/duel";
 
 type Props = {
   bracket: BracketState;
@@ -15,11 +17,49 @@ type State = {
 };
 class Bracket extends Component<Props, State> {
   state = {
-    rounds: []
+    rounds: [new Round({ edition: this.props.bracket.edition, nbDuel: 1 })]
   };
-  handleInitBracket() {}
-  handleInitEmptyBracket() {}
-  handleAddDuel() {}
+
+
+  initListFirstDuels(nbDuel: number, teams: object[]): Duel[] {
+    let random = shuffle<object>(teams);
+    let firstDuels: Duel[] = []
+
+    for (let i = 0; i < nbDuel; i++) {
+      firstDuels.push(
+        new Duel({
+          edition: this.props.bracket.edition,
+          nbTeamMaxByDuel: this.props.bracket.nbTeamMaxByDuel
+        }));
+    }
+    random.forEach((t, i) =>
+      firstDuels[i % nbDuel].addTeam(""))
+
+    return firstDuels;
+  }
+
+  makeDuelInTournament(duels: Duel[]) {
+    // todo a faire
+    let nbRound = 1;
+    while (nbRound ** 2 <= duels.length) {
+      nbRound++;
+    }
+
+    if (nbRound ** 2 === duels.length) {
+      this.state.rounds[nbRound].state.duels = duels;
+    } else {
+      for (let i = 0; i < (nbRound - 1) ** 2; i++) {
+        let d = duels.pop();
+        if (d) this.state.rounds[nbRound - 1].state.duels.push(d)
+      }
+      this.state.rounds[nbRound].state.duels
+    }
+  }
+
+  handleInitBracket() { }
+  handleInitEmptyBracket() { }
+  handleAddDuel() { }
+
 
   render() {
     return (
@@ -43,9 +83,13 @@ class Bracket extends Component<Props, State> {
 }
 
 const mapStateToProps = (state: AppState) => ({
-  bracket: state.bracket
+  bracket: state.bracket,
 });
 export default connect(mapStateToProps)(Bracket);
+
+/*************
+ * Functions *
+ *************/
 
 function nbMinDuelByNbTeam(nbTeam: number, nbTeamMaxByDuel: number): number {
   return Math.ceil(nbTeam / nbTeamMaxByDuel);
@@ -53,52 +97,9 @@ function nbMinDuelByNbTeam(nbTeam: number, nbTeamMaxByDuel: number): number {
 
 function initEmptyBracket(nbDuel: number): Round[] {
   let rounds: Round[] = [];
-
-  for (let i = 0; i < nbDuel; i++) {
-    rounds.push(new Round({ edition: true }));
+  for (let i = 1; (i ** 2) <= nbDuel; i++) {
+    rounds.push(new Round({ edition: true, nbDuel: i ** 2 }));
   }
-
   return rounds;
 }
 
-export function initBracket(state: AppState): IRound[] {
-  // Get all teams & mixed
-  let teams = shuffle<ITeam>(state.teams.teams);
-  let maxByDuel = state.bracket.nbTeamMaxByDuel;
-  let nbDuel = Math.ceil(teams.length / maxByDuel);
-  var bracket: IRound[] = [];
-  var firstDuels: IDuel[] = [];
-
-  for (let i = 0; i < nbDuel; i++) {
-    firstDuels.push(new Duel());
-  }
-
-  teams.forEach((t, i) =>
-    firstDuels[i % nbDuel].scoring.push(new DuelScoring(t))
-  );
-  console.log(firstDuels);
-  bracket = initEmptyBracket(firstDuels.length);
-  console.log(bracket);
-
-  return makeDuelInTournament(bracket, firstDuels);
-}
-
-function initEmptyB4racket(nbFirstDuel: number): IRound[] {
-  let rounds: IRound[] = [];
-  for (let i = 1; i ** 2 <= nbFirstDuel; i++) {
-    let round: IRound = new Round();
-    for (let j = 0; j < i ** 2; j++) {
-      round.duels.push(new Duel());
-    }
-    rounds.push(round);
-  }
-
-  return rounds;
-}
-
-function makeDuelInTournament(bracket: IRound[], duels: IDuel[]): IRound[] {
-  let lastRound = bracket[bracket.length].duels.length;
-
-  for (let i = 0; i < lastRound; i++) {}
-  return bracket;
-}

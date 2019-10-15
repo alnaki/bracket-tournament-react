@@ -8,15 +8,15 @@ type Props = {
   nbDuel: number;
 };
 type State = {
-  duels: any;
+  duels: Duel[];
 };
-export default class Round extends Component<Props> {
+export default class Round extends Component<Props, State> {
   static DefaultProps = {
     nbDuel: 1
   };
   state = { duels: this.initDuels() };
 
-  private initDuels(): Duel[] {
+  initDuels(): Duel[] {
     let duels: Duel[] = [];
     for (let i = 0; i < this.props.nbDuel; i++) {
       duels.push(new Duel({ edition: this.props.edition, nbTeamMaxByDuel: 2 }));

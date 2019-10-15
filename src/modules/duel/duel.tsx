@@ -16,6 +16,9 @@ type State = {
   duelsScore: DuelScore[];
 };
 export default class Duel extends Component<Props, State> {
+  state = {
+    duelsScore: []
+  }
   deleteTeam() {}
 
   addTeam = (_event: any) => {
