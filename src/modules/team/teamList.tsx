@@ -5,7 +5,7 @@ import { List, ListItem, Card, Button } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import { connect } from "react-redux";
 import { addTeam } from "../../store/team/actions";
-import { initBracket } from "../../util/initBracket";
+import { initBracket } from "../../util/bracket";
 import { AppState } from "../../store";
 import { IRound } from "../../model/round";
 
