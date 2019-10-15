@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { Grid, Button } from "@material-ui/core";
-import TeamDuel from "../team/teamDuel";
+import Duel from "../duel/duel";
 import AddIcon from "@material-ui/icons/Add";
-import { IDuel } from "../../model/duel";
 
 type Props = {
   edition: boolean;
-  duels: IDuel[];
+  duels: Duel[];
 };
 export default class Round extends Component<Props> {
   addDuel = (_event: any) => {};
@@ -16,7 +15,7 @@ export default class Round extends Component<Props> {
       <Grid className="bracket-column">
         <h4>Match 1</h4>
         {this.props.duels.map((s, i) => (
-          <TeamDuel duel={s} key={i} />
+          <Duel duel={s} key={i} />
         ))}
         {this.props.edition && (
           <Button

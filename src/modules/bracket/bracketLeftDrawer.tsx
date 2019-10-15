@@ -14,7 +14,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import TeamList from "../team/teamList";
 import TeamListRanking from "../team/teamListRanking";
-import { IRound } from "../../model/round";
+import Round from "../round/round";
 
 const drawerWidth = 300;
 
@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 type Props = {
   edition: boolean;
-  initRounds: (rounds: IRound[]) => void;
+  initRounds: (rounds: Round[]) => void;
   children: React.ReactNode;
 };
 export default function BracketLeftDrawer(props: Props) {

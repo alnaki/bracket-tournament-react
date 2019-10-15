@@ -1,11 +1,11 @@
-import React, { Component } from "react";
 import { Card } from "@material-ui/core";
-import styled from "styled-components";
-import TeamCard from "./teamCard";
+import React, { Component } from "react";
 import { connect } from "react-redux";
+import styled from "styled-components";
+import { IDuel } from "../../model/duel";
 import { AppState } from "../../store";
 import { ITeam } from "../../store/team/types";
-import { IDuel } from "../../model/duel";
+import TeamCard from "../team/teamCard";
 
 const DuelRoot = styled.div`
   max-width: 275px;
@@ -18,7 +18,7 @@ type Props = {
   edition: boolean;
   nbTeamMaxByDuel: number;
 };
-class TeamDuel extends Component<Props> {
+class Duel extends Component<Props> {
   deleteTeam() {}
 
   addTeam = (_event: any) => {
@@ -34,10 +34,9 @@ class TeamDuel extends Component<Props> {
     return (
       <DuelRoot>
         <Card>
-          {this.props.duel.scoring
-             .map(s => (
-              <TeamCard team={s.team} variant={"medium"} />
-            ))}
+          {this.props.duel.scoring.map(s => (
+            <TeamCard team={s.team} variant={"medium"} />
+          ))}
         </Card>
       </DuelRoot>
     );
@@ -50,4 +49,4 @@ const mapStateToProps = (state: AppState) => ({
   nbTeamMaxByDuel: state.bracket.nbTeamMaxByDuel
 });
 
-export default connect(mapStateToProps)(TeamDuel);
+export default connect(mapStateToProps)(Duel);
