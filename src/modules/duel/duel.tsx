@@ -1,7 +1,10 @@
 import { Card } from "@material-ui/core";
 import React, { Component } from "react";
 import styled from "styled-components";
+import { BracketState } from "../../store/bracket/types";
+import { IDuel, IDuelScore } from "../../config/model";
 import DuelScore from "./duelScore";
+import TeamCard from "../team/teamCard";
 
 const DuelRoot = styled.div`
   max-width: 275px;
@@ -9,20 +12,19 @@ const DuelRoot = styled.div`
 `;
 
 type Props = {
-  edition: boolean;
-  nbTeamMaxByDuel: number;
+  bracketState: BracketState;
+  duel?: IDuel;
 };
-type State = {
-  duelsScore: DuelScore[];
-};
-export default class Duel extends Component<Props, State> {
+type State = {};
+export default class Duel extends Component<Props, State & IDuel> {
   state = {
-    duelsScore: []
-  }
+    duelsScore: this.props.duel ? this.props.duel.duelsScore : []
+  };
   deleteTeam() {}
 
   addTeam = (_event: any) => {
-    if (this.state.duelsScore.length >= this.props.nbTeamMaxByDuel) return;
+    if (this.state.duelsScore.length >= this.props.bracketState.nbTeamMaxByDuel)
+      return;
     let elem = {
       name: "New Player",
       playerList: []
@@ -33,6 +35,10 @@ export default class Duel extends Component<Props, State> {
   render() {
     return (
       <DuelRoot>
+        Duel
+        {this.state.duelsScore.map(score => (
+          <DuelScore bracketState={this.props.bracketState} duelScore={score} />
+        ))}
         <Card />
       </DuelRoot>
     );

@@ -15,6 +15,7 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import TeamList from "../team/teamList";
 import TeamListRanking from "../team/teamListRanking";
 import Round from "../round/round";
+import { BracketState } from "../../store/bracket/types";
 
 const drawerWidth = 300;
 
@@ -76,9 +77,9 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 type Props = {
-  edition: boolean;
-  initRounds: (rounds: Round[]) => void;
+  bracketState: BracketState;
   children: React.ReactNode;
+  initTeamBracket: () => void;
 };
 export default function BracketLeftDrawer(props: Props) {
   const theme = useTheme();
@@ -113,8 +114,8 @@ export default function BracketLeftDrawer(props: Props) {
           </IconButton>
         </div>
         <Divider />
-        {props.edition ? (
-          <TeamList initRounds={props.initRounds} />
+        {props.bracketState.edition ? (
+          <TeamList initTeamBracket={props.initTeamBracket} />
         ) : (
           <TeamListRanking />
         )}

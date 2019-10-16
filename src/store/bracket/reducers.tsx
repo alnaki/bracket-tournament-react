@@ -2,8 +2,8 @@ import { BracketActionTypes, BracketState } from "./types";
 import * as types from "./types";
 const initialState: BracketState = {
   name: "Tournament",
-  edition: false,
-  nbTeamMaxByDuel: 4,
+  edition: true,
+  nbTeamMaxByDuel: 2,
   nbTeamWinner: 1
 };
 
@@ -34,12 +34,11 @@ export function bracketReducer(
 // pas plus de la moitié peuvent gagner
 function upNbTeamByDuel(state: BracketState, nb: number) {
   if (nb >= 2) {
-    if (nb >= (state.nbTeamWinner * 2)) {
+    if (nb >= state.nbTeamWinner * 2) {
       return {
         ...state,
         nbTeamMaxByDuel: nb
-      }
-
+      };
     } else {
       return {
         ...state,
@@ -49,17 +48,17 @@ function upNbTeamByDuel(state: BracketState, nb: number) {
     }
   } else {
     return state;
-  };
+  }
 }
 
 // pas plus de la moitié peuvent gagner
 function upNbWinner(state: BracketState, nb: number) {
-  if (nb >= 1 && state.nbTeamMaxByDuel >= (nb * 2)) {
+  if (nb >= 1 && state.nbTeamMaxByDuel >= nb * 2) {
     return {
       ...state,
       nbTeamWinner: nb
     };
   } else {
     return state;
-  };
+  }
 }

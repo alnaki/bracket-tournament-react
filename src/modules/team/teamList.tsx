@@ -5,14 +5,13 @@ import { List, ListItem, Card, Button } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import { connect } from "react-redux";
 import { addTeam } from "../../store/team/actions";
-import { initBracket } from "../../util/bracket";
 import { AppState } from "../../store";
 
 type Props = {
   states: AppState;
   teams: ITeam[];
   addTeam: (arg0: undefined) => void;
-  initRounds: (rounds: Round[]) => void;
+  initTeamBracket: () => void;
 };
 class TeamList extends Component<Props> {
   handleAddTeam = (_event: any) => {
@@ -20,8 +19,7 @@ class TeamList extends Component<Props> {
   };
 
   handleInitBracket = () => {
-    let rounds = initBracket(this.props.states);
-    this.props.initRounds(rounds);
+    this.props.initTeamBracket();
   };
 
   render() {
@@ -47,7 +45,7 @@ class TeamList extends Component<Props> {
         <Button
           variant="contained"
           color="secondary"
-          onClick={this.handleInitBracket}
+          onClick={this.props.initTeamBracket}
           fullWidth
         >
           Générer tournois aléatoire
