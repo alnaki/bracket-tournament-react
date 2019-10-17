@@ -7,18 +7,17 @@ import Duel from "../duel/duel";
 
 type Props = {
   bracketState: BracketState;
-  duels?: IDuel[];
+  round?: IRound;
   nbDuel?: number;
 };
-type State = {};
-export default class Round extends Component<Props, State & IRound> {
+export default class Round extends Component<Props, IRound> {
   static defaultProps = {
     nbDuel: 1
   };
   state = {
-    duels: this.props.duels
-      ? this.props.duels
-      : Array(this.props.nbDuel).fill({ duelsScore: [] })
+    duels: this.props.round
+      ? this.props.round.duels
+      : Array(this.props.nbDuel).fill({ duels: [] })
   };
 
   addDuel(duel: IDuel) {

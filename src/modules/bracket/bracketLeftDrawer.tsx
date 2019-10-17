@@ -14,7 +14,6 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import TeamList from "../team/teamList";
 import TeamListRanking from "../team/teamListRanking";
-import Round from "../round/round";
 import { BracketState } from "../../store/bracket/types";
 
 const drawerWidth = 300;
