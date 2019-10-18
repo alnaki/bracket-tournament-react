@@ -5,7 +5,7 @@ import { ITeam } from "../../store/team/types";
 
 type Props = {
   team: ITeam;
-  variant: "small" | "medium";
+  variant?: "small" | "medium";
   edition?: boolean;
 };
 type State = {};

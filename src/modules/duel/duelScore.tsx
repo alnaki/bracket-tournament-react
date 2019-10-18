@@ -16,6 +16,24 @@ export default class DuelScore extends Component<Props, IDuelScore> {
       : { id: 0, name: "unknown", playerList: [] },
     score: this.props.duelScore ? this.props.duelScore.score : "X"
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    // Utilisation classique (pensez bien à comparer les props) :
+    const team = this.props.duelScore
+      ? this.props.duelScore.team
+      : { id: 0, name: "unknown", playerList: [] };
+    const score = this.props.duelScore ? this.props.duelScore.score : "X";
+    if (
+      JSON.stringify(team) !== JSON.stringify(prevState.team) &&
+      score !== prevState.score
+    ) {
+      this.setState({
+        team: team,
+        score: score
+      });
+    }
+  }
+
   render() {
     return (
       <Grid container>

@@ -18,6 +18,17 @@ export default class Duel extends Component<Props, IDuel> {
   state = {
     duelsScore: this.props.duel ? this.props.duel.duelsScore : []
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    // Utilisation classique (pensez bien à comparer les props) :
+    const duelsScore = this.props.duel ? this.props.duel.duelsScore : [];
+    if (JSON.stringify(duelsScore) !== JSON.stringify(prevState.duelsScore)) {
+      this.setState({
+        duelsScore: duelsScore
+      });
+    }
+  }
+
   deleteTeam() {}
 
   addTeam = (_event: any) => {
@@ -34,9 +45,13 @@ export default class Duel extends Component<Props, IDuel> {
     return (
       <DuelRoot>
         Duel
-        {/* {this.state.duelsScore.map(score => (
-          <DuelScore bracketState={this.props.bracketState} duelScore={score} />
-        ))} */}
+        {this.state.duelsScore.map((score, i) => (
+          <DuelScore
+            key={i}
+            bracketState={this.props.bracketState}
+            duelScore={score}
+          />
+        ))}
         <Card />
       </DuelRoot>
     );

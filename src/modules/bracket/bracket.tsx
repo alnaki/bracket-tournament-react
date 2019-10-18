@@ -48,8 +48,12 @@ class Bracket extends Component<Props, State & IBracket> {
           initTeamBracket={this.handleInitTeamBracket.bind(this)}
         >
           <Grid container>
-            {this.state.rounds.map(round => (
-              <Round bracketState={this.props.bracketState} round={round} />
+            {this.state.rounds.map((round, i) => (
+              <Round
+                key={i}
+                bracketState={this.props.bracketState}
+                round={round}
+              />
             ))}
           </Grid>
         </BracketLeftDrawer>
@@ -119,7 +123,7 @@ function initTeamBracket(duels: IDuel[]): IRound[] {
   for (let i = 0; i < nbRound; i++) {
     let duelRound: IRound = { duels: [] };
     for (let j = 0; j < Math.pow(2, i); j++) {
-      duelRound.duels.push({ duelScore: [] });
+      duelRound.duels.push({ duelsScore: [] });
     }
     rounds.push(duelRound);
   }
