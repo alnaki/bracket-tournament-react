@@ -24,7 +24,7 @@ export default class DuelScore extends Component<Props, IDuelScore> {
       : { id: 0, name: "unknown", playerList: [] };
     const score = this.props.duelScore ? this.props.duelScore.score : "X";
     if (
-      JSON.stringify(team) !== JSON.stringify(prevState.team) &&
+      JSON.stringify(team) !== JSON.stringify(prevState.team) ||
       score !== prevState.score
     ) {
       this.setState({
