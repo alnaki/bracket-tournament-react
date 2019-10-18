@@ -20,26 +20,18 @@ export default class Duel extends Component<Props, IDuel> {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    // Utilisation classique (pensez bien à comparer les props) :
     const duelsScore = this.props.duel ? this.props.duel.duelsScore : [];
+    console.log(
+      duelsScore,
+      prevState.duelsScore,
+      JSON.stringify(duelsScore) !== JSON.stringify(prevState.duelsScore)
+    );
     if (JSON.stringify(duelsScore) !== JSON.stringify(prevState.duelsScore)) {
       this.setState({
         duelsScore: duelsScore
       });
     }
   }
-
-  deleteTeam() {}
-
-  addTeam = (_event: any) => {
-    if (this.state.duelsScore.length >= this.props.bracketState.nbTeamMaxByDuel)
-      return;
-    let elem = {
-      name: "New Player",
-      playerList: []
-    };
-    // ajouter le joueur dans le state
-  };
 
   render() {
     return (

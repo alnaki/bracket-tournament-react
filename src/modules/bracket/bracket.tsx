@@ -139,10 +139,6 @@ function initTeamBracket(duels: IDuel[]): IRound[] {
     let duelEmptyForFull: IDuel[] = Array(
       Math.pow(2, nbRound - 1) - duelFullInit.length
     ).fill({ duelsScore: [] });
-    console.log("nbDuelLast", nbDuelLast);
-    console.log("duelLast", duelLast);
-    console.log("duelFullInit", duelFullInit);
-    console.log("duelEmptyForFull", duelEmptyForFull);
     rounds.pop();
     rounds.push({ duels: [...duelEmptyForFull, ...duelFullInit] });
     rounds.push({ duels: [...duelLast] });

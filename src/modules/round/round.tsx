@@ -25,7 +25,6 @@ export default class Round extends Component<Props, IRound> {
     const duels = this.props.round
       ? this.props.round.duels
       : Array(this.props.nbDuel).fill({ duels: [] });
-    console.log("maj du composant", duels, prevState.duels);
     if (JSON.stringify(duels) !== JSON.stringify(prevState.duels)) {
       this.setState({
         duels: duels
