@@ -17,7 +17,7 @@ export default class DuelScore extends Component<Props, IDuelScore> {
     score: this.props.duelScore ? this.props.duelScore.score : "X"
   };
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps: any, prevState: { team: any; score: React.ReactText; }) {
     // Utilisation classique (pensez bien à comparer les props) :
     const team = this.props.duelScore
       ? this.props.duelScore.team

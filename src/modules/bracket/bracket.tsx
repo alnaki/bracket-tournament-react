@@ -38,7 +38,7 @@ class Bracket extends Component<Props, State & IBracket> {
     let rounds = initTeamBracket(duels);
     this.setState({ rounds: rounds });
   }
-  handleAddDuel() {}
+  handleAddDuel() { }
 
   render() {
     return (
@@ -48,7 +48,7 @@ class Bracket extends Component<Props, State & IBracket> {
           initTeamBracket={this.handleInitTeamBracket.bind(this)}
         >
           <Grid container>
-            {this.state.rounds.map((round, i) => (
+            {this.state.rounds.slice().reverse().map((round, i) => (
               <Round
                 key={i}
                 bracketState={this.props.bracketState}
@@ -83,16 +83,24 @@ function nbMinRound(nbDuel: number) {
 }
 
 function initEmptyBracket(nbDuel: number) {
-  let rounds: IRound[] = [];
   let nbRound = nbMinRound(nbDuel);
-  for (let i = 0; i < nbRound + 1; i++) {
-    for (let j = 0; j < Math.pow(2, i); j++) {
-      rounds.push({ duels: [] });
-    }
-  }
   let nbDuelLast = (nbDuel - Math.pow(2, nbRound)) * 2;
+  let rounds: IRound[] = initEmptyRounds(nbRound);
+
   if (nbDuelLast > 0) {
     rounds.push({ duels: Array(nbDuelLast).fill({ duels: [] }) });
+  }
+  return rounds;
+}
+
+function initEmptyRounds(nbRounds: number) {
+  let rounds: IRound[] = [];
+  for (let i = 0; i < nbRounds; i++) {
+    let duelRound: IRound = { duels: [] };
+    for (let j = 0; j < Math.pow(2, i); j++) {
+      duelRound.duels.push({ duelsScore: [] });
+    }
+    rounds.push(duelRound);
   }
   return rounds;
 }
@@ -111,31 +119,25 @@ function listFirstDuels(nbDuel: number, teams: ITeam[]) {
 
 function initTeamBracket(duels: IDuel[]): IRound[] {
   let rounds: IRound[] = [];
-  console.log("hello", duels);
   // if any duels to init
   if (duels.length === 0) {
     rounds.push({ duels: [] });
     return rounds;
   }
 
-  let nbRound = nbMinRound(duels.length);
   // init first empty rounds
-  for (let i = 0; i < nbRound; i++) {
-    let duelRound: IRound = { duels: [] };
-    for (let j = 0; j < Math.pow(2, i); j++) {
-      duelRound.duels.push({ duelsScore: [] });
-    }
-    rounds.push(duelRound);
-  }
-  console.log("rounds empty", rounds);
+  let nbRound = nbMinRound(duels.length);
+  rounds = initEmptyRounds(nbRound)
+
   // last round is full :)
   if (Math.pow(2, nbRound) === duels.length) {
     rounds.push({ duels: duels });
     // last round is not complete :/
   } else {
+    duels.reverse(); // for duel alone
     let nbDuelLast = (duels.length - Math.pow(2, nbRound - 1)) * 2;
-    let duelLast: IDuel[] = duels.slice(0, nbDuelLast - 1);
-    let duelFullInit: IDuel[] = duels.slice(nbDuelLast - 1, duels.length - 1);
+    let duelLast: IDuel[] = duels.slice(0, nbDuelLast).reverse();
+    let duelFullInit: IDuel[] = duels.slice(nbDuelLast);
     let duelEmptyForFull: IDuel[] = Array(
       Math.pow(2, nbRound - 1) - duelFullInit.length
     ).fill({ duelsScore: [] });
@@ -144,6 +146,5 @@ function initTeamBracket(duels: IDuel[]): IRound[] {
     rounds.push({ duels: [...duelLast] });
   }
 
-  console.log("RESULT", rounds);
   return rounds;
 }

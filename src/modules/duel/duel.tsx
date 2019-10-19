@@ -19,7 +19,7 @@ export default class Duel extends Component<Props, IDuel> {
     duelsScore: this.props.duel ? this.props.duel.duelsScore : []
   };
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps: any, prevState: { duelsScore: any; }) {
     const duelsScore = this.props.duel ? this.props.duel.duelsScore : [];
     console.log(
       duelsScore,

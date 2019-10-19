@@ -20,7 +20,7 @@ export default class Round extends Component<Props, IRound> {
       : Array(this.props.nbDuel).fill({ duels: [] })
   };
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps: any, prevState: { duels: any; }) {
     // Utilisation classique (pensez bien à comparer les props) :
     const duels = this.props.round
       ? this.props.round.duels
