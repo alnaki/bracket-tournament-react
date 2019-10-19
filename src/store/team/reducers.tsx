@@ -1,17 +1,9 @@
-import {
-  TeamActionTypes,
-  TeamState,
-  ADD_TEAM,
-  EDIT_TEAM,
-  DELETE_TEAM,
-  ADD_PLAYER_IN_TEAM,
-  DELETE_PLAYER_IN_TEAM
-} from "./types";
+import { ADD_PLAYER_IN_TEAM, ADD_TEAM, DELETE_PLAYER_IN_TEAM, DELETE_TEAM, EDIT_TEAM, INIT_N_TEAM, ITeam, TeamActionTypes, TeamState } from "./types";
 
 const initialState: TeamState = {
   teams: [
-    { id: 0, name: "team 1", playerList: [] },
-    { id: 1, name: "group 2", playerList: [] }
+    { id: 0, name: "Click here to change name", playerList: [] },
+    { id: 1, name: "Double click to say Winner", playerList: [] }
   ],
   nbTeam: 2
 };
@@ -23,12 +15,8 @@ export function teamReducer(
   switch (action.type) {
     case ADD_TEAM:
       !action.team
-        ? (action.team = {
-            id: state.nbTeam,
-            name: "Team " + state.nbTeam,
-            playerList: []
-          })
-        : (action.team.id = state.nbTeam);
+        ? action.team = initTeam(state.nbTeam)
+        : action.team.id = state.nbTeam;
       return {
         nbTeam: state.nbTeam + 1,
         teams: [...state.teams, action.team]
@@ -47,6 +35,11 @@ export function teamReducer(
         ...state,
         teams: [...state.teams.filter(team => team.id !== action.bracketId)]
       };
+    case INIT_N_TEAM:
+      return {
+        ...state,
+        teams: [...state.teams, ...initNumberTeam(action.nbTeam, state)]
+      }
     case ADD_PLAYER_IN_TEAM:
       const upTeam1 = state.teams.find(team => team.id === action.teamId);
       if (upTeam1 !== undefined) {
@@ -60,7 +53,6 @@ export function teamReducer(
           ]
         };
       } else return state;
-
     case DELETE_PLAYER_IN_TEAM:
       const upTeam2 = state.teams.find(team => team.id === action.teamId);
       if (upTeam2 !== undefined) {
@@ -76,8 +68,28 @@ export function teamReducer(
           ]
         };
       } else return state;
-
     default:
       return state;
+  }
+}
+
+
+function initNumberTeam(nbTeam: number, state: TeamState): ITeam[] {
+  let teams: ITeam[] = [];
+  for (let i = state.teams.length; i < nbTeam; i++) {
+    teams.push({
+      id: state.nbTeam,
+      name: "Team " + state.nbTeam,
+      playerList: []
+    })
+  }
+  return teams;
+}
+
+function initTeam(id: number): ITeam {
+  return {
+    id: id,
+    name: "Team " + id,
+    playerList: []
   }
 }

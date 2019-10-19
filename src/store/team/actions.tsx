@@ -24,7 +24,8 @@ export function deleteTeam(id: number) {
 
 export function initNumberTeam(nbTeam: number) {
   return {
-    type: types.
+    type: types.INIT_N_TEAM,
+    nbTeam: nbTeam
   }
 }
 
