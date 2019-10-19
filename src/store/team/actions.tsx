@@ -22,6 +22,12 @@ export function deleteTeam(id: number) {
   };
 }
 
+export function initNumberTeam(nbTeam: number) {
+  return {
+    type: types.
+  }
+}
+
 export function addPlayerInTeam(idTeam: number, idPlayer: number) {
   return {
     type: types.ADD_PLAYER_IN_TEAM,
@@ -37,3 +43,5 @@ export function deletePlayerInTeam(idTeam: number, idPlayer: number) {
     idPlayer: idPlayer
   };
 }
+
+

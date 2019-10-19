@@ -37,8 +37,7 @@ export default class DuelScore extends Component<Props, IDuelScore> {
   render() {
     return (
       <Grid container>
-        score
-        <Grid item>
+        <Grid item xs={12} sm>
           <TeamCard team={this.state.team} />
         </Grid>
         <Grid item>

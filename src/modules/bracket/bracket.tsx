@@ -51,6 +51,7 @@ class Bracket extends Component<Props, State & IBracket> {
             {this.state.rounds.slice().reverse().map((round, i) => (
               <Round
                 key={i}
+                name={"Round " + i}
                 bracketState={this.props.bracketState}
                 round={round}
               />
@@ -78,7 +79,6 @@ function nbMinDuelByNbTeam(nbTeam: number, nbTeamMaxByDuel: number): number {
 
 function nbMinRound(nbDuel: number) {
   let nbRound = Math.ceil(Math.log2(nbDuel));
-  console.log("nbDuel", nbDuel, "nbRound", nbRound);
   return nbRound;
 }
 
