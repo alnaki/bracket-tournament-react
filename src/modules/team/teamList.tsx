@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { ITeam } from "../../store/team/types";
 import TeamCard from "./teamCard";
-import { List, ListItem, Card, Button } from "@material-ui/core";
+import { List, ListItem, Card, Button, TextField } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import { connect } from "react-redux";
 import { addTeam } from "../../store/team/actions";
@@ -13,7 +13,13 @@ type Props = {
   addTeam: (arg0: undefined) => void;
   initTeamBracket: () => void;
 };
-class TeamList extends Component<Props> {
+type State = {
+  nbTeam: number;
+}
+class TeamList extends Component<Props, State> {
+  state = {
+    nbTeam: this.props.teams.length
+  }
   handleAddTeam = (_event: any) => {
     this.props.addTeam(undefined);
   };
@@ -22,9 +28,23 @@ class TeamList extends Component<Props> {
     this.props.initTeamBracket();
   };
 
+  handleChangeNbTeam(input: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    let nbTeam = Number(input.target.value);
+    if(0 < nbTeam && nbTeam <= 256)
+    this.setState({ ...this.state, nbTeam: Number(input.target.value) })
+  }
   render() {
     return (
       <div>
+        <TextField
+          type="number"
+          value={this.state.nbTeam}
+          onChange={e => this.handleChangeNbTeam(e)}
+          InputLabelProps={{
+            shrink: true
+          }}
+          variant="standard"
+        />
         <List>
           {this.props.teams.map((t, i) => (
             <ListItem key={i}>

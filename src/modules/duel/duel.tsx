@@ -15,11 +15,6 @@ export default class Duel extends Component<Props, IDuel> {
 
   componentDidUpdate(prevProps: any, prevState: { duelsScore: any; }) {
     const duelsScore = this.props.duel ? this.props.duel.duelsScore : [];
-    console.log(
-      duelsScore,
-      prevState.duelsScore,
-      JSON.stringify(duelsScore) !== JSON.stringify(prevState.duelsScore)
-    );
     if (JSON.stringify(duelsScore) !== JSON.stringify(prevState.duelsScore)) {
       this.setState({
         duelsScore: duelsScore
