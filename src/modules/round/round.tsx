@@ -49,7 +49,7 @@ export default class Round extends Component<Props, IRound> {
   render() {
     return (
       <RoundStyle>
-        <Grid item xs className="bracket-column">
+        <Grid item xs>
           <h4>{this.props.name}</h4>
           {this.state.duels.map((duel, i) => (
             <Duel key={i} bracketState={this.props.bracketState} duel={duel} />
