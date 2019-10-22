@@ -17,8 +17,10 @@ export default class DuelScore extends Component<Props, IDuelScore> {
     score: this.props.duelScore ? this.props.duelScore.score : "X"
   };
 
-  componentDidUpdate(prevProps: any, prevState: { team: any; score: React.ReactText; }) {
-    // Utilisation classique (pensez bien à comparer les props) :
+  componentDidUpdate(
+    prevProps: any,
+    prevState: { team: any; score: React.ReactText }
+  ) {
     const team = this.props.duelScore
       ? this.props.duelScore.team
       : { id: 0, name: "unknown", playerList: [] };
@@ -38,12 +40,17 @@ export default class DuelScore extends Component<Props, IDuelScore> {
     return (
       <Grid container>
         <Grid item xs={11} sm>
-          <TeamCard team={this.state.team} edition={this.props.bracketState.edition} />
+          <TeamCard
+            team={this.state.team}
+            edition={this.props.bracketState.edition}
+          />
         </Grid>
         <Grid item>
           <Divider orientation="vertical" />
         </Grid>
-        <Grid item xs={1} >{this.state.score}</Grid>
+        <Grid item xs={1}>
+          {this.state.score}
+        </Grid>
       </Grid>
     );
   }

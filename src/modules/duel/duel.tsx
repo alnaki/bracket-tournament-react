@@ -9,8 +9,12 @@ import DuelScore from "./duelScore";
 type Props = {
   bracketState: BracketState;
   duel?: IDuel;
+  duelId?: number;
 };
 export default class Duel extends Component<Props, IDuel> {
+  static defaultProps = {
+    duelId: 1
+  };
   state = {
     duelsScore: this.props.duel ? this.props.duel.duelsScore : []
   };
@@ -34,6 +38,7 @@ export default class Duel extends Component<Props, IDuel> {
     return (
       // <Droppable droppableId={this.props.}>
       <Card>
+        <h5>{this.props.duelId}</h5>
         {this.state.duelsScore.map((score, i) => (
           <DuelScore
             key={i}

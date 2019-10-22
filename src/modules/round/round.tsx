@@ -15,11 +15,15 @@ type Props = {
   bracketState: BracketState;
   name?: string;
   round?: IRound;
+  roundId?: number;
   nbDuel?: number;
+  firstDuelId?: number;
 };
 export default class Round extends Component<Props, IRound> {
   static defaultProps = {
-    nbDuel: 1
+    roundId: 1,
+    nbDuel: 1,
+    firstDuelId: 1
   };
   state = {
     duels: this.props.round
@@ -53,7 +57,12 @@ export default class Round extends Component<Props, IRound> {
         <Grid item xs>
           <Title>{this.props.name}</Title>
           {this.state.duels.map((duel, i) => (
-            <Duel key={i} bracketState={this.props.bracketState} duel={duel} />
+            <Duel
+              key={i}
+              bracketState={this.props.bracketState}
+              duel={duel}
+              duelId={this.props.firstDuelId + i}
+            />
           ))}
           {this.props.bracketState.edition && (
             <Button

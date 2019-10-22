@@ -38,7 +38,7 @@ class Bracket extends Component<Props, State & IBracket> {
     let rounds = initTeamBracket(duels);
     this.setState({ rounds: rounds });
   }
-  handleAddDuel() { }
+  handleAddDuel() {}
 
   render() {
     return (
@@ -48,14 +48,19 @@ class Bracket extends Component<Props, State & IBracket> {
           initTeamBracket={this.handleInitTeamBracket.bind(this)}
         >
           <Grid container>
-            {this.state.rounds.slice().reverse().map((round, i) => (
-              <Round
-                key={i}
-                name={"Round " + i}
-                bracketState={this.props.bracketState}
-                round={round}
-              />
-            ))}
+            {this.state.rounds
+              .slice()
+              .reverse()
+              .map((round, i) => (
+                <Round
+                  key={i}
+                  name={"Round " + i}
+                  round={round}
+                  roundId={i}
+                  // firstDuelId={firstIdDuelForRound(this.state.rounds, i)}
+                  bracketState={this.props.bracketState}
+                />
+              ))}
           </Grid>
         </BracketLeftDrawer>
       </BracketRightDrawer>
@@ -127,7 +132,7 @@ function initTeamBracket(duels: IDuel[]): IRound[] {
 
   // init first empty rounds
   let nbRound = nbMinRound(duels.length);
-  rounds = initEmptyRounds(nbRound)
+  rounds = initEmptyRounds(nbRound);
 
   // last round is full :)
   if (Math.pow(2, nbRound) === duels.length) {
@@ -147,4 +152,8 @@ function initTeamBracket(duels: IDuel[]): IRound[] {
   }
 
   return rounds;
+}
+
+function firstIdDuelForRound(rounds: IRound[], roundNb: number): number {
+  return rounds.slice(0, roundNb - 1).reduce((r1, r0) => r1.length + r0);
 }

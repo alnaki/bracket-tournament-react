@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./App.css";
 import Bracket from "./modules/bracket/bracket";
 import { Provider } from "react-redux";
 import { DragDropContext } from "react-beautiful-dnd";
