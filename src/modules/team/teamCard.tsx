@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Avatar, Grid, Divider, Typography, Card } from "@material-ui/core";
 import { styled } from "@material-ui/core/styles";
 import { ITeam } from "../../store/team/types";
-import Skeleton from '@material-ui/lab/Skeleton';
+import Skeleton from "@material-ui/lab/Skeleton";
 
 type Props = {
   team?: ITeam;
@@ -41,11 +41,11 @@ export default class TeamCard extends Component<Props, State> {
               <Divider orientation="vertical" />
             </Grid>
             <Grid item zeroMinWidth>
-              {this.props.team ?
+              {this.props.team ? (
                 <Typography noWrap>{this.props.team.name}</Typography>
-                :
+              ) : (
                 <Skeleton width="70%" />
-              }
+              )}
             </Grid>
           </Grid>
         );
@@ -53,36 +53,41 @@ export default class TeamCard extends Component<Props, State> {
         return (
           <Grid container wrap="nowrap" spacing={1}>
             <Grid item>
-              {this.props.team ?
-                this.props.team.avatar ?
+              {this.props.team ? (
+                this.props.team.avatar ? (
                   <Avatar src={this.props.team.avatar} />
-                  :
+                ) : (
                   <MyAvatar>{this.props.team.name.substr(0, 2)}</MyAvatar>
-                :
+                )
+              ) : (
                 <Skeleton variant="circle" width={40} height={40} />
-              }
+              )}
             </Grid>
             <Grid item>
               <Divider orientation="vertical" />
             </Grid>
-            {this.props.team ?
+            {this.props.team ? (
               <Grid item zeroMinWidth>
                 <Typography noWrap>{this.props.team.name}</Typography>
               </Grid>
-              :
+            ) : (
               <Grid item xs>
                 <Skeleton width="70%" />
               </Grid>
-            }
+            )}
           </Grid>
         );
     }
   }
   render() {
     if (this.props.team && this.props.edition) {
-      return <div style={{ padding: "6px" }}><Card>{this.teamCardView()}</Card></div>
+      return (
+        <div style={{ padding: "6px" }}>
+          <Card>{this.teamCardView()}</Card>
+        </div>
+      );
     } else {
-      return <div>{this.teamCardView()}</div>
+      return <>{this.teamCardView()}</>;
     }
   }
 }

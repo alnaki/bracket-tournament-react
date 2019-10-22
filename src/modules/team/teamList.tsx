@@ -35,7 +35,7 @@ class TeamList extends Component<Props, State> {
   }
   render() {
     return (
-      <div>
+      <>
         <TextField
           type="number"
           value={this.state.nbTeam}
@@ -70,7 +70,7 @@ class TeamList extends Component<Props, State> {
         >
           Générer tournois aléatoire
         </Button>
-      </div>
+      </>
     );
   }
 }

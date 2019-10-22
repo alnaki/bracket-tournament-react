@@ -7,8 +7,9 @@ import { BracketState } from "../../store/bracket/types";
 import Duel from "../duel/duel";
 
 const RoundStyle = styled.div`
-min-width: 300px;
+  min-width: 300px;
 `;
+const Title = styled.h4``;
 
 type Props = {
   bracketState: BracketState;
@@ -26,7 +27,7 @@ export default class Round extends Component<Props, IRound> {
       : Array(this.props.nbDuel).fill({ duels: [] })
   };
 
-  componentDidUpdate(prevProps: any, prevState: { duels: any; }) {
+  componentDidUpdate(prevProps: any, prevState: { duels: any }) {
     // Utilisation classique (pensez bien à comparer les props) :
     const duels = this.props.round
       ? this.props.round.duels
@@ -50,7 +51,7 @@ export default class Round extends Component<Props, IRound> {
     return (
       <RoundStyle>
         <Grid item xs>
-          <h4>{this.props.name}</h4>
+          <Title>{this.props.name}</Title>
           {this.state.duels.map((duel, i) => (
             <Duel key={i} bracketState={this.props.bracketState} duel={duel} />
           ))}
