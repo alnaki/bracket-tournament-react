@@ -1,9 +1,10 @@
 import { Card } from "@material-ui/core";
 import React, { Component } from "react";
-import { BracketState } from "../../store/bracket/types";
 import { IDuel } from "../../config/model";
-import DuelScore from "./duelScore";
+import { BracketState } from "../../store/bracket/types";
 import TeamCard from "../team/teamCard";
+import DuelScore from "./duelScore";
+// import { Droppable } from "react-beautiful-dnd";
 
 type Props = {
   bracketState: BracketState;
@@ -15,10 +16,12 @@ export default class Duel extends Component<Props, IDuel> {
   };
 
   nbSkeletonInEdition(): number {
-    return this.props.bracketState.nbTeamMaxByDuel - this.state.duelsScore.length;
+    return (
+      this.props.bracketState.nbTeamMaxByDuel - this.state.duelsScore.length
+    );
   }
 
-  componentDidUpdate(prevProps: any, prevState: { duelsScore: any; }) {
+  componentDidUpdate(prevProps: any, prevState: { duelsScore: any }) {
     const duelsScore = this.props.duel ? this.props.duel.duelsScore : [];
     if (JSON.stringify(duelsScore) !== JSON.stringify(prevState.duelsScore)) {
       this.setState({
@@ -29,6 +32,7 @@ export default class Duel extends Component<Props, IDuel> {
 
   render() {
     return (
+      // <Droppable droppableId={this.props.}>
       <Card>
         {this.state.duelsScore.map((score, i) => (
           <DuelScore
@@ -37,8 +41,10 @@ export default class Duel extends Component<Props, IDuel> {
             duelScore={score}
           />
         ))}
-        {this.props.bracketState.edition && Array(this.nbSkeletonInEdition()).fill(<TeamCard edition={true}></TeamCard>)}
+        {this.props.bracketState.edition &&
+          Array(this.nbSkeletonInEdition()).fill(<TeamCard edition={true} />)}
       </Card>
+      // </Droppable>
     );
   }
 }
