@@ -15,23 +15,23 @@ type Props = {
 };
 type State = {
   nbTeam: number;
-}
+};
 class TeamList extends Component<Props, State> {
   state = {
     nbTeam: this.props.teams.length
-  }
+  };
   handleAddTeam = (_event: any) => {
     this.props.addTeam(undefined);
   };
-
   handleInitBracket = () => {
     this.props.initTeamBracket();
   };
-
-  handleChangeNbTeam(input: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+  handleChangeNbTeam(
+    input: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) {
     let nbTeam = Number(input.target.value);
-    if(0 < nbTeam && nbTeam <= 256)
-    this.setState({ ...this.state, nbTeam: Number(input.target.value) })
+    if (0 < nbTeam && nbTeam <= 256)
+      this.setState({ ...this.state, nbTeam: Number(input.target.value) });
   }
   render() {
     return (
