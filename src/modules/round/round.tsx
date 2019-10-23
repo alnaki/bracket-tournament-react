@@ -61,7 +61,7 @@ export default class Round extends Component<Props, IRound> {
               key={i}
               bracketState={this.props.bracketState}
               duel={duel}
-              duelId={this.props.firstDuelId + i}
+              duelId={this.props.firstDuelId! + i}
             />
           ))}
           {this.props.bracketState.edition && (

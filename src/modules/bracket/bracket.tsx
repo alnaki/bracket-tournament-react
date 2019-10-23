@@ -154,6 +154,4 @@ function initTeamBracket(duels: IDuel[]): IRound[] {
   return rounds;
 }
 
-function firstIdDuelForRound(rounds: IRound[], roundNb: number): number {
-  return rounds.slice(0, roundNb - 1).reduce((r1, r0) => r1.length + r0);
-}
+
