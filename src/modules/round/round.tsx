@@ -21,7 +21,7 @@ type Props = {
 };
 export default class Round extends Component<Props, IRound> {
   static defaultProps = {
-    roundId: 1,
+    roundId: 11,
     nbDuel: 1,
     firstDuelId: 1
   };
