@@ -3,12 +3,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { AppState } from "../../store";
 import { BracketState } from "../../store/bracket/types";
-import { shuffle } from "../../util/shuffle";
+import { shuffle } from "../../services/shuffle";
 import { IBracket, IRound, IDuel } from "../../config/model";
 import Round from "../round/round";
 import BracketLeftDrawer from "./bracketLeftDrawer";
 import BracketRightDrawer from "./bracketRightDrawer";
 import { ITeam } from "../../store/team/types";
+import { DragDropContext } from "react-beautiful-dnd";
 
 type Props = {
   bracketState: BracketState;
@@ -40,8 +41,17 @@ class Bracket extends Component<Props, State & IBracket> {
   }
   handleAddDuel() {}
 
+  dragEnd(result:any) {
+    console.log(result)
+  }
+
+  dragStart(result:any) {
+    console.log(result)
+  }
+
   render() {
     return (
+      <DragDropContext onDragEnd={result => this.dragEnd(result)} onDragStart={result => this.dragStart(result)}>
       <BracketRightDrawer>
         <BracketLeftDrawer
           bracketState={this.props.bracketState}
@@ -64,6 +74,7 @@ class Bracket extends Component<Props, State & IBracket> {
           </Grid>
         </BracketLeftDrawer>
       </BracketRightDrawer>
+      </DragDropContext>
     );
   }
 }
