@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Avatar, Grid, Divider, Typography, Card } from "@material-ui/core";
 import { styled } from "@material-ui/core/styles";
-import { ITeam } from "../../store/team/types";
+import { ITeam } from "../../config/model";
 import Skeleton from "@material-ui/lab/Skeleton";
 
 type Props = {

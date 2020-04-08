@@ -1,15 +1,9 @@
+import { ITeam } from "../../config/model"
+
 // Describing the shape of the chat's slice of state
 export interface TeamState {
   teams: ITeam[];
   nbTeam: number;
-}
-
-export interface ITeam {
-  id: string;
-  idBDD?: number;
-  name: string;
-  avatar?: string;
-  playerList: number[];
 }
 
 // Describing the different ACTION NAMES available
@@ -38,12 +32,12 @@ interface InitNumberTeam {
 }
 interface AddPlayerInTeam {
   type: typeof ADD_PLAYER_IN_TEAM;
-  playerId: number;
+  playerId: string;
   teamId: string;
 }
 interface DeletePlayerInTeam {
   type: typeof DELETE_PLAYER_IN_TEAM;
-  playerId: number;
+  playerId: string;
   teamId: string;
 }
 

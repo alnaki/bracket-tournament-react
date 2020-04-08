@@ -2,21 +2,15 @@ import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
 import { IDuelScore } from "../../config/model";
-import { BracketState } from "../../store/bracket/types";
+import { IBracket } from "../../config/model";
 import TeamCard from "../team/teamCard";
 import uuid from "uuid/v4";
 
 type Props = {
-  bracketState: BracketState;
+  bracketState: IBracket;
   duelScore?: IDuelScore;
 };
 export default class DuelScore extends Component<Props, IDuelScore> {
-  state = {
-    team: this.props.duelScore
-      ? this.props.duelScore.team
-      : { id: uuid(), name: "unknown", playerList: [] },
-    score: this.props.duelScore ? this.props.duelScore.score : "X"
-  };
 
   componentDidUpdate(
     prevProps: any,
@@ -31,7 +25,6 @@ export default class DuelScore extends Component<Props, IDuelScore> {
       score !== prevState.score
     ) {
       this.setState({
-        team: team,
         score: score
       });
     }
@@ -43,7 +36,7 @@ export default class DuelScore extends Component<Props, IDuelScore> {
         <Grid item xs={11} sm>
           <TeamCard
             team={this.state.team}
-            edition={this.props.bracketState.edition}
+            edition={this.props.bracketState.editionMode}
           />
         </Grid>
         <Grid item>

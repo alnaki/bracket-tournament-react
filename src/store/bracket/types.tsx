@@ -1,12 +1,3 @@
-// Describing the shape of the chat's slice of state
-export interface BracketState {
-  id?: number;
-  name: string;
-  edition: boolean;
-  nbTeamMaxByDuel: number;
-  nbTeamWinner: number;
-}
-
 // Describing the different ACTION NAMES available
 export const CHANGE_NAME = "CHANGE_NAME";
 export const CHANGE_MODE = "CHANGE_MODE";

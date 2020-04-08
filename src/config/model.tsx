@@ -1,14 +1,21 @@
-import { ITeam } from "../store/team/types";
-
 export interface IBracket {
+  id: string;
+  name: string;
+  editionMode: boolean;
+  nbTeamMaxByDuel: number;
+  nbTeamWinner: number;
   rounds: IRound[];
 }
 
 export interface IRound {
-  duels: IDuel[];
+  id: string;
+  name: string;
+  roundNumber: number;
+  duelsId: string[];
 }
 
 export interface IDuel {
+  id: string;
   duelsScore: IDuelScore[];
 }
 
@@ -20,4 +27,11 @@ export interface IDuel {
 export interface IDuelScore {
   team: ITeam;
   score: number | "V" | "D" | "X";
+}
+
+export interface ITeam {
+  id: string;
+  name: string;
+  avatar?: string;
+  playersId: string[];
 }

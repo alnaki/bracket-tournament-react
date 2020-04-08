@@ -1,5 +1,5 @@
 import * as types from "./types";
-import { ITeam } from "./types";
+import { ITeam } from "../../config/model";
 
 export function addTeam(team: ITeam | undefined) {
   return {

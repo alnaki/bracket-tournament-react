@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ITeam } from "../../store/team/types";
+import { ITeam } from "../../config/model";
 import TeamCard from "./teamCard";
 import { List, ListItem } from "@material-ui/core";
 import { AppState } from "../../store";

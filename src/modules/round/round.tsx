@@ -2,8 +2,7 @@ import { Button, Grid } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import React, { Component } from "react";
 import styled from "styled-components";
-import { IDuel, IRound } from "../../config/model";
-import { BracketState } from "../../store/bracket/types";
+import { IDuel, IRound, IBracket } from "../../config/model";
 import Duel from "../duel/duel";
 
 const RoundStyle = styled.div`
@@ -12,59 +11,34 @@ const RoundStyle = styled.div`
 const Title = styled.h4``;
 
 type Props = {
-  bracketState: BracketState;
-  name?: string;
-  round?: IRound;
-  roundId?: number;
-  nbDuel?: number;
-  firstDuelId?: number;
+  bracketState: IBracket;
+  round: IRound;
 };
 export default class Round extends Component<Props, IRound> {
   static defaultProps = {
-    roundId: 11,
-    nbDuel: 1,
-    firstDuelId: 1
-  };
-  state = {
-    duels: this.props.round
-      ? this.props.round.duels
-      : Array(this.props.nbDuel).fill({ duels: [] })
+    roundId: 1,
   };
 
-  componentDidUpdate(prevProps: any, prevState: { duels: any }) {
-    // Utilisation classique (pensez bien à comparer les props) :
-    const duels = this.props.round
-      ? this.props.round.duels
-      : Array(this.props.nbDuel).fill({ duels: [] });
-    if (JSON.stringify(duels) !== JSON.stringify(prevState.duels)) {
-      this.setState({
-        duels: duels
-      });
-    }
-  }
+  // addDuel(duel: IDuel) {
+  //   this.setState({ ...this.state, duels: [...this.state.duels, duel] });
+  // }
 
-  addDuel(duel: IDuel) {
-    this.setState({ ...this.state, duels: [...this.state.duels, duel] });
-  }
-
-  handleAddDuel() {
-    this.addDuel({ duelsScore: [] });
-  }
+  // handleAddDuel() {
+  //   this.addDuel({ duelsScore: [] });
+  // }
 
   render() {
     return (
       <RoundStyle>
         <Grid item xs>
-          <Title>{this.props.name}</Title>
-          {this.state.duels.map((duel, i) => (
+          <Title>{this.props.round.name}</Title>
+          {this.props.round.duelsId.map((duel, i) => (
             <Duel
               key={i}
               bracketState={this.props.bracketState}
-              duel={duel}
-              duelId={this.props.firstDuelId! + i}
             />
           ))}
-          {this.props.bracketState.edition && (
+          {/* {this.props.bracketState.edition && (
             <Button
               variant="contained"
               color="primary"
@@ -73,7 +47,7 @@ export default class Round extends Component<Props, IRound> {
             >
               <AddIcon />
             </Button>
-          )}
+          )} */}
         </Grid>
       </RoundStyle>
     );

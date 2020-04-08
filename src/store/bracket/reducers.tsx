@@ -1,16 +1,20 @@
-import { BracketActionTypes, BracketState } from "./types";
+import { IBracket } from "../../config/model";
+import { BracketActionTypes } from "./types";
 import * as types from "./types";
-const initialState: BracketState = {
+
+const initialState: IBracket = {
+  id: "tournament",
   name: "Tournament",
-  edition: true,
+  editionMode: true,
   nbTeamMaxByDuel: 2,
-  nbTeamWinner: 1
+  nbTeamWinner: 1,
+  rounds: []
 };
 
 export function bracketReducer(
   state = initialState,
   action: BracketActionTypes
-): BracketState {
+): IBracket {
   switch (action.type) {
     case types.CHANGE_NAME:
       return {
@@ -20,7 +24,7 @@ export function bracketReducer(
     case types.CHANGE_MODE:
       return {
         ...state,
-        edition: action.value
+        editionMode: action.value
       };
     case types.CHANGE_NB_TEAM_MAX_BY_DUEL:
       return upNbTeamByDuel(state, action.value);
@@ -32,7 +36,7 @@ export function bracketReducer(
 }
 
 // pas plus de la moitié peuvent gagner
-function upNbTeamByDuel(state: BracketState, nb: number) {
+function upNbTeamByDuel(state: IBracket, nb: number) {
   if (nb >= 2) {
     if (nb >= state.nbTeamWinner * 2) {
       return {
@@ -52,7 +56,7 @@ function upNbTeamByDuel(state: BracketState, nb: number) {
 }
 
 // pas plus de la moitié peuvent gagner
-function upNbWinner(state: BracketState, nb: number) {
+function upNbWinner(state: IBracket, nb: number) {
   if (nb >= 1 && state.nbTeamMaxByDuel >= nb * 2) {
     return {
       ...state,

@@ -1,22 +1,18 @@
 import { Card } from "@material-ui/core";
 import React, { Component } from "react";
-import { IDuel } from "../../config/model";
-import { BracketState } from "../../store/bracket/types";
+import { IDuel, IBracket } from "../../config/model";
 import TeamCard from "../team/teamCard";
 import DuelScore from "./duelScore";
 // import { Droppable } from "react-beautiful-dnd";
 
 type Props = {
-  bracketState: BracketState;
+  bracketState: IBracket;
   duel?: IDuel;
   duelId?: number;
 };
 export default class Duel extends Component<Props, IDuel> {
   static defaultProps = {
     duelId: 1
-  };
-  state = {
-    duelsScore: this.props.duel ? this.props.duel.duelsScore : []
   };
 
   nbSkeletonInEdition(): number {
@@ -46,7 +42,7 @@ export default class Duel extends Component<Props, IDuel> {
             duelScore={score}
           />
         ))}
-        {this.props.bracketState.edition &&
+        {this.props.bracketState.editionMode &&
           Array(this.nbSkeletonInEdition()).fill(<TeamCard edition={true} />)}
       </Card>
       // </Droppable>

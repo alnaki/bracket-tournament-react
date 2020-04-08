@@ -6,7 +6,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Switch from "@material-ui/core/Switch";
 import TextField from "@material-ui/core/TextField";
-import { BracketState } from "../../store/bracket/types";
+import { IBracket } from "../../config/model";
 import { connect } from "react-redux";
 import { AppState } from "../../store";
 import { changeName, changeMode, changeNbTeamMaxByDuel, changeNbTeamWinner } from "../../store/bracket/actions";
@@ -18,7 +18,7 @@ import TitleIcon from '@material-ui/icons/Title';
 const textfield = { width: "40px", height: "30px" }
 
 type Props = {
-  bracket: BracketState;
+  bracket: IBracket;
   changeName: (arg0: string) => void;
   changeMode: (arg0: boolean) => void;
   changeNbTeamMaxByDuel: (arg0: number) => void;
@@ -63,7 +63,7 @@ class BracketParams extends Component<Props> {
           <ListItemSecondaryAction>
             <Switch
               edge="end"
-              checked={this.props.bracket.edition}
+              checked={this.props.bracket.editionMode}
               onChange={e => this.handleChangeMode(e)}
               inputProps={{ "aria-label": "primary checkbox" }}
             />

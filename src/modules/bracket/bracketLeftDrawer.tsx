@@ -8,7 +8,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import TeamList from "../team/teamList";
 import TeamListRanking from "../team/teamListRanking";
-import { BracketState } from "../../store/bracket/types";
+import { IBracket } from "../../config/model";
 
 const drawerWidth = 300;
 
@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 type Props = {
-  bracketState: BracketState;
+  bracketState: IBracket;
   children: React.ReactNode;
   initTeamBracket: () => void;
 };
@@ -103,7 +103,7 @@ export default function BracketLeftDrawer(props: Props) {
           </IconButton>
         </div>
         <Divider />
-        {props.bracketState.edition ? (
+        {props.bracketState.editionMode ? (
           <TeamList initTeamBracket={props.initTeamBracket} />
         ) : (
             <TeamListRanking />

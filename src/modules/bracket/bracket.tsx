@@ -2,23 +2,26 @@ import Grid from "@material-ui/core/Grid";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { AppState } from "../../store";
-import { BracketState } from "../../store/bracket/types";
-import { IBracket } from "../../config/model";
+import { IBracket, ITeam } from "../../config/model";
 import Round from "../round/round";
 import BracketLeftDrawer from "./bracketLeftDrawer";
 import BracketRightDrawer from "./bracketRightDrawer";
-import { ITeam } from "../../store/team/types";
 import { DragDropContext } from "react-beautiful-dnd";
 import { nbMinDuelByNbTeam, initEmptyBracket, listFirstDuels, initTeamBracket } from "../../services/bracketService";
 
 type Props = {
-  bracketState: BracketState;
+  bracketState: IBracket;
   teams: ITeam[];
 };
 type State = {};
 
 class Bracket extends Component<Props, State & IBracket> {
   state = {
+    id: "tournament",
+    name: "Tournament",
+    editionMode: true,
+    nbTeamMaxByDuel: 2, 
+    nbTeamWinner: 1,
     rounds: []
   };
 
@@ -29,7 +32,7 @@ class Bracket extends Component<Props, State & IBracket> {
       this.props.bracketState.nbTeamMaxByDuel
     );
     let rounds = initEmptyBracket(nbDuel);
-    this.setState({ rounds: rounds });
+    // this.setState({ roundsId: rounds });
   }
 
   handleInitTeamBracket() {
@@ -40,9 +43,9 @@ class Bracket extends Component<Props, State & IBracket> {
     );
     let duels = listFirstDuels(nbDuel, this.props.teams);
     let rounds = initTeamBracket(duels);
-    this.setState({ rounds: rounds });
+    // this.setState({ roundsId: rounds });
   }
-  
+
   handleAddDuel() {}
 
   dragEnd(result:any) {
@@ -68,10 +71,7 @@ class Bracket extends Component<Props, State & IBracket> {
               .map((round, i) => (
                 <Round
                   key={i}
-                  name={"Round " + i}
                   round={round}
-                  roundId={i}
-                  // firstDuelId={firstIdDuelForRound(this.state.rounds, i)}
                   bracketState={this.props.bracketState}
                 />
               ))}

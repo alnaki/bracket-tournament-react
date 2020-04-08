@@ -1,10 +1,11 @@
-import { ADD_PLAYER_IN_TEAM, ADD_TEAM, DELETE_PLAYER_IN_TEAM, DELETE_TEAM, EDIT_TEAM, INIT_N_TEAM, ITeam, TeamActionTypes, TeamState } from "./types";
+import { ITeam } from "../../config/model";
+import { ADD_PLAYER_IN_TEAM, ADD_TEAM, DELETE_PLAYER_IN_TEAM, DELETE_TEAM, EDIT_TEAM, INIT_N_TEAM, TeamActionTypes, TeamState } from "./types";
 import uuid from "uuid/v4";
 
 const initialState: TeamState = {
   teams: [
-    { id: "0", name: "Click here to change name", playerList: [] },
-    { id: "1", name: "Double click to say Winner", playerList: [] }
+    { id: "0", name: "Click here to change name", playersId: [] },
+    { id: "1", name: "Double click to say Winner", playersId: [] }
   ],
   nbTeam: 2
 };
@@ -41,20 +42,15 @@ export function teamReducer(
     case ADD_PLAYER_IN_TEAM:
       const upTeam1 = state.teams.find(team => team.id === action.teamId);
       if (upTeam1 !== undefined) {
-        upTeam1.playerList.push(action.playerId);
+        upTeam1.playersId.push(action.playerId);
         return {
-          ...state,
-          teams: [
-            ...state.teams.map(team =>
-              team.id === action.teamId ? upTeam1 : team
-            )
-          ]
+          ...state
         };
       } else return state;
     case DELETE_PLAYER_IN_TEAM:
       const upTeam2 = state.teams.find(team => team.id === action.teamId);
       if (upTeam2 !== undefined) {
-        upTeam2.playerList = upTeam2.playerList.filter(
+        upTeam2.playersId = upTeam2.playersId.filter(
           player => player === action.playerId
         );
         return {
@@ -84,6 +80,6 @@ function initTeam(): ITeam {
   return {
     id: uuid(),
     name: "Team",
-    playerList: []
+    playersId: []
   }
 }
