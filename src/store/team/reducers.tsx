@@ -1,9 +1,10 @@
 import { ADD_PLAYER_IN_TEAM, ADD_TEAM, DELETE_PLAYER_IN_TEAM, DELETE_TEAM, EDIT_TEAM, INIT_N_TEAM, ITeam, TeamActionTypes, TeamState } from "./types";
+import uuid from "uuid/v4";
 
 const initialState: TeamState = {
   teams: [
-    { id: 0, name: "Click here to change name", playerList: [] },
-    { id: 1, name: "Double click to say Winner", playerList: [] }
+    { id: "0", name: "Click here to change name", playerList: [] },
+    { id: "1", name: "Double click to say Winner", playerList: [] }
   ],
   nbTeam: 2
 };
@@ -14,12 +15,9 @@ export function teamReducer(
 ): TeamState {
   switch (action.type) {
     case ADD_TEAM:
-      !action.team
-        ? action.team = initTeam(state.nbTeam)
-        : action.team.id = state.nbTeam;
       return {
         nbTeam: state.nbTeam + 1,
-        teams: [...state.teams, action.team]
+        teams: [...state.teams, initTeam()]
       };
     case EDIT_TEAM:
       return {
@@ -77,19 +75,15 @@ export function teamReducer(
 function initNumberTeam(nbTeam: number, state: TeamState): ITeam[] {
   let teams: ITeam[] = [];
   for (let i = state.teams.length; i < nbTeam; i++) {
-    teams.push({
-      id: state.nbTeam,
-      name: "Team " + state.nbTeam,
-      playerList: []
-    })
+    teams.push(initTeam())
   }
   return teams;
 }
 
-function initTeam(id: number): ITeam {
+function initTeam(): ITeam {
   return {
-    id: id,
-    name: "Team " + id,
+    id: uuid(),
+    name: "Team",
     playerList: []
   }
 }

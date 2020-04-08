@@ -4,6 +4,7 @@ import Divider from "@material-ui/core/Divider";
 import { IDuelScore } from "../../config/model";
 import { BracketState } from "../../store/bracket/types";
 import TeamCard from "../team/teamCard";
+import uuid from "uuid/v4";
 
 type Props = {
   bracketState: BracketState;
@@ -13,7 +14,7 @@ export default class DuelScore extends Component<Props, IDuelScore> {
   state = {
     team: this.props.duelScore
       ? this.props.duelScore.team
-      : { id: 0, name: "unknown", playerList: [] },
+      : { id: uuid(), name: "unknown", playerList: [] },
     score: this.props.duelScore ? this.props.duelScore.score : "X"
   };
 
@@ -23,7 +24,7 @@ export default class DuelScore extends Component<Props, IDuelScore> {
   ) {
     const team = this.props.duelScore
       ? this.props.duelScore.team
-      : { id: 0, name: "unknown", playerList: [] };
+      : { id: uuid(), name: "unknown", playerList: [] };
     const score = this.props.duelScore ? this.props.duelScore.score : "X";
     if (
       JSON.stringify(team) !== JSON.stringify(prevState.team) ||

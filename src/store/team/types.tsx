@@ -5,7 +5,7 @@ export interface TeamState {
 }
 
 export interface ITeam {
-  id: number;
+  id: string;
   idBDD?: number;
   name: string;
   avatar?: string;
@@ -30,7 +30,7 @@ interface EditTeam {
 }
 interface DeleteTeam {
   type: typeof DELETE_TEAM;
-  bracketId: number;
+  bracketId: string;
 }
 interface InitNumberTeam {
   type: typeof INIT_N_TEAM;
@@ -39,12 +39,12 @@ interface InitNumberTeam {
 interface AddPlayerInTeam {
   type: typeof ADD_PLAYER_IN_TEAM;
   playerId: number;
-  teamId: number;
+  teamId: string;
 }
 interface DeletePlayerInTeam {
   type: typeof DELETE_PLAYER_IN_TEAM;
   playerId: number;
-  teamId: number;
+  teamId: string;
 }
 
 export type TeamActionTypes =

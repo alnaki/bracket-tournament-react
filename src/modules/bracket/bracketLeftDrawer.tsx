@@ -1,17 +1,11 @@
 import React from "react";
 import clsx from "clsx";
-import {
-  makeStyles,
-  useTheme,
-  Theme,
-  createStyles
-} from "@material-ui/core/styles";
+import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import TeamList from "../team/teamList";
 import TeamListRanking from "../team/teamListRanking";
 import { BracketState } from "../../store/bracket/types";
@@ -80,8 +74,8 @@ type Props = {
   children: React.ReactNode;
   initTeamBracket: () => void;
 };
+
 export default function BracketLeftDrawer(props: Props) {
-  const theme = useTheme();
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
@@ -105,19 +99,15 @@ export default function BracketLeftDrawer(props: Props) {
         <div className={classes.drawerHeader}>
           <h3>Teams</h3>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "ltr" ? (
-              <ChevronLeftIcon />
-            ) : (
-              <ChevronRightIcon />
-            )}
+            <ChevronLeftIcon />
           </IconButton>
         </div>
         <Divider />
         {props.bracketState.edition ? (
           <TeamList initTeamBracket={props.initTeamBracket} />
         ) : (
-          <TeamListRanking />
-        )}
+            <TeamListRanking />
+          )}
       </Drawer>
       <main
         className={clsx(classes.content, {

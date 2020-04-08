@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { ITeam } from "../../store/team/types";
 import TeamCard from "./teamCard";
-import { List, ListItem, Card, Button, TextField } from "@material-ui/core";
+import { ListItem, Card, Button, TextField } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import { connect } from "react-redux";
 import { addTeam } from "../../store/team/actions";
 import { AppState } from "../../store";
+import { Droppable, Draggable } from "react-beautiful-dnd";
 
 type Props = {
   states: AppState;
@@ -16,6 +17,7 @@ type Props = {
 type State = {
   nbTeam: number;
 };
+
 class TeamList extends Component<Props, State> {
   state = {
     nbTeam: this.props.teams.length
@@ -45,15 +47,42 @@ class TeamList extends Component<Props, State> {
           }}
           variant="standard"
         />
-        <List>
-          {this.props.teams.map((t, i) => (
-            <ListItem key={i}>
+
+        <Droppable droppableId="teamList">
+          {(provided, snapshot) => (
+            <div ref={provided.innerRef} {...provided.droppableProps}>
+              {this.props.teams.map((t, index) => (
+                <Draggable draggableId={t.id} index={index}>
+                  {(provided, snapshot) => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                    >
+                      <ListItem key={index}>
+                        <Card style={{ width: "inherit" }}>
+                          <TeamCard team={t} />
+                        </Card>
+                      </ListItem>
+                    </div>
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+
+
+        {/* <List>
+          {this.props.teams.map((t, index) => (
+            <ListItem key={index}>
               <Card style={{ width: "inherit" }}>
                 <TeamCard team={t} />
               </Card>
             </ListItem>
           ))}
-        </List>
+        </List> */}
         <Button
           variant="contained"
           color="primary"
@@ -79,11 +108,9 @@ const mapStateToProps = (state: AppState) => ({
   states: state,
   teams: state.teams.teams
 });
-
 const mapDispatchToProps = (dispatch: any) => ({
   addTeam: (team: ITeam | undefined) => dispatch(addTeam(team), dispatch)
 });
-
 export default connect(
   mapStateToProps,
   mapDispatchToProps
