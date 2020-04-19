@@ -45,4 +45,11 @@ export function deletePlayerInTeam(idTeam: number, idPlayer: number) {
   };
 }
 
+export function changeTeamList(teams: ITeam[]) {
+  return {
+    type: types,
+    teams: teams
+  }
+}
+
 

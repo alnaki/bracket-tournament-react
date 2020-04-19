@@ -1,90 +1,93 @@
-import Grid from "@material-ui/core/Grid";
 import React, { Component } from "react";
+import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { connect } from "react-redux";
-import { AppState } from "../../store";
 import { IBracket, ITeam } from "../../config/model";
-import Round from "../round/round";
+import { AppState } from "../../store";
+import { changeTeamIds } from "../../store/bracket/actions";
 import BracketLeftDrawer from "./bracketLeftDrawer";
 import BracketRightDrawer from "./bracketRightDrawer";
-import { DragDropContext } from "react-beautiful-dnd";
-import { nbMinDuelByNbTeam, initEmptyBracket, listFirstDuels, initTeamBracket } from "../../services/bracketService";
+import BracketRounds from "./bracketRounds";
 
 type Props = {
-  bracketState: IBracket;
+  bracket: IBracket;
   teams: ITeam[];
+  changeTeamIds: (arg0: string[]) => void;
 };
 type State = {};
 
 class Bracket extends Component<Props, State & IBracket> {
-  state = {
-    id: "tournament",
-    name: "Tournament",
-    editionMode: true,
-    nbTeamMaxByDuel: 2, 
-    nbTeamWinner: 1,
-    rounds: []
-  };
+
+  /**
+   * If drag from player list : copy.\
+   * If drag from duel :
+   * - in same duel : move
+   * - in other duel and same round: move
+   * - in other duel and other round: copy
+   * @param result 
+   */
+  dragEnd(result: DropResult) {
+    console.log("dragEnd: ", result);
+
+    const { source, destination, draggableId } = result;
+    // Any modification
+    if (!destination) return false;
+    if (destination.droppableId === source.droppableId
+      && destination.index === source.index) return false;
+
+    // Move in same list
+    if (destination.droppableId === source.droppableId
+      && destination.index !== source.index) {
+      if ("teamList" === source.droppableId) {
+        const newTeamList = Array.from(this.props.bracket.teamIds);
+        newTeamList.splice(source.index, 1);
+        newTeamList.splice(destination.index, 0, draggableId)
+        this.props.changeTeamIds(newTeamList);
+      }
+
+      // Move in different list
+    } else {
+      if ("teamList" === source.droppableId) {
+      }
+    }
+  }
+
+  dragStart(result: any) {
+    // console.log("dragStart: ", result)
+  }
 
   handleInitEmptyBracket() {
-    let nbTeam = this.props.teams.length;
-    let nbDuel = nbMinDuelByNbTeam(
-      nbTeam,
-      this.props.bracketState.nbTeamMaxByDuel
-    );
-    let rounds = initEmptyBracket(nbDuel);
-    // this.setState({ roundsId: rounds });
   }
 
   handleInitTeamBracket() {
-    let nbTeam = this.props.teams.length;
-    let nbDuel = nbMinDuelByNbTeam(
-      nbTeam,
-      this.props.bracketState.nbTeamMaxByDuel
-    );
-    let duels = listFirstDuels(nbDuel, this.props.teams);
-    let rounds = initTeamBracket(duels);
-    // this.setState({ roundsId: rounds });
   }
 
-  handleAddDuel() {}
+  handleAddDuel() { }
 
-  dragEnd(result:any) {
-    console.log(result)
-  }
 
-  dragStart(result:any) {
-    console.log(result)
-  }
 
   render() {
     return (
       <DragDropContext onDragEnd={result => this.dragEnd(result)} onDragStart={result => this.dragStart(result)}>
-      <BracketRightDrawer>
-        <BracketLeftDrawer
-          bracketState={this.props.bracketState}
-          initTeamBracket={this.handleInitTeamBracket.bind(this)}
-        >
-          <Grid container>
-            {this.state.rounds
-              .slice()
-              .reverse()
-              .map((round, i) => (
-                <Round
-                  key={i}
-                  round={round}
-                  bracketState={this.props.bracketState}
-                />
-              ))}
-          </Grid>
-        </BracketLeftDrawer>
-      </BracketRightDrawer>
+        <BracketRightDrawer>
+          <BracketLeftDrawer
+            bracket={this.props.bracket}
+            initTeamBracket={this.handleInitTeamBracket.bind(this)}
+          >
+            <BracketRounds rounds={this.props.bracket.rounds}></BracketRounds>
+          </BracketLeftDrawer>
+        </BracketRightDrawer>
       </DragDropContext>
     );
   }
 }
 
+
+const mapDispatchToProps = (dispatch: any) => ({
+  changeTeamIds: (value: string[]) => dispatch(changeTeamIds(value), dispatch),
+});
+
 const mapStateToProps = (state: AppState) => ({
-  bracketState: state.bracket,
+  bracket: state.bracket,
   teams: state.teams.teams
 });
-export default connect(mapStateToProps)(Bracket);
+export default connect(mapStateToProps, mapDispatchToProps)(Bracket);

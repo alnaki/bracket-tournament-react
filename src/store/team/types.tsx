@@ -13,6 +13,7 @@ export const DELETE_TEAM = "DELETE_TEAM";
 export const INIT_N_TEAM = "INIT_N_TEAM";
 export const ADD_PLAYER_IN_TEAM = "ADD_PLAYER_IN_TEAM";
 export const DELETE_PLAYER_IN_TEAM = "DELETE_PLAYER_IN_TEAM";
+export const CHANGE_TEAM_LIST = "CHANGE_TEAM_LIST";
 
 interface AddTeam {
   type: typeof ADD_TEAM;
@@ -40,6 +41,10 @@ interface DeletePlayerInTeam {
   playerId: string;
   teamId: string;
 }
+interface ChangeTeamList {
+  type: typeof CHANGE_TEAM_LIST;
+  teams: ITeam[];
+}
 
 export type TeamActionTypes =
   | AddTeam
@@ -47,4 +52,5 @@ export type TeamActionTypes =
   | DeleteTeam
   | InitNumberTeam
   | AddPlayerInTeam
-  | DeletePlayerInTeam;
+  | DeletePlayerInTeam
+  | ChangeTeamList;

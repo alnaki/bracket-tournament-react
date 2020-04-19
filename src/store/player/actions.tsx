@@ -1,5 +1,5 @@
 import { ADD_PLAYER, EDIT_PLAYER, DELETE_PLAYER } from "./types";
-import { IPlayer } from "./types";
+import { IPlayer } from "../../config/model";
 
 export function addPlayer(player: IPlayer) {
   return {

@@ -1,4 +1,5 @@
 import * as types from "./types";
+import { IRound } from "../../config/model";
 
 export function changeName(value: string) {
   return {
@@ -26,4 +27,25 @@ export function changeNbTeamWinner(value: number) {
     type: types.CHANGE_NB_TEAM_WINNER,
     value: value
   };
+}
+
+export function changeRounds(value: IRound[]) {
+  return {
+    type: types.CHANGE_ROUNDS,
+    value: value
+  }
+}
+
+export function changeNbRoundMax(value: number) {
+  return {
+    type: types.CHANGE_NB_ROUND_MAX,
+    value: value
+  }
+}
+
+export function changeTeamIds(value: string[]) {
+  return {
+    type: types.CHANGE_TEAM_IDS,
+    value: value
+  }
 }

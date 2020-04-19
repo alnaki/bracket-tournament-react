@@ -1,15 +1,11 @@
+import { IPlayer } from "../../config/model"
+
 // Describing the shape of the chat's slice of state
 export interface PlayerState {
   playerList: IPlayer[];
   nbPlayer: number;
 }
 
-export interface IPlayer {
-  id: number;
-  idBDD?: number;
-  name: String;
-  avatar?: string;
-}
 
 // Describing the different ACTION NAMES available
 export const ADD_PLAYER = "ADD_PLAYER";

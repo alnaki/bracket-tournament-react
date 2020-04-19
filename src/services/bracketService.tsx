@@ -2,16 +2,15 @@ import { IRound, IDuel } from "../config/model";
 import { ITeam } from "../config/model";
 import { shuffle } from "./shuffle";
 
+function initBracket() {
 
-function nbMinDuelByNbTeam(nbTeam: number, nbTeamMaxByDuel: number): number {
-    return Math.ceil(nbTeam / nbTeamMaxByDuel);
+
 }
 
-function nbMinRound(nbDuel: number) {
-    let nbRound = Math.ceil(Math.log2(nbDuel));
-    return nbRound;
-}
-
+/**
+ * Define a new bracket. Delete all duels
+ * @param nbDuel 
+ */
 function initEmptyBracket(nbDuel: number) {
     let nbRound = nbMinRound(nbDuel);
     let nbDuelLast = (nbDuel - Math.pow(2, nbRound)) * 2;
@@ -77,6 +76,15 @@ function initTeamBracket(duels: IDuel[]): IRound[] {
     // }
 
     return rounds;
+}
+
+function nbMinDuelByNbTeam(nbTeam: number, nbTeamMaxByDuel: number): number {
+    return Math.ceil(nbTeam / nbTeamMaxByDuel);
+}
+
+function nbMinRound(nbDuel: number) {
+    let nbRound = Math.ceil(Math.log2(nbDuel));
+    return nbRound;
 }
 
 export { nbMinDuelByNbTeam, initEmptyBracket, listFirstDuels, initTeamBracket };

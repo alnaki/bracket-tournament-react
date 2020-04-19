@@ -1,14 +1,30 @@
 import { ITeam } from "../../config/model";
-import { ADD_PLAYER_IN_TEAM, ADD_TEAM, DELETE_PLAYER_IN_TEAM, DELETE_TEAM, EDIT_TEAM, INIT_N_TEAM, TeamActionTypes, TeamState } from "./types";
+import { ADD_PLAYER_IN_TEAM, ADD_TEAM, DELETE_PLAYER_IN_TEAM, DELETE_TEAM, EDIT_TEAM, INIT_N_TEAM, TeamActionTypes, TeamState, CHANGE_TEAM_LIST } from "./types";
 import uuid from "uuid/v4";
 
 const initialState: TeamState = {
   teams: [
-    { id: "0", name: "Click here to change name", playersId: [] },
-    { id: "1", name: "Double click to say Winner", playersId: [] }
+    { id: "1", name: "Click here to change name", playersId: [] },
+    { id: "2", name: "Double click to say Winner", playersId: [] }
   ],
   nbTeam: 2
 };
+
+function initNumberTeam(nbTeam: number, state: TeamState): ITeam[] {
+  let teams: ITeam[] = [];
+  for (let i = state.teams.length; i < nbTeam; i++) {
+    teams.push(initTeam())
+  }
+  return teams;
+}
+
+function initTeam(): ITeam {
+  return {
+    id: uuid(),
+    name: "Team",
+    playersId: []
+  }
+}
 
 export function teamReducer(
   state = initialState,
@@ -62,24 +78,12 @@ export function teamReducer(
           ]
         };
       } else return state;
+    case CHANGE_TEAM_LIST:
+      return {
+        ...state,
+        teams: action.teams
+      }
     default:
       return state;
-  }
-}
-
-
-function initNumberTeam(nbTeam: number, state: TeamState): ITeam[] {
-  let teams: ITeam[] = [];
-  for (let i = state.teams.length; i < nbTeam; i++) {
-    teams.push(initTeam())
-  }
-  return teams;
-}
-
-function initTeam(): ITeam {
-  return {
-    id: uuid(),
-    name: "Team",
-    playersId: []
   }
 }

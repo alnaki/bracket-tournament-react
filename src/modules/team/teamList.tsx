@@ -7,12 +7,13 @@ import { connect } from "react-redux";
 import { addTeam } from "../../store/team/actions";
 import { AppState } from "../../store";
 import { Droppable, Draggable } from "react-beautiful-dnd";
+import { findById } from "../../services/teamService";
 
 type Props = {
-  states: AppState;
-  teams: ITeam[];
+  teamStore: ITeam[];
   addTeam: (arg0: undefined) => void;
   initTeamBracket: () => void;
+  teamIds: string[];
 };
 type State = {
   nbTeam: number;
@@ -20,7 +21,7 @@ type State = {
 
 class TeamList extends Component<Props, State> {
   state = {
-    nbTeam: this.props.teams.length
+    nbTeam: this.props.teamStore.length
   };
   handleAddTeam = (_event: any) => {
     this.props.addTeam(undefined);
@@ -51,8 +52,8 @@ class TeamList extends Component<Props, State> {
         <Droppable droppableId="teamList">
           {(provided, snapshot) => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
-              {this.props.teams.map((t, index) => (
-                <Draggable draggableId={t.id} index={index}>
+              {this.props.teamIds.map((teamId, index) => (
+                <Draggable draggableId={teamId} index={index}>
                   {(provided, snapshot) => (
                     <div
                       ref={provided.innerRef}
@@ -61,7 +62,7 @@ class TeamList extends Component<Props, State> {
                     >
                       <ListItem key={index}>
                         <Card style={{ width: "inherit" }}>
-                          <TeamCard team={t} />
+                          <TeamCard team={findById(teamId, this.props.teamStore)} />
                         </Card>
                       </ListItem>
                     </div>
@@ -105,8 +106,7 @@ class TeamList extends Component<Props, State> {
 }
 
 const mapStateToProps = (state: AppState) => ({
-  states: state,
-  teams: state.teams.teams
+  teamStore: state.teams.teams
 });
 const mapDispatchToProps = (dispatch: any) => ({
   addTeam: (team: ITeam | undefined) => dispatch(addTeam(team), dispatch)

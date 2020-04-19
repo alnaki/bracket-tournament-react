@@ -1,12 +1,17 @@
+// Etat du tournoi
 export interface IBracket {
   id: string;
   name: string;
   editionMode: boolean;
+  rounds: IRound[];
+  teamIds: string[];
+
+  nbRoundMax: number; // 0 > infini
   nbTeamMaxByDuel: number;
   nbTeamWinner: number;
-  rounds: IRound[];
 }
 
+// belongs to the bracket
 export interface IRound {
   id: string;
   name: string;
@@ -16,17 +21,16 @@ export interface IRound {
 
 export interface IDuel {
   id: string;
-  duelsScore: IDuelScore[];
+  duelsScore: IScore[];
 }
 
 /**
- * V: victory
- * D: defeat
- * X: no play
+ * Number: Score
+ * -1: Unplay
  */
-export interface IDuelScore {
-  team: ITeam;
-  score: number | "V" | "D" | "X";
+export interface IScore {
+  idTeam: string;
+  score: number;
 }
 
 export interface ITeam {
@@ -34,4 +38,11 @@ export interface ITeam {
   name: string;
   avatar?: string;
   playersId: string[];
+}
+
+export interface IPlayer {
+  id: number;
+  idBDD?: number;
+  name: String;
+  avatar?: string;
 }

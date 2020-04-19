@@ -1,18 +1,11 @@
-import { IRound } from "../config/model"
+import { IRound } from "../config/model";
+import uuid from "uuid/v4";
 
-export function round1(_roundNumber: number): IRound {
-    return  ({
-        id: "",
-        name: "",
+export function newRound(_roundNumber: number, _name?: string): IRound {
+    return ({
+        id: uuid(),
+        name: _name ? _name : "Round " + _roundNumber,
         roundNumber: _roundNumber,
         duelsId: []
     });
 }
-
-export function round2(_name: string, _roundNumber: number): IRound {
-    return  ({
-        id: "",
-        name: _name,
-        roundNumber: _roundNumber,
-        duelsId: []
-    });}

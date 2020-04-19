@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 type Props = {
-  bracketState: IBracket;
+  bracket: IBracket;
   children: React.ReactNode;
   initTeamBracket: () => void;
 };
@@ -103,8 +103,8 @@ export default function BracketLeftDrawer(props: Props) {
           </IconButton>
         </div>
         <Divider />
-        {props.bracketState.editionMode ? (
-          <TeamList initTeamBracket={props.initTeamBracket} />
+        {props.bracket.editionMode ? (
+          <TeamList initTeamBracket={props.initTeamBracket} teamIds={props.bracket.teamIds} />
         ) : (
             <TeamListRanking />
           )}

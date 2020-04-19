@@ -1,17 +1,15 @@
-import { Button, Grid } from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
 import React, { Component } from "react";
 import styled from "styled-components";
-import { IDuel, IRound, IBracket } from "../../config/model";
-import Duel from "../duel/duel";
+import { IBracket, IRound } from "../../config/model";
+import RoundList from "./roundList";
+import RoundTitle from "./roundTitle";
 
 const RoundStyle = styled.div`
-  min-width: 300px;
+  min-width: 50px;
+  max-width: 300px;
 `;
-const Title = styled.h4``;
 
 type Props = {
-  bracketState: IBracket;
   round: IRound;
 };
 export default class Round extends Component<Props, IRound> {
@@ -30,15 +28,9 @@ export default class Round extends Component<Props, IRound> {
   render() {
     return (
       <RoundStyle>
-        <Grid item xs>
-          <Title>{this.props.round.name}</Title>
-          {this.props.round.duelsId.map((duel, i) => (
-            <Duel
-              key={i}
-              bracketState={this.props.bracketState}
-            />
-          ))}
-          {/* {this.props.bracketState.edition && (
+        <RoundTitle round={this.props.round}></RoundTitle>
+        <RoundList round={this.props.round}></RoundList>
+        {/* {this.props.bracketState.edition && (
             <Button
               variant="contained"
               color="primary"
@@ -48,7 +40,6 @@ export default class Round extends Component<Props, IRound> {
               <AddIcon />
             </Button>
           )} */}
-        </Grid>
       </RoundStyle>
     );
   }
